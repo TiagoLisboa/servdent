@@ -11,7 +11,7 @@ $servico = preg_replace('/[^[:alnum:]-]/','',$_GET["servico"]);
 $servico = Servico::find(intval($servico));
 $usuario = $_SESSION['informacoes'];
 
-$ref = Pagamento::insert("", "", "", floatval($servico->valor_servico), "", "", $usuario->id_paciente, $servico->id_servico);
+$ref = Pagamento::insert("", "", "", floatval($servico->valor_servico), "0", "", $usuario->id_paciente, $servico->id_servico);
 
 require_once('PagSeguro.class.php');
 $pagseguro = new PagSeguro();
