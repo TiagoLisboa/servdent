@@ -25,7 +25,7 @@
             $db = Db::getInstance();
 
             $req = $db->prepare('INSERT INTO pagamento (data_pagamento, data_vencimento, tipo_pagamento, valor_pagamento, confirmar_pagamento, cod_pagamento, paciente_id_paciente) 
-                                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
+                                VALUES (?, ?, ?, ?, ?, ?, ?)');
 
             $req->execute(array($data_pagamento, $data_vencimento, $tipo_pagamento, $valor_pagamento, $confirmar_pagamento, $cod_pagamento, $paciente_id_paciente));
 
