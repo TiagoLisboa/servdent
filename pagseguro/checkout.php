@@ -32,7 +32,7 @@ $data["shippingAddressCity"] = $usuario->cidade;
 $data["shippingAddressState"] = $usuario->estado;
 $data["shippingAddressPostalCode"] = $usuario->cep;*/
 
-die($data);
+// die($data);
 
 $data = http_build_query($data);
 
