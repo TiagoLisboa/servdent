@@ -11,6 +11,7 @@
 			
 		}else{
 			//PAGAMENTO PENDENTE
+			Paciente::insertServico(1, 1);
 			echo $PagSeguro->getStatusText($PagSeguro->status);
 		}
 	}
