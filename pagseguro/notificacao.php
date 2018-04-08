@@ -1,5 +1,7 @@
 <?php
 
+header("access-control-allow-origin: https://sandbox.pagseguro.uol.com.br");
+
 $notificationCode = preg_replace('/[^[:alnum:]-]/','',$_POST["notificationCode"]);
 
 $data['token'] ='8E9F15E9128144F0B3870F58E70F10BB';
@@ -21,7 +23,8 @@ $reference = $xml->reference;
 $status = $xml->status;
 
 if($reference && $status){
-	Paciente::insertServico(1, 1);
+	if ($status == 3 || $status == 4)
+		Paciente::insertServico(1, 1);
 }
 
 ?>

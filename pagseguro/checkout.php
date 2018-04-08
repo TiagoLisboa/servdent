@@ -1,52 +1,50 @@
 <?php
+header("access-control-allow-origin: https://pagseguro.uol.com.br");
 
 if (!session_id()) @ session_start();
 if (!isset($_GET['servico'])) return call ('pages', 'erro');
 
+$servico = preg_replace('/[^[:alnum:]-]/','',$_GET["servico"]);
 
 
-//----------------------------------------------------------------------------
+$servico = Servico::find(intval($servico));
+$usuario = $_SESSION['informacoes'];
 
+$ref = Pagamento::insert("", "", "", "", "", "", $usuario->id_paciente);
 
-//RECEBER RETORNO
-if( isset($_GET['transaction_id']) ){
-	$pagamento = $PagSeguro->getStatusByReference($_GET['codigo']);
-	$paciente_id_paciente = intval($_SESSION['informacoes']->id_paciente);
-	
-	$pagamento->codigo_pagseguro = $_GET['transaction_id'];
-	if($pagamento->status==3 || $pagamento->status==4){
-		Paciente::insertServico(intval($_GET['servico']), $paciente_id_paciente);
-	}else{
-		die();
-		// Pagamento::insert("", "", $tipo_pagamento, $valor_pagamento, $confirmar_pagamento, $cod_pagamento, $paciente_id_paciente);
-	}
-} else {
-	$servico = Servico::find(intval($_GET['servico']));
-	$usuario = $_SESSION['informacoes'];
-	
-	header("access-control-allow-origin: https://pagseguro.uol.com.br");
-	header("Content-Type: text/html; charset=UTF-8",true);
-	date_default_timezone_set('America/Sao_Paulo');
-	
-	require_once("PagSeguro.class.php");
-	$PagSeguro = new PagSeguro();
-		
-	//EFETUAR PAGAMENTO	
-	$venda = array("codigo"=>$servico->id_servico,
-				   "valor"=>$servico->valor_servico,
-				   "descricao"=>"VENDA DE $servico->tipo_servico",
-				   "nome"=>$usuario->nome_completo,
-				   "email"=>$usuario->email,
-				   "telefone"=>$usuario->telefone,
-				   "rua"=>$usuario->rua,
-				   "numero"=>$usuario->numero,
-				   "bairro"=>$usuario->bairro,
-				   "cidade"=>$usuario->cidade,
-				   "estado"=>$usuario->estado, //2 LETRAS MAIÚSCULAS
-				   "cep"=>$usuario->cep,
-				   "codigo_pagseguro"=>"");
-				   
-	$PagSeguro->executeCheckout($venda,"http://dentalclean-com-br.umbler.net/?controller=pagseguro&action=checkout&servico=".$_GET['servico']);
-}
+$data = array(
+	"token" => '8E9F15E9128144F0B3870F58E70F10BB',
+	"email" => 'tiago.caio.ol@gmail.com',
+	"currency" => 'BRL',
+	"itemId1" => $servico,
+	"itemDescription1" => $servico->tipo_servico,
+	"itemAmount1"=>$servico->valor_servico,
+	"itemDescription1"=>"VENDA DE $servico->tipo_servico",
+	"reference"=>$ref,
+	"senderName"=>$usuario->nome_completo,
+	"senderEmail"=>$usuario->email,
+	"senderPhone"=>$usuario->telefone,
+	"shippingAddressStreet"=>$usuario->rua,
+	"shippingAddressNumber"=>$usuario->numero,
+	"shippingAddressDistrict"=>$usuario->bairro,
+	"shippingAddressCity"=>$usuario->cidade,
+	"shippingAddressState"=>$usuario->estado,
+	"shippingAddressPostalCode"=>$usuario->cep);
+
+$data = http_build_query($data);
+
+$url = 'https://ws.sandbox.pagseguro.uol.com.br/v2/checkout';
+
+$curl = curl_init();
+curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($curl, CURLOPT_URL, $url);
+curl_setopt($curl, CURLOPT_POST, true);
+curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+$xml = curl_exec($curl);
+curl_close($curl);
+
+$xml = simplexml_load_string($xml);
+
+header ("Location: https://sandbox.pagseguro.uol.com.br/v2/checkout/payment.html?code=".$xml->code);
 
 ?>
