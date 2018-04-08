@@ -19,6 +19,8 @@ $data["itemId1"] = $servico->id_servico;
 $data["itemQuantity1"] = '1';
 $data["itemDescription1"] = $servico->tipo_servico;
 $data["itemAmount1"] = $servico->valor_servico;
+
+die($data);
 /*$data["reference"] = $ref;
 $data["senderName"] = $usuario->nome_completo;
 $data["senderEmail"] = $usuario->email;
