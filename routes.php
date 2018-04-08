@@ -15,16 +15,20 @@
             case 'compras':
                 $controller = new ComprasController();
                 break;
+            case 'pagseguro':
+                $controller = new PagseguroController();
         }
 
         $controller->{ $action }();
     }
 
     $controllers = array(
-        'pages' => ['home', 'servicos', 'error'],
+        'pages' => ['home', 'servicos', 'error', 'contato'],
         'login' => ['index', 'validate', 'secretaria', 'novoPaciente', 'cadastrarPaciente',
-                    'logout'],
-        'compras' => ['comprar', 'datepicker', 'finalizar', 'solicitarReserva', 'finalizarReserva']);
+                    'logout', 'editarPaciente', 'atualizarPaciente', 'deletarPaciente'],
+        'compras' => ['comprar', 'datepicker', 'finalizar', 'solicitarReserva', 
+                    'finalizarReserva', 'modificarReserva', 'alterarReserva', 'updateReserva'],
+        'pagseguro' => ['checkout']);
     
     if (array_key_exists($controller, $controllers)) {
         if (in_array($action, $controllers[$controller])) {

@@ -46,6 +46,22 @@
             return $db->lastInsertId();
 
         }
+
+        public static function update($id_login, $senha, $usuario) {
+            $db = Db::getInstance();
+
+            $req = $db->prepare('UPDATE login SET senha=:senha, usuario=:usuario, papel=:papel WHERE id_login=:id_login');
+            $req->execute(array('senha' => $senha, 'usuario' => $usuario, 'papel' => 'Paciente', 'id_login' => $id_login));
+
+        }
+
+        public static function delete($id_login) {
+            $db = Db::getInstance();
+
+            $req = $db->prepare('DELETE FROM login WHERE id_login=:id_login');
+
+            $req->execute(array('id_login'=>$id_login));
+        }
     }
 
 ?>

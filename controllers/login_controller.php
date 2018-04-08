@@ -6,6 +6,7 @@
 
         public function secretaria() {
             $pacientes = Paciente::all();
+            $agendamentos = Agendamento::all();
             require_once('views/login/secretaria.php');
         }
 
@@ -48,6 +49,73 @@
             $id_paciente = Paciente::insert($login_id_login, $nome_completo, $email, $cpf, 
                                             $cep, $estado, $cidade, $bairro, $rua, $complemento, 
                                             $numero, $telefone);
+
+            header("Location: /?controller=login&action=index&success=1");
+        }
+
+        public function deletarPaciente() {
+            if(!isset($_GET['id_login_paciente']))
+                return call('pages', 'error');
+            
+            Paciente::delete(intval($_GET['id_login_paciente']));
+            Login::delete(intval($_GET['id_login_paciente']));
+            
+            header('Location: /?controller=login&action=index');
+        }
+
+        public function atualizarPaciente() {
+            if(!isset($_POST['usuario']))
+                return call('pages', 'error');
+            
+            $id_login = intval($_POST['id_login']);
+            $usuario = $_POST['usuario'];
+            $senha = $_POST['senha'];
+            
+            Login::update($id_login, $senha, $usuario);
+
+
+            $nome_completo = $_POST['nome_completo'];
+            $email = $_POST['email'];
+            $cpf = $_POST['cpf'];
+            $cep = $_POST['cep'];
+            $estado = $_POST['estado'];
+            $cidade = $_POST['cidade'];
+            $bairro = $_POST['bairro'];
+            $rua = $_POST['rua'];
+            $complemento = $_POST['complemento'];
+            $numero = $_POST['numero'];
+            $telefone = $_POST['telefone'];
+
+            Paciente::update($id_login, $nome_completo, $email, $cpf, 
+                            $cep, $estado, $cidade, $bairro, $rua, $complemento, 
+                            $numero, $telefone);
+
+            header("Location: /?controller=login&action=index&success=2");
+        }
+
+        public function editarPaciente() {
+            if(!isset($_GET['paciente']))
+                return call('pages', 'error');
+
+            $id_login_paciente = intval($_GET['paciente']);
+
+            $infor_paciente = Paciente::find($id_login_paciente);
+            
+            $login = $infor_paciente->login->usuario;
+            $senha = $infor_paciente->login->senha;
+            $nome_completo = $infor_paciente->nome_completo;
+            $cpf = $infor_paciente->cpf;
+            $email = $infor_paciente->email;
+            $telefone = $infor_paciente->telefone;
+            $cep = $infor_paciente->cep;
+            $estado = $infor_paciente->estado;
+            $cidade = $infor_paciente->cidade;
+            $bairro = $infor_paciente->bairro;
+            $rua = $infor_paciente->rua;
+            $numero = $infor_paciente->numero;
+            $complemento = $infor_paciente->complemento;
+
+            require_once('views/login/editar-paciente.php');
         }
 
         public function validate() {

@@ -41,6 +41,48 @@
             require_once('views/compras/escolherServicoContratado.php');
         }
 
+        public function alterarReserva() {
+            if (!isset($_GET['agendamento'])) return call('pages', 'error');
+            if (!session_id()) @ session_start();
+
+            $agendamento = Agendamento::find(intval($_GET['agendamento']));
+
+            require_once('views/compras/editarAgendamento.php');
+        }
+
+        public function updateReserva() {
+            if (!isset($_POST['horario']) || !isset($_POST['data']) || !isset($_POST['id_agendamento'])) return call('pages', 'error');
+            if (!session_id()) @ session_start();
+
+            $horario = $_POST['horario'];
+            $data = $_POST['data'];
+            $id_agendamento = intval($_POST['id_agendamento']);
+
+            $agendamento = Agendamento::find($id_agendamento);
+            $agendamento->data_2 = $data;
+            $agendamento->horario = $horario;
+
+            Agendamento::update($agendamento->paciente_id_paciente, $agendamento->dentista_id_dentista, $agendamento->servico_id_servico, $agendamento->data_2, $agendamento->horario, $agendamento->cod_servico, $agendamento->registro_historico, $id_agendamento);
+
+            header("Location: /?controller=login&action=index");
+        }
+
+        public function modificarReserva() {
+            if (!isset($_POST['horario']) || !isset($_POST['acao'])) return call('pages', 'error');
+            if (!session_id()) @ session_start();
+
+            $id_agendamento = intval($_POST['horario']);
+            $acao = $_POST['acao'];
+
+            if ($acao == 'cancelar') {
+                Agendamento::delete($id_agendamento);
+            } else if ($acao == 'alterar') {
+                return header("Location: /?controller=compras&action=alterarReserva&agendamento=$id_agendamento");
+            }
+
+            header("Location: /?controller=login&action=index");
+        }
+
         public function finalizar() {
             if (!isset($_POST['horario']) || !isset($_POST['data'])) return call('pages', 'error');
             if (!session_id()) @ session_start();

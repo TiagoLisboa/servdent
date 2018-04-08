@@ -1,3 +1,5 @@
+<?php if (!session_id()) @ session_start(); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,9 +28,11 @@
             <ul class="navbar-nav mr-auto col-sm-3 offset-sm-3">
                 <li class="nav-item"><a href="/" class="nav-link">Início</a></li>
                 <li class="nav-item"><a href="/?controller=pages&action=servicos" class="nav-link">Serviços</a></li>
-                <li class="nav-item"><a href="/?controller=login&action=index" class="nav-link">Login</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">Contato</a></li>
-                <li class="nav-item"><a href="/?controller=login&action=logout" class="nav-link">Logout</a></li>
+                <li class="nav-item"><a href="/?controller=login&action=index" class="nav-link">
+                    <?= isset($_SESSION['login']) ? 'Conta' : 'Login' ?>
+                </a></li>
+                <li class="nav-item"><a href="/?controller=pages&action=contato" class="nav-link">Contato</a></li>
+<?php if (isset($_SESSION['login'])) { ?><li class="nav-item"><a href="/?controller=login&action=logout" class="nav-link">Logout</a></li><?php } ?>
             </ul>
             <form class="form-inline my-2 my-lg-0 col-sm-4">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">

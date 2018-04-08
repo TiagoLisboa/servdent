@@ -38,6 +38,39 @@
             return $list;
         }
 
+        public static function all() {
+            $list = [];
+            $db = Db::getInstance();
+
+            $req = $db->prepare('SELECT * FROM agendamento');
+            $req->execute();
+
+            foreach($req->fetchAll() as $age) {
+                $list[] = new Agendamento($age['id_agendamento'], $age['paciente_id_paciente'], $age['dentista_id_dentista'], $age['servico_id_servico'], $age['data_2'], $age['horario'], $age['cod_servico'], $age['registro_historico']);
+            }
+
+            return $list;
+        }
+
+        public static function find($id_agendamento) {
+            $db = Db::getInstance();
+
+            $req = $db->prepare('SELECT * FROM agendamento WHERE id_agendamento = :id_agendamento');
+            $req->execute(array('id_agendamento' => $id_agendamento));
+            $age = $req->fetch();
+
+            $agendamento = new Agendamento($age['id_agendamento'], $age['paciente_id_paciente'], $age['dentista_id_dentista'], $age['servico_id_servico'], $age['data_2'], $age['horario'], $age['cod_servico'], $age['registro_historico']);
+
+            return $agendamento;
+        }
+
+        public static function update($paciente_id_paciente, $dentista_id_dentista, $servico_id_servico, $data_2, $horario, $cod_servico, $registro_historico, $id_agendamento) {
+            $db = Db::getInstance();
+
+            $req = $db->prepare('UPDATE agendamento SET paciente_id_paciente=?, dentista_id_dentista=?, servico_id_servico=?, data_2=?, horario=?, cod_servico=?, registro_historico=? WHERE id_agendamento=?');
+            $req->execute(array($paciente_id_paciente, $dentista_id_dentista, $servico_id_servico, $data_2, $horario, $cod_servico, $registro_historico, $id_agendamento));
+        }
+
         public static function insert($paciente_id_paciente, $dentista_id_dentista, $servico_id_servico, $data_2, $horario, $cod_servico, $registro_historico) {
             $db = Db::getInstance();
 
@@ -45,6 +78,14 @@
             $req->execute(array($paciente_id_paciente, $dentista_id_dentista, $servico_id_servico, $data_2, $horario, $cod_servico, $registro_historico));
 
             return $db->lastInsertId();
+        }
+
+        public static function delete($id_agendamento) {
+            $db = Db::getInstance();
+
+            $req = $db->prepare('DELETE FROM agendamento WHERE id_agendamento=:id_agendamento');
+
+            $req->execute(array('id_agendamento'=>$id_agendamento));
         }
 
     }

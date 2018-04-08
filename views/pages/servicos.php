@@ -45,7 +45,7 @@
         <div class="col-sm-8">
             <h3 class="text-muted">Ortodontia</h3>
             <p class="text-muted">Consiste na prevenção e tratamento dos problemas de crescimento, desenvolvimento e amadurecimento da face, dos arcos dentários e da oclusão.</p>
-            <a href="/?controller=compras&action=comprar&servico=1" class="btn btn-primary">Comprar</a>
+            <a href="/?controller=pagseguro&action=checkout&servico=1" class="btn btn-primary">Comprar</a>
         </div>
     </div>
 

@@ -9,6 +9,7 @@
     require_once("models/secretaria.php");
     require_once("models/servico.php");
     require_once("models/dentista.php");
+    require_once("models/pagamento.php");
 
     if (isset($_GET['controller']) && isset($_GET['action'])) {
         $controller = $_GET['controller'];

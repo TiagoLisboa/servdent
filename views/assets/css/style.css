@@ -61,6 +61,14 @@ body {
     margin-top: 20px;
 }
 
+.mt-50 {
+    margin-top: 50px;
+}
+
+.mt-100 {
+    margin-top: 100px;
+}
+
 .mb-20 {
     margin-bottom: 20px;
 }
@@ -113,3 +121,14 @@ body {
     background-color: red !important;
     color: white !important;
 }
+
+.day.reservado {
+    background-color: green;
+    color: white !important;
+}
+
+.day.reservado:hover:not(.active):not(.disabled) {
+    background-color: green !important;
+    color: white !important;
+}
+
