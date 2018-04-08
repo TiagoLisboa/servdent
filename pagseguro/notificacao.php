@@ -21,10 +21,19 @@ $xml = simplexml_load_string($xml);
 
 $reference = $xml->reference;
 $status = $xml->status;
+$metodo = $xml->paymentMethod->type;
+$codigo = $xml->code;
+$date = $xml->date;
 
 if($reference && $status){
-	if ($status == 3 || $status == 4)
-		Paciente::insertServico(1, 1);
+	if ($status == 3 || $status == 4) {
+		$pagamento = Pagamento::find(intval($reference));
+		$pagamento->tipo_pagamento = $metodo;
+		$pagamento->data_pagamento = $date;
+		$pagamento->cod_pagamento = $codigo;
+		// Pagamento::update($pagamento);
+		Paciente::insertServico($pagamento->servico_id_servico, $paciente_id_paciente);
+	}
 }
 
 ?>
