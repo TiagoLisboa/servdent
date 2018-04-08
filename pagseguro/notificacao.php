@@ -1,18 +1,27 @@
 <?php
-	header("access-control-allow-origin: https://pagseguro.uol.com.br");
-	require_once("PagSeguro.class.php");
 
-	if(isset($_POST['notificationType']) && $_POST['notificationType'] == 'transaction'){
-		$PagSeguro = new PagSeguro();
-		$response = $PagSeguro->executeNotification($_POST);
-		if( $response->status==3 || $response->status==4 ){
-        	//PAGAMENTO CONFIRMADO
-			//ATUALIZAR O STATUS NO BANCO DE DADOS
-			
-		}else{
-			//PAGAMENTO PENDENTE
-			Paciente::insertServico(1, 1);
-			echo $PagSeguro->getStatusText($PagSeguro->status);
-		}
-	}
+$notificationCode = preg_replace('/[^[:alnum:]-]/','',$_POST["notificationCode"]);
+
+$data['token'] ='8E9F15E9128144F0B3870F58E70F10BB';
+$data['email'] = 'tiago.caio.ol@gmail.com';
+
+$data = http_build_query($data);
+
+$url = 'https://ws.sandbox.pagseguro.uol.com.br/v3/transactions/notifications/'.$notificationCode.'?'.$data;
+
+$curl = curl_init();
+curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($curl, CURLOPT_URL, $url);
+$xml = curl_exec($curl);
+curl_close($curl);
+
+$xml = simplexml_load_string($xml);
+
+$reference = $xml->reference;
+$status = $xml->status;
+
+if($reference && $status){
+	Paciente::insertServico(1, 1);
+}
+
 ?>
