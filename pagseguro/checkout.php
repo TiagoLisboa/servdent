@@ -12,24 +12,23 @@ $usuario = $_SESSION['informacoes'];
 
 $ref = Pagamento::insert("", "", "", "", "", "", $usuario->id_paciente);
 
-$data = array(
-	"token" => '8E9F15E9128144F0B3870F58E70F10BB',
-	"email" => 'tiago.caio.ol@gmail.com',
-	"currency" => 'BRL',
-	"itemId1" => $servico,
-	"itemDescription1" => $servico->tipo_servico,
-	"itemAmount1"=>$servico->valor_servico,
-	"itemDescription1"=>"VENDA DE $servico->tipo_servico",
-	"reference"=>$ref,
-	"senderName"=>$usuario->nome_completo,
-	"senderEmail"=>$usuario->email,
-	"senderPhone"=>$usuario->telefone,
-	"shippingAddressStreet"=>$usuario->rua,
-	"shippingAddressNumber"=>$usuario->numero,
-	"shippingAddressDistrict"=>$usuario->bairro,
-	"shippingAddressCity"=>$usuario->cidade,
-	"shippingAddressState"=>$usuario->estado,
-	"shippingAddressPostalCode"=>$usuario->cep);
+$data["token"] = '8E9F15E9128144F0B3870F58E70F10BB';
+$data["email"] = 'tiago.caio.ol@gmail.com';
+$data["currency"] = 'BRL';
+$data["itemId1"] = $servico;
+$data["itemDescription1"] = $servico->tipo_servico;
+$data["itemAmount1"] = $servico->valor_servico;
+$data["itemDescription1"] = "VENDA DE $servico->tipo_servico";
+$data["reference"] = $ref;
+$data["senderName"] = $usuario->nome_completo;
+$data["senderEmail"] = $usuario->email;
+$data["senderPhone"] = $usuario->telefone;
+$data["shippingAddressStreet"] = $usuario->rua;
+$data["shippingAddressNumber"] = $usuario->numero;
+$data["shippingAddressDistrict"] = $usuario->bairro;
+$data["shippingAddressCity"] = $usuario->cidade;
+$data["shippingAddressState"] = $usuario->estado;
+$data["shippingAddressPostalCode"] = $usuario->cep;
 
 $data = http_build_query($data);
 
