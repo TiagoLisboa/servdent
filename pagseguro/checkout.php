@@ -19,6 +19,7 @@ $data["itemId1"] = $servico->id_servico;
 $data["itemQuantity1"] = '1';
 $data["itemDescription1"] = $servico->tipo_servico;
 $data["itemAmount1"] = $servico->valor_servico;
+print_r($data);
 
 die($data);
 /*$data["reference"] = $ref;
