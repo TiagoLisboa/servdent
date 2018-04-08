@@ -15,11 +15,11 @@ $ref = Pagamento::insert("", "", "", "", "", "", $usuario->id_paciente);
 $data["token"] = '8E9F15E9128144F0B3870F58E70F10BB';
 $data["email"] = 'tiago.caio.ol@gmail.com';
 $data["currency"] = 'BRL';
-$data["itemId1"] = $servico;
+$data["itemId1"] = $servico->id_servico;
+$data["itemQuantity1"] = '1';
 $data["itemDescription1"] = $servico->tipo_servico;
 $data["itemAmount1"] = $servico->valor_servico;
-$data["itemDescription1"] = "VENDA DE $servico->tipo_servico";
-$data["reference"] = $ref;
+/*$data["reference"] = $ref;
 $data["senderName"] = $usuario->nome_completo;
 $data["senderEmail"] = $usuario->email;
 $data["senderPhone"] = $usuario->telefone;
@@ -28,7 +28,7 @@ $data["shippingAddressNumber"] = $usuario->numero;
 $data["shippingAddressDistrict"] = $usuario->bairro;
 $data["shippingAddressCity"] = $usuario->cidade;
 $data["shippingAddressState"] = $usuario->estado;
-$data["shippingAddressPostalCode"] = $usuario->cep;
+$data["shippingAddressPostalCode"] = $usuario->cep;*/
 
 $data = http_build_query($data);
 
