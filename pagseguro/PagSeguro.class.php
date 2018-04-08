@@ -86,7 +86,9 @@ class PagSeguro{
 			header('Location: '.$this->url_redirect.$dados['codigo_pagseguro']);
 		}
 		
-		$dados = $this->generateUrl($dados,$retorno);
+		// $dados = $this->generateUrl($dados,$retorno);
+
+		$dados = http_build_query($dados);
 		
 		$curl = curl_init($this->url);
 		curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
