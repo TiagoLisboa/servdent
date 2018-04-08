@@ -34,6 +34,8 @@ $data["shippingAddressPostalCode"] = $usuario->cep;*/
 
 $data = http_build_query($data);
 
+die($data);
+
 $url = 'https://ws.sandbox.pagseguro.uol.com.br/v2/checkout';
 
 $curl = curl_init();
