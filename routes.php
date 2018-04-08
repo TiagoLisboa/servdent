@@ -28,7 +28,7 @@
                     'logout', 'editarPaciente', 'atualizarPaciente', 'deletarPaciente'],
         'compras' => ['comprar', 'datepicker', 'finalizar', 'solicitarReserva', 
                     'finalizarReserva', 'modificarReserva', 'alterarReserva', 'updateReserva'],
-        'pagseguro' => ['checkout']);
+        'pagseguro' => ['checkout', 'notify']);
     
     if (array_key_exists($controller, $controllers)) {
         if (in_array($action, $controllers[$controller])) {
