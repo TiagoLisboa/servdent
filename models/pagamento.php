@@ -34,6 +34,14 @@
             return $db->lastInsertId();
         }
 
+        public static function update($pagamento) {
+            $db = Db::getInstance();
+
+            $req = $db->prepare('UPDATE pagamento SET data_pagamento=?, data_vencimento=?, tipo_pagamento=?, valor_pagamento=?, confirmar_pagamento=?, cod_pagamento=?, paciente_id_paciente=?, servico_id_servico=? WHERE id_pagamento = ?');
+
+            $req->execute(array($pagamento->data_pagamento, $pagamento->data_vencimento, $pagamento->tipo_pagamento, $pagamento->valor_pagamento, $pagamento->confirmar_pagamento, $pagamento->cod_pagamento, $pagamento->paciente_id_paciente, $pagamento->servico_id_servico, $pagamento->id_pagamento));
+        }
+
         public static function find($id_pagamento) {
             $db = Db::getInstance();
 
