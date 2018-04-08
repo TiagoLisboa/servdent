@@ -1,5 +1,6 @@
 <?php
 header("access-control-allow-origin: https://pagseguro.uol.com.br");
+header("Content-Type: text/html; charset=UTF-8",true);
 
 if (!session_id()) @ session_start();
 if (!isset($_GET['servico'])) return call ('pages', 'erro');
@@ -13,7 +14,7 @@ $usuario = $_SESSION['informacoes'];
 $ref = Pagamento::insert("", "", "", "", "", "", $usuario->id_paciente);
 
 $data["token"] = "8E9F15E9128144F0B3870F58E70F10BB";
-// $data["email"] = "tiago.caio.ol@gmail.com";
+$data["email"] = "tiago.caio.ol@gmail.com";
 $data["currency"] = 'BRL';
 $data["itemId1"] = $servico->id_servico;
 $data["itemQuantity1"] = '1';
@@ -31,7 +32,7 @@ $data["shippingAddressCity"] = $usuario->cidade;
 $data["shippingAddressState"] = $usuario->estado;
 $data["shippingAddressPostalCode"] = $usuario->cep;*/
 
-$data = http_build_query($data)."&email=tiago.caio.ol@gmail.com";
+$data = http_build_query($data);
 
 $url = 'https://ws.sandbox.pagseguro.uol.com.br/v2/checkout';
 
