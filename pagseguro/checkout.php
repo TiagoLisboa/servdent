@@ -32,9 +32,10 @@ $data["shippingAddressCity"] = $usuario->cidade;
 $data["shippingAddressState"] = $usuario->estado;
 $data["shippingAddressPostalCode"] = $usuario->cep;*/
 
+die($data['email']);
+
 $data = http_build_query($data);
 
-die($data);
 
 $url = 'https://ws.sandbox.pagseguro.uol.com.br/v2/checkout';
 
