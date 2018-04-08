@@ -238,9 +238,12 @@ CREATE TABLE `pagamento` (
   `confirmar_pagamento` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `cod_pagamento` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `paciente_id_paciente` int(11) DEFAULT NULL,
+  `servico_id_servico` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_pagamento`),
   KEY `pagamento_paciente_FK` (`paciente_id_paciente`),
-  CONSTRAINT `pagamento_paciente_FK` FOREIGN KEY (`paciente_id_paciente`) REFERENCES `paciente` (`id_paciente`)
+  KEY `pagamento_servico_FK` (`servico_id_servico`),
+  CONSTRAINT `pagamento_paciente_FK` FOREIGN KEY (`paciente_id_paciente`) REFERENCES `paciente` (`id_paciente`),
+  CONSTRAINT `pagamento_servico_FK` FOREIGN KEY (`servico_id_servico`) REFERENCES `servico` (`id_servico`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -329,4 +332,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-04-08 15:49:34
+-- Dump completed on 2018-04-08 18:42:28

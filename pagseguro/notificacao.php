@@ -32,7 +32,7 @@ if($reference && $status){
 		$pagamento->data_pagamento = $date;
 		$pagamento->cod_pagamento = $codigo;
 		// Pagamento::update($pagamento);
-		Paciente::insertServico($pagamento->servico_id_servico, $paciente_id_paciente);
+		Paciente::insertServico($pagamento->servico_id_servico, $pagamento->paciente_id_paciente);
 	}
 }
 
