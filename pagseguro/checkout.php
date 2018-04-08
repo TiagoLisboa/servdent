@@ -1,6 +1,6 @@
 <?php
 header("access-control-allow-origin: https://pagseguro.uol.com.br");
-header("Content-Type: application/x-www-form-urlencoded; charset=ISO-8859-1");
+header("Content-Type: application/x-www-form-urlencoded; charset=ISO-8859-1", true);
 
 if (!session_id()) @ session_start();
 if (!isset($_GET['servico'])) return call ('pages', 'erro');
