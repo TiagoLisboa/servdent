@@ -19,9 +19,7 @@ $data["itemId1"] = $servico->id_servico;
 $data["itemQuantity1"] = '1';
 $data["itemDescription1"] = $servico->tipo_servico;
 $data["itemAmount1"] = $servico->valor_servico;
-print_r($data);
 
-die($data);
 /*$data["reference"] = $ref;
 $data["senderName"] = $usuario->nome_completo;
 $data["senderEmail"] = $usuario->email;
@@ -34,6 +32,10 @@ $data["shippingAddressState"] = $usuario->estado;
 $data["shippingAddressPostalCode"] = $usuario->cep;*/
 
 $data = http_build_query($data);
+
+print_r($data);
+
+die($data);
 
 $url = 'https://ws.sandbox.pagseguro.uol.com.br/v2/checkout';
 
