@@ -16,23 +16,19 @@ $ref = Pagamento::insert("", "", "", "", "", "", $usuario->id_paciente);
 require_once('PagSeguro.class.php');
 $pagseguro = new PagSeguro();
 
-$data["token"] = "8E9F15E9128144F0B3870F58E70F10BB";
-$data["email"] = "tiago.caio.ol@gmail.com";
-$data["currency"] = 'BRL';
-$data["itemId1"] = $servico->id_servico;
-$data["itemQuantity1"] = '1';
-$data["itemDescription1"] = $servico->tipo_servico;
-$data["itemAmount1"] = $servico->valor_servico;
-$data["reference"] = $ref;
-$data["senderName"] = $usuario->nome_completo;
-$data["senderEmail"] = $usuario->email;
-$data["senderPhone"] = $usuario->telefone;
-$data["shippingAddressStreet"] = $usuario->rua;
-$data["shippingAddressNumber"] = $usuario->numero;
-$data["shippingAddressDistrict"] = $usuario->bairro;
-$data["shippingAddressCity"] = $usuario->cidade;
-$data["shippingAddressState"] = $usuario->estado;
-$data["shippingAddressPostalCode"] = $usuario->cep;
+$data = array("codigo"=>$servico->id_servico,
+				   "valor"=>$servico->valor_servico,
+				   "descricao"=>"VENDA DE $servico->tipo_servico",
+				   "nome"=>$usuario->nome_completo,
+				   "email"=>$usuario->email,
+				   "telefone"=>$usuario->telefone,
+				   "rua"=>$usuario->rua,
+				   "numero"=>$usuario->numero,
+				   "bairro"=>$usuario->bairro,
+				   "cidade"=>$usuario->cidade,
+				   "estado"=>$usuario->estado, //2 LETRAS MAIÚSCULAS
+				   "cep"=>$usuario->cep,
+				   "codigo_pagseguro"=>"");
 
 $pagseguro->executeCheckout($data, "");
 
