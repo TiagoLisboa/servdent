@@ -1,3 +1,5 @@
+<?php if (!session_id()) @ session_start(); ?>
+
 <!-- COMO FUCIONA -->
 
 <div class="jumbotron fluid-jumbotron">
