@@ -1,10 +1,10 @@
 <?php
     class ServicoController {
-        public function novoServico() {
+        public function novo() {
             require_once('views/login/cadastro-servico.php');
         }
 
-        public function cadastrarServico() {
+        public function cadastrar() {
             if(!isset($_POST['valor_servico']))
                 return call('pages', 'error');
             
@@ -40,7 +40,7 @@
 
         
 
-        public function editarServico() {
+        public function editar() {
             if(!isset($_GET['servico']))
                 return call('pages', 'error');
 
@@ -56,7 +56,7 @@
             require_once('views/login/editar-servico.php');
         }
 
-        public function atualizarServico() {
+        public function atualizar() {
             if(!isset($_POST['id_servico']))
                 return call('pages', 'error');
 
@@ -98,7 +98,7 @@
             header('Location: /?controller=login&action=index&success=4');
         }
 
-        public function deletarServico() {
+        public function deletar() {
             if(!isset($_GET['id_servico']))
                 return call('pages', 'error');
 
