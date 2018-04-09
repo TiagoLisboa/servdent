@@ -26,7 +26,7 @@
             $id_servico = intval($_POST['id_servico']);
             $horario = $_POST['horario'];
 
-            Agendamento::insert($id_paciente, 1, $id_servico, $data, $horario, '', '');
+            Agendamento::insert($id_paciente, 1, $id_servico, $data, $horario, '', '', 0);
 
             header('Location: /?controller=login&action=index');
         }
@@ -59,10 +59,13 @@
             $id_agendamento = intval($_POST['id_agendamento']);
 
             $agendamento = Agendamento::find($id_agendamento);
+            if ($agendamento->alterado != 0) {
+                return call ('pages', 'error');
+            }
             $agendamento->data_2 = $data;
             $agendamento->horario = $horario;
 
-            Agendamento::update($agendamento->paciente_id_paciente, $agendamento->dentista_id_dentista, $agendamento->servico_id_servico, $agendamento->data_2, $agendamento->horario, $agendamento->cod_servico, $agendamento->registro_historico, $id_agendamento);
+            Agendamento::update($agendamento->paciente_id_paciente, $agendamento->dentista_id_dentista, $agendamento->servico_id_servico, $agendamento->data_2, $agendamento->horario, $agendamento->cod_servico, $agendamento->registro_historico, $id_agendamento, 1);
 
             header("Location: /?controller=login&action=index");
         }
@@ -92,7 +95,7 @@
             $id_servico = $_POST['id_servico'];
             $id_paciente = intval($_SESSION['informacoes']->id_paciente);
 
-            Agendamento::insert($id_paciente, 1, $id_servico, $data, $horario, 1, "");
+            Agendamento::insert($id_paciente, 1, $id_servico, $data, $horario, 1, "", 0);
 
             header("Location: /?controller=login&action=index");
         }

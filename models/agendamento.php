@@ -10,8 +10,9 @@
         public $cod_servico;
         public $registro_historico;
         public $servico;
+        public $alterad;
 
-        public function __construct ($id_agendamento, $paciente_id_paciente, $dentista_id_dentista, $servico_id_servico, $data_2, $horario, $cod_servico, $registro_historico) {
+        public function __construct ($id_agendamento, $paciente_id_paciente, $dentista_id_dentista, $servico_id_servico, $data_2, $horario, $cod_servico, $registro_historico, $alterad) {
             $this->id_agendamento = $id_agendamento;
             $this->paciente_id_paciente = $paciente_id_paciente;
             $this->dentista_id_dentista = $dentista_id_dentista;
@@ -20,6 +21,7 @@
             $this->horario = $horario;
             $this->cod_servico = $cod_servico;
             $this->registro_historico = $registro_historico;
+            $this->alterado = $alterado;
             require_once('models/servico.php');
             $this->servico = Servico::find($servico_id_servico);
         }
@@ -32,7 +34,7 @@
             $req->execute(array('paciente_id_paciente' => $paciente_id_paciente));
 
             foreach($req->fetchAll() as $age) {
-                $list[] = new Agendamento($age['id_agendamento'], $age['paciente_id_paciente'], $age['dentista_id_dentista'], $age['servico_id_servico'], $age['data_2'], $age['horario'], $age['cod_servico'], $age['registro_historico']);
+                $list[] = new Agendamento($age['id_agendamento'], $age['paciente_id_paciente'], $age['dentista_id_dentista'], $age['servico_id_servico'], $age['data_2'], $age['horario'], $age['cod_servico'], $age['registro_historico'], $age['alterado']);
             }
 
             return $list;
@@ -46,7 +48,7 @@
             $req->execute();
 
             foreach($req->fetchAll() as $age) {
-                $list[] = new Agendamento($age['id_agendamento'], $age['paciente_id_paciente'], $age['dentista_id_dentista'], $age['servico_id_servico'], $age['data_2'], $age['horario'], $age['cod_servico'], $age['registro_historico']);
+                $list[] = new Agendamento($age['id_agendamento'], $age['paciente_id_paciente'], $age['dentista_id_dentista'], $age['servico_id_servico'], $age['data_2'], $age['horario'], $age['cod_servico'], $age['registro_historico'], $age['alterado']);
             }
 
             return $list;
@@ -59,23 +61,23 @@
             $req->execute(array('id_agendamento' => $id_agendamento));
             $age = $req->fetch();
 
-            $agendamento = new Agendamento($age['id_agendamento'], $age['paciente_id_paciente'], $age['dentista_id_dentista'], $age['servico_id_servico'], $age['data_2'], $age['horario'], $age['cod_servico'], $age['registro_historico']);
+            $agendamento = new Agendamento($age['id_agendamento'], $age['paciente_id_paciente'], $age['dentista_id_dentista'], $age['servico_id_servico'], $age['data_2'], $age['horario'], $age['cod_servico'], $age['registro_historico'], $age['alterado']);
 
             return $agendamento;
         }
 
-        public static function update($paciente_id_paciente, $dentista_id_dentista, $servico_id_servico, $data_2, $horario, $cod_servico, $registro_historico, $id_agendamento) {
+        public static function update($paciente_id_paciente, $dentista_id_dentista, $servico_id_servico, $data_2, $horario, $cod_servico, $registro_historico, $id_agendamento, $alterado) {
             $db = Db::getInstance();
 
-            $req = $db->prepare('UPDATE agendamento SET paciente_id_paciente=?, dentista_id_dentista=?, servico_id_servico=?, data_2=?, horario=?, cod_servico=?, registro_historico=? WHERE id_agendamento=?');
-            $req->execute(array($paciente_id_paciente, $dentista_id_dentista, $servico_id_servico, $data_2, $horario, $cod_servico, $registro_historico, $id_agendamento));
+            $req = $db->prepare('UPDATE agendamento SET paciente_id_paciente=?, dentista_id_dentista=?, servico_id_servico=?, data_2=?, horario=?, cod_servico=?, registro_historico=?, alterado=? WHERE id_agendamento=?');
+            $req->execute(array($paciente_id_paciente, $dentista_id_dentista, $servico_id_servico, $data_2, $horario, $cod_servico, $registro_historico, $alterado, $id_agendamento));
         }
 
-        public static function insert($paciente_id_paciente, $dentista_id_dentista, $servico_id_servico, $data_2, $horario, $cod_servico, $registro_historico) {
+        public static function insert($paciente_id_paciente, $dentista_id_dentista, $servico_id_servico, $data_2, $horario, $cod_servico, $registro_historico, $alterado) {
             $db = Db::getInstance();
 
-            $req = $db->prepare('INSERT INTO agendamento (paciente_id_paciente, dentista_id_dentista, servico_id_servico, data_2, horario, cod_servico, registro_historico) VALUES (?, ?, ?, ?, ?, ?, ?)');
-            $req->execute(array($paciente_id_paciente, $dentista_id_dentista, $servico_id_servico, $data_2, $horario, $cod_servico, $registro_historico));
+            $req = $db->prepare('INSERT INTO agendamento (paciente_id_paciente, dentista_id_dentista, servico_id_servico, data_2, horario, cod_servico, registro_historico, alterado) VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
+            $req->execute(array($paciente_id_paciente, $dentista_id_dentista, $servico_id_servico, $data_2, $horario, $cod_servico, $registro_historico, $alterado));
 
             return $db->lastInsertId();
         }

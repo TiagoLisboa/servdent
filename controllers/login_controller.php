@@ -5,6 +5,9 @@
         }
 
         public function secretaria() {
+            if (!session_id()) @ session_start();
+            if (!isset($_SESSION['login']) || $_SESSION['login']->papel != 'Secretaria') return call('pages', 'error');
+
             $pacientes = Paciente::all();
             $agendamentos = Agendamento::all();
             require_once('views/login/secretaria.php');
@@ -18,6 +21,13 @@
             $servicos = Paciente::allServicos(intval($_SESSION['informacoes']->id_paciente));
 
             require_once('views/login/paciente.php');
+        }
+
+        public function gerente() {
+            if (!session_id()) @ session_start();
+            if (!isset($_SESSION['login']) || $_SESSION['login']->papel != 'Gerente') return call('pages', 'error');
+
+            echo "ola mundo";
         }
 
         public function novoPaciente() {
