@@ -28,10 +28,11 @@
             $db = Db::getInstance();
 
 
-            $req = $db->prepare('INSERT INTO pagamento (data_pagamento, data_vencimento, tipo_pagamento, valor_pagamento, confirmar_pagamento, cod_pagamento, servico_id_servico, paciente_id_usuario) 
-                                VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
+            $req = $db->prepare("INSERT INTO dental_clean.pagamento
+            (data_pagamento, data_vencimento, tipo_pagamento, valor_pagamento, confirmar_pagamento, cod_pagamento, servico_id_servico, paciente_id_usuario)
+            VALUES(?, ?, ?, ?, ?, ?, ?, ?);");
 
-            $req->execute(array($data_pagamento, $data_vencimento, $tipo_pagamento, $valor_pagamento, $confirmar_pagamento, $cod_pagamento, $paciente_id_usuario, $servico_id_servico));
+            $req->execute(array($data_pagamento, $data_vencimento, $tipo_pagamento, $valor_pagamento, $confirmar_pagamento, $cod_pagamento, $servico_id_servico, $paciente_id_usuario));
 
             return $db->lastInsertId();
         }
