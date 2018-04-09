@@ -1,5 +1,3 @@
-<?php if (!session_id()) @ session_start(); ?>
-
 <div class="container">
     <div class="row">
 
@@ -31,13 +29,13 @@
                     <td><?= $servico->tipo_servico ?></td>
                     <td><?= $servico->valor_servico ?></td>
                     <td><?= $servico->descricao_servico ?></td>
-                    <td><a href="/?controller=login&action=editarServico&servico=<?= $servico->id_servico ?>" class="btn btn-warning">Editar</a></td>
+                    <td><a href="/?controller=servico&action=editar&servico=<?= $servico->id_servico ?>" class="btn btn-warning">Editar</a></td>
                 </tr>
                 <?php } ?>
             </tbody>
         </table>
 
-        <a href="/?controller=login&action=novoServico" class="btn btn-primary">Cadastrar serviço</a>
+        <a href="/?controller=servico&action=novo" class="btn btn-primary">Cadastrar serviço</a>
 
     </div>
 
@@ -84,13 +82,13 @@
                     <td><?= $paciente->cidade ?></td>
                     <td><?= $paciente->bairro ?></td>
                     <td><?= $paciente->papel ?></td>
-                    <td><a href="/?controller=login&action=editarUsuario&id_usuario=<?= $paciente->id_usuario ?>" class="btn btn-warning">Editar</a></td>
+                    <td><a href="/?controller=paciente&action=editarUsuario&id_usuario=<?= $paciente->id_usuario ?>" class="btn btn-warning">Editar</a></td>
                 </tr>
                 <?php } ?>
             </tbody>
         </table>
 
-        <a href="/?controller=login&action=novoPaciente" class="btn btn-primary">Cadastrar paciente</a>
+        <a href="/?controller=paciente&action=novoUsuario" class="btn btn-primary">Cadastrar Usuario</a>
 
     </div>
 </div>

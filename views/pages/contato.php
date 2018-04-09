@@ -23,7 +23,7 @@
     <p class="text-muted text-center">Dúvidas? Entre em contato.</p>
 
     <div class="mt-50">
-        <form action="/?controller=contato&action=enviar">
+        <form action="/?controller=pages&action=enviarEmail">
             <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group">

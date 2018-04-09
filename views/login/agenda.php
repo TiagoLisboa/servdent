@@ -28,7 +28,7 @@
                         <div id="datetimepicker1"></div>
                     </div>
                     <div class="col-md-3" style="height: 100%;">
-                        <?php if ($_SESSION['usuario']->papel == 'Paciente') {?><a href="/?controller=compras&action=solicitarReserva" id="solicitarReserva" class="col-md-12 bg-green" style="display: block; border-radius: 5px; margin-bottom: 10px; color: white;">SOLICITAR RESERVA</a><?php } ?>
+                        <?php if ($_SESSION['usuario']->papel == 'Paciente') {?><a href="/?controller=reserva&action=solicitar" id="solicitarReserva" class="col-md-12 bg-green" style="display: block; border-radius: 5px; margin-bottom: 10px; color: white;">SOLICITAR RESERVA</a><?php } ?>
                         <a href="" id="alterar" class="col-md-12 bg-blue" style="display: block; border-radius: 5px; margin-bottom: 10px; color: white;">SOLICITAR ALTERAÇÃO</a>
                         <a href="" id="cancelar" class="col-md-12 bg-red" style="display: block; border-radius: 5px; margin-bottom: 10px; color: white;">CANCELAR RESERVA</a>
                     </div>
@@ -39,7 +39,7 @@
         <div class="row horarios">
             <div class="col-sm-8">
                 <h5 class="text-center">Horários Reservados</h5>
-                <form action="/?controller=compras&action=modificarReserva" method="POST" class="col-sm-12 editar-form">
+                <form action="/?controller=reserva&action=modificar" method="POST" class="col-sm-12 editar-form">
                     <div class="form-group horarios">
                         <select name="horario" class="form-control">
                         </select>
@@ -58,7 +58,7 @@
 
 </div>
 
-<form action="/?controller=compras&action=solicitarReserva" method="POST" style="display: none">
+<form action="/?controller=reserva&action=solicitar" method="POST" style="display: none">
     <input type="text" name="data" id="data" />
 </form>
 

@@ -2,7 +2,7 @@
 
 	<h2> Cadastrar Usuario </h2>
 
-	<form action="/?controller=login&action=cadastrarPaciente" method="POST">
+	<form action="/?controller=paciente&action=cadastrar" method="POST">
 
 		<h3> Login </h3>
 

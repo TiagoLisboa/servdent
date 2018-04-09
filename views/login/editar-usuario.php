@@ -4,7 +4,7 @@
 
 	<h2> Editar Paciente </h2>
 
-	<form action="/?controller=login&action=atualizarPaciente" method="POST">
+	<form action="/?controller=paciente&action=atualizarUsuario" method="POST">
 
 		<h3> Login </h3>
 
@@ -112,7 +112,7 @@
 	$('.deletar').on('click', function (e) {
 		var x = confirm("Tem certeza que deseja deletar esse usuario?");
 		if (x)
-			window.location="/?controller=login&action=deletarPaciente&id_usuario=<?= $id_usuario ?>"
+			window.location="/?controller=paciente&action=deletarUsuario&id_usuario=<?= $id_usuario ?>"
 	});
 
 </script>

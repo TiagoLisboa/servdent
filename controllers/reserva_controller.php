@@ -1,23 +1,6 @@
 <?php
-    class ComprasController {
-        public function comprar() {
-            if(!isset($_GET['servico'])) return call ('pages', 'error');
-
-            $servico_id_servico = intval($_GET['servico']);
-
-            if (!session_id()) @ session_start();
-            if (!isset($_SESSION['usuario']) || $_SESSION['usuario']->papel != 'Paciente') return header('Location: /?controller=login&action=index');
-
-            $paciente_id_paciente = intval($_SESSION['usuario']->id_usuario);
-            //Agendamento::insert($paciente_id_paciente, 1, $servico_id_servico, 0, 0, 0, "registro");
-            Usuario::insertServico(intval($_GET['servico']), $paciente_id_paciente);
-            
-
-            return call('login', 'index');
-
-        }
-
-        public function finalizarReserva() {
+    class ReservaController {
+        public function finalizar() {
             if (!session_id()) @ session_start();
             if (!isset($_SESSION['usuario']) || !isset($_POST['data'])) return call('pages', 'error');
 
@@ -31,7 +14,7 @@
             header('Location: /?controller=login&action=index');
         }
 
-        public function solicitarReserva() {
+        public function solicitar() {
             if (!session_id()) @ session_start();
             if (!isset($_SESSION['usuario']) || !isset($_POST['data'])) return call('pages', 'error');
 
@@ -42,7 +25,7 @@
             require_once('views/compras/escolherServicoContratado.php');
         }
 
-        public function alterarReserva() {
+        public function alterar() {
             if (!isset($_GET['agendamento'])) return call('pages', 'error');
             if (!session_id()) @ session_start();
 
@@ -56,7 +39,7 @@
             require_once('views/compras/editarAgendamento.php');
         }
 
-        public function updateReserva() {
+        public function update() {
             if (!isset($_POST['horario']) || !isset($_POST['data']) || !isset($_POST['id_agendamento'])) return call('pages', 'error');
             if (!session_id()) @ session_start();
 
@@ -85,7 +68,7 @@
             header("Location: /?controller=login&action=index");
         }
 
-        public function modificarReserva() {
+        public function modificar() {
             if (!isset($_POST['horario']) || !isset($_POST['acao'])) return call('pages', 'error');
             if (!session_id()) @ session_start();
 
@@ -99,24 +82,6 @@
             }
 
             header("Location: /?controller=login&action=index");
-        }
-
-        public function finalizar() {
-            if (!isset($_POST['horario']) || !isset($_POST['data'])) return call('pages', 'error');
-            if (!session_id()) @ session_start();
-            
-            $horario = $_POST['horario'];
-            $data = $_POST['data'];
-            $id_servico = $_POST['id_servico'];
-            $id_usuario = intval($_SESSION['usuario']->id_usuario);
-
-            Agendamento::insert($id_usuario, 1, $id_servico, $data, $horario, 1, "", 0);
-
-            header("Location: /?controller=login&action=index");
-        }
-
-        public function datepicker() {
-            require_once('views/compras/datepicker.php');
         }
     }
 ?>

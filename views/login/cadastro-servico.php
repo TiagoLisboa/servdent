@@ -2,7 +2,7 @@
 
 	<h2> Cadastrar Serviço </h2>
 
-	<form action="/?controller=login&action=cadastrarServico" method="POST" enctype="multipart/form-data">
+	<form action="/?controller=servico&action=cadastrar" method="POST" enctype="multipart/form-data">
 
 		<div class="form-group">
 			<label for="img">Imagem</label>

@@ -4,7 +4,7 @@
 
 	<h2> Editar Serviço </h2>
 
-	<form action="/?controller=login&action=atualizarServico" method="POST" enctype="multipart/form-data">
+	<form action="/?controller=servico&action=atualizar" method="POST" enctype="multipart/form-data">
 
 		<input type="hidden" name="id_servico" value="<?= $id_servico ?>">
 
@@ -48,7 +48,7 @@
 	$('.deletar').on('click', function (e) {
 		var x = confirm("Tem certeza que deseja deletar esse serviço?");
 		if (x)
-			window.location="/?controller=login&action=deletarServico&id_servico=<?= $id_servico ?>"
+			window.location="/?controller=servico&action=deletar&id_servico=<?= $id_servico ?>"
 	});
 	
 	$('.custom-file-input').on('change',function(){

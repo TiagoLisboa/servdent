@@ -1,5 +1,3 @@
-<?php if (!session_id()) @ session_start(); ?>
-
 <div class="container">
     <div class="row">
 
@@ -42,13 +40,13 @@
                     <td><?= $paciente->estado ?></td>
                     <td><?= $paciente->cidade ?></td>
                     <td><?= $paciente->bairro ?></td>
-                    <td><a href="/?controller=login&action=editarPaciente&paciente=<?= $paciente->id_usuario ?>" class="btn btn-warning">Editar</a></td>
+                    <td><a href="/?controller=paciente&action=editar&paciente=<?= $paciente->id_usuario ?>" class="btn btn-warning">Editar</a></td>
                 </tr>
                 <?php } ?>
             </tbody>
         </table>
 
-        <a href="/?controller=login&action=novoPaciente" class="btn btn-primary">Cadastrar paciente</a>
+        <a href="/?controller=paciente&action=novo" class="btn btn-primary">Cadastrar paciente</a>
 
     </div>
 
