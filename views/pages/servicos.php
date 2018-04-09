@@ -46,7 +46,8 @@
             <div class="col-sm-8">
                 <h3 class="text-muted"><?= $servico->tipo_servico ?></h3>
                 <p class="text-muted"><?= $servico->descricao_servico ?></p>
-                <a href="/?controller=pagseguro&action=checkout&servico=<?= $servico->id_servico ?>" class="btn btn-primary">Comprar</a>
+                <a href="<?= (isset($_POST['usuario']) && $_POST['usuario']->papel == 'Paciente') ? '/?controller=pagseguro&action=checkout&servico=' . $servico->id_servico : '' ?>"
+                class="btn btn-primary">Comprar</a> 
             </div>
         </div>
     <?php } ?>
