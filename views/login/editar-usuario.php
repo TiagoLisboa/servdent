@@ -112,7 +112,7 @@
 	$('.deletar').on('click', function (e) {
 		var x = confirm("Tem certeza que deseja deletar esse usuario?");
 		if (x)
-			window.location="/?controller=paciente&action=deletarUsuario&id_usuario=<?= $id_usuario ?>"
+			window.location="/?controller=paciente&action=deletar&id_usuario=<?= $id_usuario ?>"
 	});
 
 </script>
