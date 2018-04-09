@@ -4,7 +4,7 @@
 
 	<h2> Editar Paciente </h2>
 
-	<form action="/?controller=paciente&action=atualizarUsuario" method="POST">
+	<form action="/?controller=paciente&action=atualizar" method="POST">
 
 		<h3> Login </h3>
 
