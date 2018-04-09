@@ -4,17 +4,24 @@
         require_once('controllers/' . $controller . '_controller.php');
 
         switch ($controller) {
+            case 'login':
+                $controller = new LoginController();
+                break;
+            case 'paciente':
+                $controller = new PacienteController();
+                break;
             case 'pages':
                 $controller = new PagesController();
                 break;
-            case 'login':
-                $controller = new LoginController();
+            case 'pagseguro':
+                $controller = new PagseguroController();
                 break;
             case 'reserva':
                 $controller = new ReservaController();
                 break;
-            case 'pagseguro':
-                $controller = new PagseguroController();
+            case 'servico':
+                $controller = new ServicoController();
+                break;
         }
 
         $controller->{ $action }();
