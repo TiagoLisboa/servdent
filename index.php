@@ -1,5 +1,5 @@
 <?php
-    
+
     require_once('connection.php');
 
     require_once("models/usuario.php");
@@ -14,6 +14,8 @@
         $controller = 'pages';
         $action     = 'home';
     }
+
+    if (!session_id()) @ session_start();
 
     require_once('views/layout.php');
 
