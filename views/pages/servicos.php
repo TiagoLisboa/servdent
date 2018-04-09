@@ -38,38 +38,18 @@
 
     <h2 class="text-center font-weight-bold text-blue">ESCOLHA SEU SERVIÇO E RESERVE UM HORÁRIO. </h2>
 
-    <div class="row top-buffer">
-        <div class="col-sm-3">
-            <img class="card-img-top" src="views/assets/imgs/ortodontia.png" alt="Ortodontia">
+    <?php foreach($servicos as $servico) { ?>
+        <div class="row top-buffer">
+            <div class="col-sm-3">
+                <img class="card-img-top" src="<?= $servico->img_path ?>" alt="<?= $servico->tipo_servico ?>">
+            </div>
+            <div class="col-sm-8">
+                <h3 class="text-muted"><?= $servico->tipo_servico ?></h3>
+                <p class="text-muted"><?= $servico->descricao_servico ?></p>
+                <a href="/?controller=pagseguro&action=checkout&servico=<?= $servico->id_servico ?>" class="btn btn-primary">Comprar</a>
+            </div>
         </div>
-        <div class="col-sm-8">
-            <h3 class="text-muted">Ortodontia</h3>
-            <p class="text-muted">Consiste na prevenção e tratamento dos problemas de crescimento, desenvolvimento e amadurecimento da face, dos arcos dentários e da oclusão.</p>
-            <a href="/?controller=pagseguro&action=checkout&servico=1" class="btn btn-primary">Comprar</a>
-        </div>
-    </div>
-
-    <div class="row top-buffer">
-        <div class="col-sm-3">
-            <img class="card-img-top" src="views/assets/imgs/protese.png" alt="Prótese">
-        </div>
-        <div class="col-sm-8">
-            <h3 class="text-muted">Prótese</h3>
-            <p class="text-muted">A prótese dental ciência que lida com a reposição de tecidos bucais e dentes perdidos, visando restaurar e manter a forma, função, aparêncie e saúde bucal.</p>
-            <a href="/?controller=pagseguro&action=checkout&servico=2" class="btn btn-primary">Comprar</a>
-        </div>
-    </div>
-
-    <div class="row top-buffer">
-        <div class="col-sm-3">
-            <img class="card-img-top" src="views/assets/imgs/clareamento.png" alt="Clareamento">
-        </div>
-        <div class="col-sm-8">
-            <h3 class="text-muted">Clareamento</h3>
-            <p class="text-muted">O clareamento dentário é uma técnica que se tornou muito popular nos últimos anos devido ao apelo estético por dentes brancos.</p>
-            <a href="/?controller=pagseguro&action=checkout&servico=3" class="btn btn-primary">Comprar</a>
-        </div>
-    </div>
+    <?php } ?>
 
 </div>
 

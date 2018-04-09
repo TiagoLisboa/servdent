@@ -34,9 +34,22 @@
         <form action="/?controller=compras&action=finalizarReserva" method="POST" class="col-sm-12 finalizar-form">
             <div class="form-group">
                 <select name="horario" class="form-control">
-                    <?php for($i = 0; $i < 24; $i++) { ?>
-                        <option selected value="<?= $i ?>"><?= $i ?></option>
-                    <?php } ?>
+                    <?php 
+                        for($i = 0; $i < 24; $i++) { 
+                            $valido = true;
+                            foreach ($agendamentos as $agendamento) {
+                                if ($agendamento->data_2 == $data && $agendamento->horario == $i) {
+                                    $valido = false;
+                                }
+                            }
+                            if ($valido) {
+                                ?>
+                                    <option selected value="<?= $i ?>"><?= $i ?></option>
+                                <?php
+
+                            }
+                        }
+                    ?>
                 </select>
             </div>
             <input type="hidden" name="data" id="data" value="<?= $data ?>" />

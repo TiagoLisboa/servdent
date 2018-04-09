@@ -8,8 +8,6 @@
                 $controller = new PagesController();
                 break;
             case 'login':
-                require_once('models/login.php');
-                require_once('models/paciente.php');
                 $controller = new LoginController();
                 break;
             case 'compras':
@@ -25,7 +23,9 @@
     $controllers = array(
         'pages' => ['home', 'servicos', 'error', 'contato'],
         'login' => ['index', 'validate', 'secretaria', 'novoPaciente', 'cadastrarPaciente',
-                    'logout', 'editarPaciente', 'atualizarPaciente', 'deletarPaciente'],
+                    'logout', 'editarPaciente', 'atualizarPaciente', 'deletarPaciente',
+                    'editarServico', 'atualizarServico', 'deletarServico', 'deletarServico',
+                    'cadastrarServico', 'novoServico', 'novoUsuario', 'editarUsuario'],
         'compras' => ['comprar', 'datepicker', 'finalizar', 'solicitarReserva', 
                     'finalizarReserva', 'modificarReserva', 'alterarReserva', 'updateReserva'],
         'pagseguro' => ['checkout', 'notify']);

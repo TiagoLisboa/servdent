@@ -2,7 +2,7 @@
 
     if (!session_id()) @ session_start();
     
-    if (!isset($_SESSION['login'])) { 
+    if (!isset($_SESSION['usuario'])) { 
 
 ?>
 
@@ -21,6 +21,6 @@
 
 <?php 
     } else {
-        call('login', strtolower($_SESSION['login']->papel));
+        call('login', strtolower($_SESSION['usuario']->papel));
     }
 ?>

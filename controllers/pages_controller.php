@@ -1,10 +1,12 @@
 <?php
     class PagesController {
         public function home() {
+            $servicos = Servico::all();
             require_once('views/pages/inicio.php');
         }
 
         public function servicos() {
+            $servicos = Servico::all();
             require_once('views/pages/servicos.php');
         }
 

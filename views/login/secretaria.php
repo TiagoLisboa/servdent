@@ -33,7 +33,7 @@
             <tbody>
                 <?php foreach ($pacientes as $paciente) { ?>
                 <tr>
-                    <th scope="row"><?= $paciente->id_paciente ?></td>
+                    <th scope="row"><?= $paciente->id_usuario ?></td>
                     <td><?= $paciente->nome_completo ?></td>
                     <td><?= $paciente->telefone ?></td>
                     <td><?= $paciente->email ?></td>
@@ -42,7 +42,7 @@
                     <td><?= $paciente->estado ?></td>
                     <td><?= $paciente->cidade ?></td>
                     <td><?= $paciente->bairro ?></td>
-                    <td><a href="/?controller=login&action=editarPaciente&paciente=<?= $paciente->login_id_login ?>" class="btn btn-warning">Editar</a></td>
+                    <td><a href="/?controller=login&action=editarPaciente&paciente=<?= $paciente->id_usuario ?>" class="btn btn-warning">Editar</a></td>
                 </tr>
                 <?php } ?>
             </tbody>

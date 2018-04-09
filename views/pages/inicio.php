@@ -10,35 +10,19 @@
 <div class="container-fluid nossos-servicos">
     <div class="row">
 
-        <div class="col-sm-4">
+        <?php foreach($servicos as $servico) { ?>
+
+        <div class="col-sm-4 mt-50">
             <div class="card">
-                <img class="card-img-top" src="views/assets/imgs/ortodontia.png" alt="Ortodontia">
+                <img class="card-img-top" src="<?= $servico->img_path ?>" alt="<?= $servico->tipo_servico ?>">
                 <div class="card-body">
-                    <h5 class="card-title text-center">Ortodontia</h5>
-                    <p class="card-text text-center">Consiste na prevenção e tratamento dos problemas de crescimento, desenvolvimento e amadurecimento da face, dos arcos dentários e da oclusão.</p>
+                    <h5 class="card-title text-center"><?= $servico->tipo_servico ?></h5>
+                    <p class="card-text text-center"><?= $servico->descricao_servico ?></p>
                 </div>
             </div>
         </div>
 
-        <div class="col-sm-4">
-            <div class="card">
-                <img class="card-img-top" src="views/assets/imgs/protese.png" alt="Prótese">
-                <div class="card-body">
-                    <h5 class="card-title text-center">Prótese</h5>
-                    <p class="card-text text-center">A prótese dental ciência que lida com a reposição de tecidos bucais e dentes perdidos, visando restaurar e manter a forma, função, aparêncie e saúde bucal</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-sm-4">
-            <div class="card">
-                <img class="card-img-top" src="views/assets/imgs/clareamento.png" alt="Clareamento">
-                <div class="card-body">
-                    <h5 class="card-title text-center">Clareamento</h5>
-                    <p class="card-text text-center">O clareamento dentário é uma técnica que se tornou muito popular nos últimos anos devido ao apelo estético por dentes brancos.</p>
-                </div>
-            </div>
-        </div>
+        <?php } ?>
     
     </div>
 </div>

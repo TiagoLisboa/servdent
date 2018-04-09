@@ -2,39 +2,37 @@
 
     class Agendamento {
         public $id_agendamento;
-        public $paciente_id_paciente;
-        public $dentista_id_dentista;
         public $servico_id_servico;
         public $data_2;
         public $horario;
         public $cod_servico;
         public $registro_historico;
+        public $alterado;
+        public $paciente_id_usuario;
         public $servico;
-        public $alterad;
 
-        public function __construct ($id_agendamento, $paciente_id_paciente, $dentista_id_dentista, $servico_id_servico, $data_2, $horario, $cod_servico, $registro_historico, $alterad) {
+        public function __construct ($id_agendamento, $servico_id_servico, $data_2, $horario, $cod_servico, $registro_historico, $alterado, $paciente_id_usuario) {
             $this->id_agendamento = $id_agendamento;
-            $this->paciente_id_paciente = $paciente_id_paciente;
-            $this->dentista_id_dentista = $dentista_id_dentista;
             $this->servico_id_servico = $servico_id_servico;
             $this->data_2 = $data_2;
             $this->horario = $horario;
             $this->cod_servico = $cod_servico;
             $this->registro_historico = $registro_historico;
             $this->alterado = $alterado;
+            $this->paciente_id_usuario = $paciente_id_usuario;
             require_once('models/servico.php');
             $this->servico = Servico::find($servico_id_servico);
         }
 
-        public static function allByIdPaciente($paciente_id_paciente) {
+        public static function allByIdPaciente($paciente_id_usuario) {
             $list = [];
             $db = Db::getInstance();
 
-            $req = $db->prepare('SELECT * FROM agendamento WHERE paciente_id_paciente = :paciente_id_paciente');
-            $req->execute(array('paciente_id_paciente' => $paciente_id_paciente));
+            $req = $db->prepare('SELECT * FROM agendamento WHERE paciente_id_usuario = :paciente_id_usuario');
+            $req->execute(array('paciente_id_usuario' => $paciente_id_usuario));
 
             foreach($req->fetchAll() as $age) {
-                $list[] = new Agendamento($age['id_agendamento'], $age['paciente_id_paciente'], $age['dentista_id_dentista'], $age['servico_id_servico'], $age['data_2'], $age['horario'], $age['cod_servico'], $age['registro_historico'], $age['alterado']);
+                $list[] = new Agendamento($age['id_agendamento'], $age['servico_id_servico'], $age['data_2'], $age['horario'], $age['cod_servico'], $age['registro_historico'], $age['alterado'], $age['paciente_id_usuario']);
             }
 
             return $list;
@@ -48,7 +46,7 @@
             $req->execute();
 
             foreach($req->fetchAll() as $age) {
-                $list[] = new Agendamento($age['id_agendamento'], $age['paciente_id_paciente'], $age['dentista_id_dentista'], $age['servico_id_servico'], $age['data_2'], $age['horario'], $age['cod_servico'], $age['registro_historico'], $age['alterado']);
+                $list[] = new Agendamento($age['id_agendamento'], $age['servico_id_servico'], $age['data_2'], $age['horario'], $age['cod_servico'], $age['registro_historico'], $age['alterado'], $age['paciente_id_usuario']);
             }
 
             return $list;
@@ -61,23 +59,25 @@
             $req->execute(array('id_agendamento' => $id_agendamento));
             $age = $req->fetch();
 
-            $agendamento = new Agendamento($age['id_agendamento'], $age['paciente_id_paciente'], $age['dentista_id_dentista'], $age['servico_id_servico'], $age['data_2'], $age['horario'], $age['cod_servico'], $age['registro_historico'], $age['alterado']);
+            $agendamento = new Agendamento($age['id_agendamento'], $age['servico_id_servico'], $age['data_2'], $age['horario'], $age['cod_servico'], $age['registro_historico'], $age['alterado'], $age['paciente_id_usuario']);
 
             return $agendamento;
         }
 
-        public static function update($paciente_id_paciente, $dentista_id_dentista, $servico_id_servico, $data_2, $horario, $cod_servico, $registro_historico, $id_agendamento, $alterado) {
+        public static function update($id_agendamento, $servico_id_servico, $data_2, $horario, $cod_servico, $registro_historico, $alterado, $paciente_id_usuario) {
             $db = Db::getInstance();
 
-            $req = $db->prepare('UPDATE agendamento SET paciente_id_paciente=?, dentista_id_dentista=?, servico_id_servico=?, data_2=?, horario=?, cod_servico=?, registro_historico=?, alterado=? WHERE id_agendamento=?');
-            $req->execute(array($paciente_id_paciente, $dentista_id_dentista, $servico_id_servico, $data_2, $horario, $cod_servico, $registro_historico, $alterado, $id_agendamento));
+            $req = $db->prepare("UPDATE dental_clean.agendamento
+            SET servico_id_servico=?, data_2=?, horario=?, cod_servico=?, registro_historico=?, alterado=?, paciente_id_usuario=?
+            WHERE id_agendamento=?");
+            $req->execute(array($servico_id_servico, $data_2, $horario, $cod_servico, $registro_historico, $alterado, $paciente_id_usuario, $id_agendamento));
         }
 
-        public static function insert($paciente_id_paciente, $dentista_id_dentista, $servico_id_servico, $data_2, $horario, $cod_servico, $registro_historico, $alterado) {
+        public static function insert($servico_id_servico, $data_2, $horario, $cod_servico, $registro_historico, $alterado, $paciente_id_usuario) {
             $db = Db::getInstance();
-
-            $req = $db->prepare('INSERT INTO agendamento (paciente_id_paciente, dentista_id_dentista, servico_id_servico, data_2, horario, cod_servico, registro_historico, alterado) VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
-            $req->execute(array($paciente_id_paciente, $dentista_id_dentista, $servico_id_servico, $data_2, $horario, $cod_servico, $registro_historico, $alterado));
+            
+            $req = $db->prepare('INSERT INTO agendamento (servico_id_servico, data_2, horario, cod_servico, registro_historico, alterado, paciente_id_usuario) VALUES (?, ?, ?, ?, ?, ?, ?)');
+            $req->execute(array($servico_id_servico, $data_2, $horario, $cod_servico, $registro_historico, $alterado, $paciente_id_usuario));
 
             return $db->lastInsertId();
         }

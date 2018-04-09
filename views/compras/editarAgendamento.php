@@ -17,9 +17,6 @@
             <form action="/?controller=compras&action=updateReserva" method="POST" class="col-sm-12 editar-form" >
                 <div class="form-group horarios">
                     <select name="horario" class="form-control">
-                        <?php for($i = 0; $i < 24; $i++) { ?>
-                            <option <?= $i == $agendamento->horario ? 'selected' : '' ?> value="<?= $i ?>"><?= $i ?></option>
-                        <?php } ?>
                     </select>
                 </div>
                 <input type="hidden" name="data" id="data" />
@@ -58,5 +55,45 @@
                 $('.editar-form').submit();
             }
         })
+
+        var usedDates = [
+            <?php foreach($agendamentos as $agendamento) {
+                echo("{id_agendamento: " . $agendamento->id_agendamento . ", data: moment('" . $agendamento->data_2 . "'), horario: " . $agendamento->horario . "}, ");
+            }?>
+        ];
+
+        $('select[name="horario"]').html('');
+        for (var i = 0; i <= 23; i++) {
+            var pode = true;
+            for (var j = 0; j < usedDates.length; j++) {
+                if (usedDates[j].data.format('YYYY-MM-DD') == $('#datetimepicker1').datetimepicker('viewDate').format('YYYY-MM-DD') && usedDates[j].horario == i) {
+                    pode = false;
+                    break;
+                }
+            }
+            if (pode) {
+                $('select[name="horario"]').append(
+                    '<option selected value="'+ i +'">'+ i +'</option>'
+                );
+            }
+        }
+
+        $('#datetimepicker1').on('change.datetimepicker', function () {
+            $('select[name="horario"]').html('');
+            for (var i = 0; i <= 23; i++) {
+                var pode = true;
+                for (var j = 0; j < usedDates.length; j++) {
+                    if (usedDates[j].data.format('YYYY-MM-DD') == $('#datetimepicker1').datetimepicker('viewDate').format('YYYY-MM-DD') && usedDates[j].horario == i) {
+                        pode = false;
+                        break;
+                    }
+                }
+                if (pode) {
+                    $('select[name="horario"]').append(
+                        '<option selected value="'+ i +'">'+ i +'</option>'
+                    );
+                }
+            }   
+        });
     });
 </script>

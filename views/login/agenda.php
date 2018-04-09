@@ -7,7 +7,18 @@
 
 </div>
 
+<?php if(isset($_GET['msg']) && intval($_GET['msg']) == 1) { ?>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="alert alert-warning col-sm-12">
+                Reserva já foi alterada uma vez
+            </div>
+        </div>
+    </div>
+<?php } ?>
+
 <div class="row">
+
     
     <div class="container">
         <div style="overflow:hidden;">
@@ -17,7 +28,7 @@
                         <div id="datetimepicker1"></div>
                     </div>
                     <div class="col-md-3" style="height: 100%;">
-                        <a href="/?controller=compras&action=solicitarReserva" id="solicitarReserva" class="col-md-12 bg-green" style="display: block; border-radius: 5px; margin-bottom: 10px; color: white;">SOLICITAR RESERVA</a>
+                        <?php if ($_SESSION['usuario']->papel == 'Paciente') {?><a href="/?controller=compras&action=solicitarReserva" id="solicitarReserva" class="col-md-12 bg-green" style="display: block; border-radius: 5px; margin-bottom: 10px; color: white;">SOLICITAR RESERVA</a><?php } ?>
                         <a href="" id="alterar" class="col-md-12 bg-blue" style="display: block; border-radius: 5px; margin-bottom: 10px; color: white;">SOLICITAR ALTERAÇÃO</a>
                         <a href="" id="cancelar" class="col-md-12 bg-red" style="display: block; border-radius: 5px; margin-bottom: 10px; color: white;">CANCELAR RESERVA</a>
                     </div>

@@ -1,18 +1,19 @@
 <?php
 
-    class Servico {
-        public $id_servico;
-        public $gerente_id_gerente;
-        public $valor_servico;
-        public $tipo_servico;
-        public $descricao_servico;
 
-        public function __construct ($id_servico, $gerente_id_gerente, $valor_servico, $tipo_servico, $descricao_servico) {
-            $this->id_servico = $id_servico;;
-            $this->gerente_id_gerente = $gerente_id_gerente;;
-            $this->valor_servico = $valor_servico;;
-            $this->tipo_servico = $tipo_servico;;
-            $this->descricao_servico = $descricao_servico;;
+    class Servico {
+        public $id_servico; 
+        public $valor_servico; 
+        public $tipo_servico; 
+        public $descricao_servico;
+        public $img_path;
+
+        public function __construct ($id_servico, $valor_servico, $tipo_servico, $descricao_servico, $img_path) {
+            $this->id_servico = $id_servico;
+            $this->valor_servico = $valor_servico;
+            $this->tipo_servico = $tipo_servico;
+            $this->descricao_servico = $descricao_servico;
+            $this->img_path = $img_path;
         }
 
         public static function all() {
@@ -23,7 +24,7 @@
             $req->execute();
 
             foreach($req->fetchAll() as $servico) {
-                $list[] = new Servico($servico['id_servico'], $servico['gerente_id_gerente'], $servico['valor_servico'], $servico['tipo_servico'], $servico['descricao_servico']);
+                $list[] = new Servico($servico['id_servico'], $servico['valor_servico'], $servico['tipo_servico'], $servico['descricao_servico'], $servico['img_path']);
             }
 
             return $list;
@@ -37,7 +38,37 @@
             $req->execute(array('id_servico' => $id_servico));
             $servico = $req->fetch();
 
-            return new Servico($servico['id_servico'], $servico['gerente_id_gerente'], $servico['valor_servico'], $servico['tipo_servico'], $servico['descricao_servico']);
+            return new Servico($servico['id_servico'], $servico['valor_servico'], $servico['tipo_servico'], $servico['descricao_servico'], $servico['img_path']);
+        }
+
+        public static function delete($id_servico) {
+            $db = Db::getInstance();
+
+            $req = $db->prepare('DELETE FROM servico WHERE id_servico = :id_servico');
+
+            $req->execute(array('id_servico' => $id_servico));
+        }
+
+        public static function update($id_servico, $valor_servico, $tipo_servico, $descricao_servico, $img_path) {
+            $db = Db::getInstance();
+
+            $req = $db->prepare("UPDATE dental_clean.servico
+                                SET valor_servico=?, tipo_servico=?, descricao_servico=?, img_path=?
+                                WHERE id_servico=?");
+
+            $req->execute(array($valor_servico, $tipo_servico, $descricao_servico, $img_path, $id_servico));
+        }
+
+        public static function insert($valor_servico, $tipo_servico, $descricao_servico, $img_path) {
+            $db = Db::getInstance();
+
+            $req = $db->prepare("INSERT INTO dental_clean.servico
+                                (valor_servico, tipo_servico, descricao_servico, img_path)
+                                VALUES(?, ?, ?, ?)");
+
+            $req->execute(array($valor_servico, $tipo_servico, $descricao_servico, $img_path));
+
+            return $db->lastInsertId();
         }
     }
 

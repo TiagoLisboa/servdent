@@ -1,6 +1,6 @@
 <div class="container">
 
-	<h2> Cadastrar Paciente </h2>
+	<h2> Cadastrar Usuario </h2>
 
 	<form action="/?controller=login&action=cadastrarPaciente" method="POST">
 
@@ -38,7 +38,7 @@
 			<input type="text" class="form-control" id="telefone" name="telefone" placeholder="Telefone" required />
 		</div>
 
-		<div class="form-group">
+        <div class="form-group">
 			<label for="data_nascimento" class="control-label">Data de Nacimento</label>
 			<input type="date" class="form-control" id="data_nascimento" name="data_nascimento" />
 		</div>
@@ -79,6 +79,23 @@
 		<div class="form-group">
 			<label for="complemento" class="control-label">Complemento</label>
 			<input type="text" class="form-control" id="complemento" name="complemento" placeholder="Complemento" />
+		</div>
+
+        <h3>Sistema</h3>
+
+        <div class="form-group">
+			<label for="papel" class="control-label">Papel</label>
+            <select name="papel" id="papel" class="form-control">
+                <option value="Paciente">Paciente</option>
+                <option value="Secretaria">Secretaria</option>
+                <option value="Dentista">Dentista</option>
+                <option value="Gerente">Gerente</option>
+            </select>
+		</div>
+
+        <div class="form-group">
+			<label for="cru" class="control-label">CRU</label>
+			<input type="text" class="form-control" id="cru" name="cru" placeholder="Complemento" />
 		</div>
 
 		<button type="submit" class="btn btn-primary">Cadastrar</button>
