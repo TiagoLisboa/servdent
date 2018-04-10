@@ -20,7 +20,7 @@
         <?php foreach($servicos as $servico) { ?>
             <div class="col-sm-2 mt-10 servico" data-servico="<?= $servico->id_servico ?>">
                 <div class="card">
-                    <img class="card-img-top" src="views/assets/imgs/ortodontia.png" alt="Ortodontia">
+                    <img class="card-img-top" src="<?= $servico->img_path ?>" alt="<?= $servico->tipo_servico ?>">
                     <div class="card-body">
                         <h5 class="card-title text-center"><?=  $servico->tipo_servico ?></h5>
                     </div>
