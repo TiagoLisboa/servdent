@@ -28,7 +28,7 @@
     }
 
     $controllers = array(
-        'pages' => ['home', 'servicos', 'error', 'contato'],
+        'pages' => ['home', 'servicos', 'error', 'contato', 'enviarEmail'],
         'login' => ['index', 'validate', 'secretaria', 'gerente', 'paciente', 'logout'],
         'servico' => ['editar', 'atualizar', 'deletar', 'cadastrar', 'novo'],
         'paciente' => ['editar', 'atualizar', 'deletar','novo', 'cadastrar', 'novoUsuario', 'editarUsuario'],

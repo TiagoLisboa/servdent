@@ -1,7 +1,7 @@
 <?php
     class ServicoController {
         public function novo() {
-            require_once('views/login/cadastro-servico.php');
+            require_once('views/servico/cadastro.php');
         }
 
         public function cadastrar() {
@@ -53,7 +53,7 @@
             $descricao_servico = $servico->descricao_servico;
             $img_path = $servico->img_path;
 
-            require_once('views/login/editar-servico.php');
+            require_once('views/servico/editar.php');
         }
 
         public function atualizar() {

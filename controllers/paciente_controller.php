@@ -1,11 +1,11 @@
 <?php
     class PacienteController {
         public function novo() {
-            require_once('views/login/cadastro-paciente.php');
+            require_once('views/paciente/cadastro.php');
         }
 
         public function novoUsuario() {
-            require_once('views/login/cadastro-usuario.php');
+            require_once('views/usuario/cadastro.php');
         }
 
         public function cadastrar() {
@@ -99,7 +99,7 @@
             $complemento = $usuario->complemento;
             $data_nascimento = $usuario->data_nascimento;
 
-            require_once('views/login/editar-paciente.php');
+            require_once('views/paciente/editar.php');
         }
 
         public function editarUsuario() {
@@ -128,7 +128,7 @@
             $papel = $usuario->papel;
             $cru = $usuario->cru;
 
-            require_once('views/login/editar-usuario.php');
+            require_once('views/usuario/editar.php');
         }
     }
 
