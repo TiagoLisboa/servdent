@@ -78,7 +78,7 @@
             if ($acao == 'cancelar') {
                 Agendamento::delete($id_agendamento);
             } else if ($acao == 'alterar') {
-                return header("Location: /?controller=compras&action=alterarReserva&agendamento=$id_agendamento");
+                return header("Location: /?controller=reserva&action=alterar&agendamento=$id_agendamento");
             }
 
             header("Location: /?controller=login&action=index");
