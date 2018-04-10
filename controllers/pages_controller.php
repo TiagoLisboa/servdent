@@ -22,20 +22,35 @@
             if (!isset($_POST['nome']))
                 return call('pages', 'error');
             
-            $nome = $_POST['nome'];
+            
+            $name = $_POST['nome'];
+            //pega os dados que foi digitado no ID name.
+            
             $email = $_POST['email'];
-            $telefone = $_POST['telefone'];
-            $mensagem = $_POST['mensagem'];
-
-            $to = "tiago.caio.ol@gmail.com";
-            $subject = "Mensagem do Site Dental Clean";
-            $mensagem = "Nome: $nome \nTelefone: $telefone \n$mensagem";
-            $headers = 'From: ' . $email . "\r\n" .
-            'Reply-To: ' . $email . "\r\n" .
-            'X-Mailer: PHP/' . phpversion();
-
-            $ok = mail("trollwisard@gmail.com", "teste", "oii");
-            die($ok);
+            //pega os dados que foi digitado no ID email.
+            
+            $subject = "Email do Dental Clean";
+            //pega os dados que foi digitado no ID sebject.
+            
+            $message = $_POST['mensagem'];
+            //pega os dados que foi digitado no ID message.
+            
+            $headers = "From: $email\r\n";
+            $headers .= "Reply-To: $email\r\n";
+            
+            /*abaixo contém os dados que serão enviados para o email
+            cadastrado para receber o formulário*/
+            
+            $corpo = "Formulário enviado\n";
+            $corpo .= "Nome: " . $name . "\n";
+            $corpo .= "Email: " . $email . "\n";
+            $corpo .= "Comentários: " . $message . "\n";
+            
+            $email_to = 'trollwisard@gmail.com';
+            //não esqueça de substituir este email pelo seu.
+            
+            $status = mail($email_to, $subject, $corpo, $headers);
+            //enviando o email.
 
             header("Location: /");
         }
