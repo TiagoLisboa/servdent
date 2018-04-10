@@ -29,12 +29,25 @@ body {
     background-color: #6699ff;
 }
 
+.f-title {
+    position: absolute;
+    top: 45%;
+    left: 15px;
+    background: linear-gradient(to right, #66ccff, rgba(0,0,0,0));
+    padding: 10px;
+    box-sizing: border-box;
+}
+
 .top-buffer {
     margin-top: 20px;
 }
 
 .text-blue {
     color: #6699ff;
+}
+
+.text-grey {
+    color: #999999;
 }
 
 .rounded-number {
@@ -55,6 +68,19 @@ body {
 .bg-red {
     background-color: red;
     color: #fff;
+}
+
+.no-pad {
+    padding: 0;
+}
+
+.pp-10 {
+    padding: 10px;
+}
+
+.nav-link.active {
+    background-color: #99ccff;
+    color: #fff !important;
 }
 
 .mt-20 {
@@ -132,3 +158,38 @@ body {
     color: white !important;
 }
 
+.card {
+    border:  0;
+}
+
+.jumbotron {
+    background-color: rgba(0,0,0,0);
+}
+
+.search-input {
+    background-color: #99ccff;
+    border: 0;
+    border-radius: 20px 0 0 20px;
+    padding: 0 10px;
+    color: #fff;
+}
+
+.search-input::placeholder {
+    color: #fff;
+}
+
+.search-input:focus, .search-button:focus {
+    outline: none;
+    outline-color: none;
+    outline-style: none;
+    outline-width: none;
+}
+
+.search-button {
+    background-color: #99ccff;
+    border: 0;
+    border-radius: 0 20px 20px 0;
+    padding: 0 10px;
+    margin-left: -5px;
+    color: #fff;
+}

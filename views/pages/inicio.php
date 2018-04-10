@@ -1,9 +1,20 @@
+<div class="container-fluid no-pad">
+    <div class="row">
+        <div class="col-sm-12 no-pad">
+            <img src="views/assets/imgs/header-bg.png" alt="" class="img-fluid col">
+            <div class="f-title">
+                <h2 class="text-white font-weight-bold">NÓS CUIDAMOS DO SEU SORRISO</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- NOSSOS SERVIÇOS -->
 
 <div class="jumbotron fluid-jumbotron">
     <div class="container">
-        <h1 class="text-center"> <b> NOSSOS SERVIÇOS </b> </h1>
-        <p class="text-center lead">Conheça um pouco sobre nossos serviços</p>
+        <h1 class="text-center text-blue font-weight-bold">NOSSOS SERVIÇOS</h1>
+        <p class="text-center text-muted">Conheça um pouco sobre nossos serviços</p>
     </div>
 </div>
 
@@ -16,8 +27,8 @@
             <div class="card">
                 <img class="card-img-top" src="<?= $servico->img_path ?>" alt="<?= $servico->tipo_servico ?>">
                 <div class="card-body">
-                    <h5 class="card-title text-center"><?= $servico->tipo_servico ?></h5>
-                    <p class="card-text text-center"><?= $servico->descricao_servico ?></p>
+                    <h4 class="card-title text-center text-grey font-weight-bold"><?= $servico->tipo_servico ?></h4>
+                    <p class="card-text text-center text-muted"><?= $servico->descricao_servico ?></p>
                 </div>
             </div>
         </div>
@@ -31,8 +42,8 @@
 
 <div class="jumbotron fluid-jumbotron">
     <div class="container">
-        <h1 class="text-center"> <b> NOSSA EQUIPE </b> </h1>
-        <p class="text-center lead">Profissionais altamente qualificados</p>
+        <h1 class="text-center text-blue font-weight-bold">NOSSA EQUIPE</h1>
+        <p class="text-center text-muted">Profissionais altamente qualificados</p>
     </div>
 </div>
 
@@ -43,9 +54,9 @@
             <div class="card">
                 <img class="mx-auto card-img-top rounded-circle" src="views/assets/imgs/secretaria.png" alt="Secretária" style="width: 80%;">
                 <div class="card-body">
-                    <h5 class="card-title text-center">SECRETARIA</h5>
-                    <h5 class="text-center">Andreia Lourenço</h5>
-                    <p class="card-text text-center">Formada em administração na UFRNJ.</p>
+                    <h4 class="card-title text-center font-weight-bold text-grey">SECRETÁRIA</h4>
+                    <h5 class="text-center text-grey">Andreia Lourenço</h5>
+                    <p class="card-text text-center text-grey">Formada em administração <br />na UFRJ.</p>
                 </div>
             </div>
         </div>
@@ -54,9 +65,9 @@
             <div class="card">
                 <img class="mx-auto card-img-top rounded-circle" src="views/assets/imgs/gerente.png" alt="Secretária" style="width: 80%;">
                 <div class="card-body">
-                    <h5 class="card-title text-center">GERENTE</h5>
-                    <h5 class="text-center">Roger Correia Simões</h5>
-                    <p class="card-text text-center">Formado em administração na USP.</p>
+                    <h4 class="card-title text-center font-weight-bold text-grey">GERENTE</h4>
+                    <h5 class="text-center text-grey">Roger Correia Simões</h5>
+                    <p class="card-text text-center text-grey">Formada em administração <br />na USP.</p>
                 </div>
             </div>
         </div>
@@ -65,12 +76,16 @@
             <div class="card">
                 <img class="mx-auto card-img-top " src="views/assets/imgs/dentista.png" alt="Secretária" style="width: 80%;">
                 <div class="card-body">
-                    <h5 class="card-title text-center">DENTISTA</h5>
-                    <h5 class="text-center">Andre Fazanno</h5>
-                    <p class="card-text text-center">Formado em odontologia na UFRJ.</p>
+                    <h4 class="card-title text-center font-weight-bold text-grey">DENTISTA</h4>
+                    <h5 class="text-center text-grey">Andre Fazanno</h5>
+                    <p class="card-text text-center text-grey">Formada em odontologia <br />na UFRJ.</p>
                 </div>
             </div>
         </div>
     
     </div>
 </div>
+
+<script>
+    $('#link-inicio').addClass('active');
+</script>

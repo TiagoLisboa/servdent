@@ -22,3 +22,7 @@
         call('login', strtolower($_SESSION['usuario']->papel));
     }
 ?>
+
+<script>
+    $('#link-login').addClass('active');
+</script>

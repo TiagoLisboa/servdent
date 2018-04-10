@@ -66,6 +66,7 @@
     </div>
 </div>
 <script>
+    $('#link-contato').addClass('active');
     var map;
     function initMap() {
         map = new google.maps.Map(document.getElementById('mapa'), {

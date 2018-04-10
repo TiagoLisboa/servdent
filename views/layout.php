@@ -21,21 +21,25 @@
     <header class="container-fluid header">
         <nav class="navbar navbar-expand-lg navbar-light bg-light row">
             <figure class="navbar-brand col-sm-2">
-                <img src="views/assets/imgs/logo.png" alt="logo dental clean">
+                <a href="/">
+                    <img src="views/assets/imgs/logo.png" alt="logo dental clean">
+                </a>
             </figure>
-            <ul class="navbar-nav mr-auto col-sm-3 offset-sm-3">
-                <li class="nav-item"><a href="/" class="nav-link">Início</a></li>
-                <li class="nav-item"><a href="/?controller=pages&action=servicos" class="nav-link">Serviços</a></li>
-                <li class="nav-item"><a href="/?controller=login&action=index" class="nav-link">
+            <ul class="navbar-nav mr-auto col-sm-3 offset-sm-4">
+                <li class="nav-item"><a href="/" id="link-inicio" class="nav-link">Início</a></li>
+                <li class="nav-item"><a href="/?controller=pages&action=servicos" id="link-servico" class="nav-link">Serviços</a></li>
+                <li class="nav-item"><a href="/?controller=login&action=index"  id="link-login" class="nav-link">
                     <?= isset($_SESSION['usuario']) ? 'Conta' : 'Login' ?>
                 </a></li>
-                <li class="nav-item"><a href="/?controller=pages&action=contato" class="nav-link">Contato</a></li>
+                <li class="nav-item"><a href="/?controller=pages&action=contato" class="nav-link"  id="link-contato">Contato</a></li>
 <?php if (isset($_SESSION['usuario'])) { ?><li class="nav-item"><a href="/?controller=login&action=logout" class="nav-link">Logout</a></li><?php } ?>
             </ul>
-            <form class="form-inline my-2 my-lg-0 col-sm-4">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
+            <div class="col-sm-3">
+                <form class="">
+                    <input class="search-input" type="search" placeholder="O que você procura?" aria-label="Search">
+                    <button class="search-button" type="submit"><img src="views/assets/imgs/lupa.png" alt="lupa"></button>
+                </form>
+            </div>
         </nav>
     </header>
 
@@ -48,11 +52,11 @@
             </div>
             <div class="col-sm-3">
                 <img src="views/assets/imgs/logofb.png" alt="logo facebook">
-                <span class="text-blue">fb/DentalClean</span>
+                <span class="text-blue pp-10">fb/DentalClean</span>
             </div>
             <div class="col-sm-3">
                 <img src="views/assets/imgs/logowp.png" alt="logo whatsapp">
-                <span class="text-blue">(21) 999000111</span>
+                <span class="text-blue pp-10">(21) 999000111</span>
             </div>
         </div>
     </footer>

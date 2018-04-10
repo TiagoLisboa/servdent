@@ -55,4 +55,6 @@
 </div>
 
 
-
+<script>
+    $('#link-servico').addClass('active');
+</script>
