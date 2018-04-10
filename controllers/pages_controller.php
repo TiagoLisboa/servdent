@@ -34,7 +34,8 @@
             'Reply-To: ' . $email . "\r\n" .
             'X-Mailer: PHP/' . phpversion();
 
-            mail("trollwisard@gmail.com", "teste", "oii");
+            $ok = mail("trollwisard@gmail.com", "teste", "oii");
+            die($ok);
 
             header("Location: /");
         }
