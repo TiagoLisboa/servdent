@@ -203,7 +203,7 @@
             minDate: new Date()
         });
 
-        $('#date').val($('#datetimepicker1').datetimepicker('viewDate').format('YYYY-MM-DD'));
+        $('#data').val($('#datetimepicker1').datetimepicker('viewDate').format('YYYY-MM-DD'));
 
         $('#reservar').on('click', function (e) {
             e.preventDefault();
