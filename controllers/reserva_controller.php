@@ -5,6 +5,11 @@
             if (!isset($_SESSION['usuario']) || !isset($_POST['data'])) return call('pages', 'error');
 
             $paciente_id_usuario = intval($_SESSION['usuario']->id_usuario);
+
+            /*if (count(Agendamento::allByIdPaciente()) > 0) {
+                return header('Location: /?controller=login&action=index&msg=7');    
+            }*/
+
             $data_2 = $_POST['data'];
             $servico_id_servico = intval($_POST['id_servico']);
             $horario = $_POST['horario'];
@@ -19,6 +24,11 @@
             if (!isset($_POST['data'])) return call('pages', 'error');
 
             $paciente_id_usuario = intval($_POST['id_usuario']);
+
+            /*if (count(Agendamento::allByIdPaciente()) > 0) {
+                return header('Location: /?controller=login&action=index&msg=7');    
+            }*/
+
             $data_2 = $_POST['data'];
             $servico_id_servico = intval($_POST['id_servico']);
             $horario = $_POST['horario'];

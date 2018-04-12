@@ -27,7 +27,7 @@
 
 		<div class="form-group">
 			<label for="valor_servico" class="control-label">Valor</label>
-			<input type="number" class="form-control" id="valor_servico" name="valor_servico" value="<?= $valor_servico ?>" required />
+			<input type="number" step=".01" class="form-control" id="valor_servico" name="valor_servico" value="<?= $valor_servico ?>" required />
 		</div>
 
         <div class="form-group">
@@ -36,7 +36,7 @@
 		</div>
 
         <a href="/?controller=login&action=index" class="btn btn-primary"><< Voltar</a>
-		<button type="submit" class="btn btn-warning">Editar</button>
+		<button type="submit" class="btn btn-primary">Editar</button>
 		<a href="#" class="deletar btn btn-danger">Deletar</a>
 
     </form>

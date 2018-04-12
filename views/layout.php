@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Dental Clean</title>
+    <title>ServDent</title>
     <link rel="stylesheet"
         href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
@@ -25,7 +25,7 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-light row">
             <figure class="navbar-brand col-sm-2">
                 <a href="/">
-                    <img src="views/assets/imgs/logo.png" alt="logo dental clean">
+                    <img src="views/assets/imgs/logo.png" alt="logo ServDent">
                 </a>
             </figure>
             <ul class="navbar-nav mr-auto col-sm-3 offset-sm-4">
@@ -51,11 +51,11 @@
     <footer class="container-fluid footer top-buffer">
         <div class="row">
             <div class="col-sm-6">
-                <p class="text-center text-blue">Todos os direitos reservados DentalClean</p>
+                <p class="text-center text-blue">Todos os direitos reservados ServDent</p>
             </div>
             <div class="col-sm-3">
                 <img src="views/assets/imgs/logofb.png" alt="logo facebook">
-                <span class="text-blue pp-10">fb/DentalClean</span>
+                <span class="text-blue pp-10">fb/ServDent</span>
             </div>
             <div class="col-sm-3">
                 <img src="views/assets/imgs/logowp.png" alt="logo whatsapp">

@@ -29,7 +29,7 @@
             $email = $_POST['email'];
             //pega os dados que foi digitado no ID email.
             
-            $subject = "Email do Dental Clean";
+            $subject = "Email do ServDent";
             //pega os dados que foi digitado no ID sebject.
             
             $message = $_POST['mensagem'];

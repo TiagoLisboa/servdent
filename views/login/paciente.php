@@ -42,6 +42,16 @@
         </div>
     <?php } ?>
 
+    <?php if(isset($_GET['msg']) && intval($_GET['msg']) == 7) { ?>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="alert alert-warning col-sm-12">
+                    Paciente já possui uma reserva ativa
+                </div>
+            </div>
+        </div>
+    <?php } ?>
+
     <div class="row">
 
         
@@ -151,7 +161,11 @@
 
         $('#reservar').on('click', function (e) {
             e.preventDefault();
-            if (!horario_reservado) {
+            if($('#id_servico').val() == "") {
+                alert('Paciente não possui um serviço para agendar.');
+            } else if (reservedDates.length > 0) {
+                alert('Paciente já possui um agendamento ativo.');
+            } else if (!horario_reservado) {
                 $('#data').val($('#datetimepicker1').datetimepicker("viewDate").format('YYYY-MM-DD'));
                 $('#acao').val('reservar');
                 $('form').submit();

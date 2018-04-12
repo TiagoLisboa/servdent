@@ -78,7 +78,7 @@
           position: {lat: -22.9005452, lng: -43.1956281},
           map: map,
           label: 'D',
-          title: 'Dental Clean'
+          title: 'ServDent'
         });
     }
 </script>

@@ -55,27 +55,27 @@ class PagSeguro{
 		//Dados do comprador
 		
 		//Tratar telefone
-		$telefone = implode("",explode("-",substr($dados['telefone'],5,strlen($dados['telefone']))));
-		$ddd = substr($dados['telefone'],1,2);
+		// $telefone = implode("",explode("-",substr($dados['telefone'],5,strlen($dados['telefone']))));
+		// $ddd = substr($dados['telefone'],1,2);
 		
 		//Tratar CEP
-		$cep = implode("",explode("-",$dados['cep']));
-		$cep = implode("",explode(".",$cep));
+		// $cep = implode("",explode("-",$dados['cep']));
+		// $cep = implode("",explode(".",$cep));
 		
-		$data['senderName'] = $dados['nome'];
-		$data['senderAreaCode'] = $ddd;
-		$data['senderPhone'] = $telefone;
-		$data['senderEmail'] = $dados['email'];
-		$data['shippingType'] = '3';
-		$data['shippingAddressStreet'] = $dados['rua'];
-		$data['shippingAddressNumber'] = $dados['numero'];
-		$data['shippingAddressComplement'] = " ";
-		$data['shippingAddressDistrict'] = $dados['bairro'];
-		$data['shippingAddressPostalCode'] = $cep;
-		$data['shippingAddressCity'] = $dados['cidade'];
-		$data['shippingAddressState'] = strtoupper($dados['estado']);
-		$data['shippingAddressCountry'] = 'BRA';
-		$data['redirectURL'] = $retorno;
+		// $data['senderName'] = $dados['nome'];
+		// $data['senderAreaCode'] = $ddd;
+		// $data['senderPhone'] = $telefone;
+		// $data['senderEmail'] = $dados['email'];
+		// $data['shippingType'] = '3';
+		// $data['shippingAddressStreet'] = $dados['rua'];
+		// $data['shippingAddressNumber'] = $dados['numero'];
+		// $data['shippingAddressComplement'] = " ";
+		// $data['shippingAddressDistrict'] = $dados['bairro'];
+		// $data['shippingAddressPostalCode'] = $cep;
+		// $data['shippingAddressCity'] = $dados['cidade'];
+		// $data['shippingAddressState'] = strtoupper($dados['estado']);
+		// $data['shippingAddressCountry'] = 'BRA';
+		// $data['redirectURL'] = $retorno;
 			
 		return http_build_query($data);
 	}

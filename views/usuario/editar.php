@@ -103,7 +103,7 @@
         </div>
 		
 		<a href="/?controller=login&action=index" class="btn btn-primary"><< Voltar</a>
-		<button type="submit" class="btn btn-warning">Editar</button>
+		<button type="submit" class="btn btn-primary">Editar</button>
 		<a href="#" class="deletar btn btn-danger">Deletar</a>
 	</form>
 

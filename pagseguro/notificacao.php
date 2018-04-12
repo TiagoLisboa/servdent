@@ -33,7 +33,7 @@ if($reference && $status){
 		$pagamento->cod_pagamento = $codigo;
 		$pagamento->confirmar_pagamento = $status;
 		Pagamento::update($pagamento);
-		Usuario::insertServico($pagamento->servico_id_servico, $pagamento->paciente_id_usuario);
+		// Usuario::insertServico($pagamento->servico_id_servico, $pagamento->paciente_id_usuario);
 	}
 }
 

@@ -21,7 +21,7 @@
 
 		<div class="form-group">
 			<label for="valor_servico" class="control-label">Valor</label>
-			<input type="number" class="form-control" id="valor_servico" name="valor_servico" required />
+			<input type="number" class="form-control" id="valor_servico" name="valor_servico" step=".01" required />
 		</div>
 
         <div class="form-group">

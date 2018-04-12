@@ -27,9 +27,9 @@
                 <tr>
                     <th scope="row"><?= $servico->id_servico ?></td>
                     <td><?= $servico->tipo_servico ?></td>
-                    <td><?= $servico->valor_servico ?></td>
+                    <td>R$<?= number_format((float)$servico->valor_servico, 2, ',', ''); ?></td>
                     <td><?= $servico->descricao_servico ?></td>
-                    <td><a href="/?controller=servico&action=editar&servico=<?= $servico->id_servico ?>" class="btn btn-warning">Editar</a></td>
+                    <td><a href="/?controller=servico&action=editar&servico=<?= $servico->id_servico ?>" class="btn btn-primary">Editar</a></td>
                 </tr>
                 <?php } ?>
             </tbody>
@@ -58,14 +58,10 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Nome</th>
+                    <th scope="col">Usuário</th>
                     <th scope="col">Telefone</th>
                     <th scope="col">Email</th>
-                    <th scope="col">CEP</th>
-                    <th scope="col">Endereço</th>
-                    <th scope="col">Estado</th>
-                    <th scope="col">Cidade</th>
-                    <th scope="col">Bairro</th>
-                    <th scope="col">Papel</th>
+                    <th scope="col">Função</th>
                     <th scope="col">Editar</th>
                 </tr>
             </thead>
@@ -74,15 +70,11 @@
                 <tr>
                     <th scope="row"><?= $paciente->id_usuario ?></td>
                     <td><?= $paciente->nome_completo ?></td>
+                    <td><?= $paciente->usuario ?></td>
                     <td><?= $paciente->telefone ?></td>
                     <td><?= $paciente->email ?></td>
-                    <td><?= $paciente->cep ?></td>
-                    <td>Rua <?= $paciente->rua ?>, <?= $paciente->numero ?></td>
-                    <td><?= $paciente->estado ?></td>
-                    <td><?= $paciente->cidade ?></td>
-                    <td><?= $paciente->bairro ?></td>
                     <td><?= $paciente->papel ?></td>
-                    <td><a href="/?controller=paciente&action=editarUsuario&id_usuario=<?= $paciente->id_usuario ?>" class="btn btn-warning">Editar</a></td>
+                    <td><a href="/?controller=paciente&action=editarUsuario&id_usuario=<?= $paciente->id_usuario ?>" class="btn btn-primary">Editar</a></td>
                 </tr>
                 <?php } ?>
             </tbody>
@@ -98,6 +90,16 @@
             <div class="row">
                 <div class="alert alert-warning col-sm-12">
                     Reserva já foi alterada uma vez
+                </div>
+            </div>
+        </div>
+    <?php } ?>
+
+    <?php if(isset($_GET['msg']) && intval($_GET['msg']) == 7) { ?>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="alert alert-warning col-sm-12">
+                    Paciente já possui uma reserva ativa
                 </div>
             </div>
         </div>
@@ -327,10 +329,12 @@
 
         $('#reservar').on('click', function (e) {
             e.preventDefault();
-            if (!horario_reservado) {
+            if (reservedDates.length > 0) {
+                alert('Paciente já possui um agendamento ativo.');
+            } else if (!horario_reservado) {
                 $('#data').val($('#datetimepicker1').datetimepicker("viewDate").format('YYYY-MM-DD'));
-                $('#acao').val('solicitarReserva');
-                $('#form-geral').submit();
+                $('#acao').val('reservar');
+                $('form').submit();
             } else {
                 alert('Horario já está reservado');
             }

@@ -27,13 +27,10 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Nome</th>
+                    <th scope="col">Usuário</th>
                     <th scope="col">Telefone</th>
                     <th scope="col">Email</th>
-                    <th scope="col">CEP</th>
-                    <th scope="col">Endereço</th>
-                    <th scope="col">Estado</th>
-                    <th scope="col">Cidade</th>
-                    <th scope="col">Bairro</th>
+                    <th scope="col">Função</th>
                     <th scope="col">Editar</th>
                 </tr>
             </thead>
@@ -42,14 +39,11 @@
                 <tr>
                     <th scope="row"><?= $paciente->id_usuario ?></td>
                     <td><?= $paciente->nome_completo ?></td>
+                    <td><?= $paciente->usuario ?></td>
                     <td><?= $paciente->telefone ?></td>
                     <td><?= $paciente->email ?></td>
-                    <td><?= $paciente->cep ?></td>
-                    <td>Rua <?= $paciente->rua ?>, <?= $paciente->numero ?></td>
-                    <td><?= $paciente->estado ?></td>
-                    <td><?= $paciente->cidade ?></td>
-                    <td><?= $paciente->bairro ?></td>
-                    <td><a href="/?controller=paciente&action=editar&paciente=<?= $paciente->id_usuario ?>" class="btn btn-warning">Editar</a></td>
+                    <td><?= $paciente->papel ?></td>
+                    <td><a href="/?controller=paciente&action=editar&paciente=<?= $paciente->id_usuario ?>" class="btn btn-primary">Editar</a></td>
                 </tr>
                 <?php } ?>
             </tbody>
@@ -66,6 +60,16 @@
             <div class="row">
                 <div class="alert alert-warning col-sm-12">
                     Reserva já foi alterada uma vez
+                </div>
+            </div>
+        </div>
+    <?php } ?>
+
+    <?php if(isset($_GET['msg']) && intval($_GET['msg']) == 7) { ?>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="alert alert-warning col-sm-12">
+                    Paciente já possui uma reserva ativa
                 </div>
             </div>
         </div>
@@ -145,16 +149,15 @@
             <h5>DADOS DA RESERVA</h5>
             
             <table class="table">
-                <tr>
-                    <th>NOME DO CLIENTE:</th>
-                    <th>USUARIO:</th>
-                    <th>SERVICO:</th>
-                </tr>
-                <tr>
-                    <td id="nomedocliente"></td>
-                    <td id="usuario"></td>
-                    <td id="servico"></td>
-                </tr>
+                <thead>
+                    <tr>
+                        <th>NOME DO CLIENTE</th>
+                        <th>USUARIO</th>
+                        <th>SERVIÇO</th>
+                    </tr>
+                </thead>
+                <tbody id="dadosreserva">
+                </tbody>
             </table>
         </div>
 
@@ -173,20 +176,8 @@
                 if ($(this).hasClass('reservado')) {
                     horario_reservado = true;
                     $('#id_agendamento').val($(this).data('id_agendamento'));
-                    var h = $(this).data('horario');
-                    var d = $('#datetimepicker1').datetimepicker('viewDate').format('YYYY-MM-DD');
-                    var reserva = reservedDates.filter(function (e, i) {
-                        return e.horario == h && e.data.format('YYYY-MM-DD') == d;
-                    })[0];
-
-                    $('#nomedocliente').html(reserva.paciente);
-                    $('#usuario').html(reserva.usuario);
-                    $('#servico').html(reserva.servico);
                 } else {
                     horario_reservado = false;
-                    $('#nomedocliente').html("");
-                    $('#usuario').html("");
-                    $('#servico').html("");
                 }
 
                 $('#horario').val($(this).data('horario'));
@@ -207,9 +198,11 @@
 
         $('#reservar').on('click', function (e) {
             e.preventDefault();
-            if (!horario_reservado) {
+            if (reservedDates.length > 0) {
+                alert('Paciente já possui um agendamento ativo.');
+            } else if (!horario_reservado) {
                 $('#data').val($('#datetimepicker1').datetimepicker("viewDate").format('YYYY-MM-DD'));
-                $('#acao').val('solicitarReserva');
+                $('#acao').val('reservar');
                 $('form').submit();
             } else {
                 alert('Horario já está reservado');
@@ -224,7 +217,7 @@
                 var x = confirm("Tem certeza que deseja cancelar essa reserva?");
                 if (x) {
                     $('#acao').val('cancelar');
-                    $('form').submit();
+                    $('#form-geral').submit();
                 }
             }
         })
@@ -235,7 +228,7 @@
                 alert("Reserva não selecionada");
             } else {
                 $('#acao').val('alterar');
-                $('form').submit();
+                $('#form-geral').submit();
             }
         })
     
@@ -246,9 +239,19 @@
             });
             var data = $('#datetimepicker1').datetimepicker('viewDate').format('YYYY-MM-DD');
             $('#data').val(data);
+            
+            $('#dadosreserva').html("");
+
             reservedDates.forEach(function (e, i) {
                 if(e.data.format('YYYY-MM-DD') == data) {
                     $('.table-horarios td[data-horario=\'' + e.horario + '\']').addClass('reservado').data('id_agendamento', e.id_agendamento);
+                    $('#dadosreserva').append(
+                        "<tr>" +
+                            "<td>" + e.paciente + "</td>" +
+                            "<td>" + e.usuario + "</td>" +
+                            "<td>" + e.servico + "</td>" +
+                        "</tr>"
+                    )
                 }
             })
         });

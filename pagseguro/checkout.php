@@ -30,6 +30,8 @@ $data = array("codigo"=>$ref,
 			"cep"=>$usuario->cep,
 			"codigo_pagseguro"=>"");
 
+Usuario::insertServico($servico->id_servico, $usuario->id_usuario);
+
 $pagseguro->executeCheckout($data, "");
 
 ?>
