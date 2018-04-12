@@ -1,9 +1,9 @@
 <?php
 class PagSeguro{
-	private $email         = "tiago.caio.ol@gmail.com";
-	private $token_sandbox = "8E9F15E9128144F0B3870F58E70F10BB";
-	private $token_oficial = "8E9F15E9128144F0B3870F58E70F10BB";
-	private $url_retorno   = "http://SEUSITE/pagseguro/notificacao.php";
+	private $email         = "renanvilela92b@gmail.com";
+	private $token_sandbox = "2411C54E3C574CAB99C4253CCEF79B1D";
+	private $token_oficial = "2411C54E3C574CAB99C4253CCEF79B1D";
+	// private $url_retorno   = "http://SEUSITE/pagseguro/notificacao.php";
 	
 	//URL OFICIAL
 	//COMENTE AS 4 LINHAS ABAIXO E DESCOMENTE AS URLS DA SANDBOX PARA REALIZAR TESTES

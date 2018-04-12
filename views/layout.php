@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>ServDent</title>
+    <link rel="icon" href="views/assets/imgs/logo.png">
     <link rel="stylesheet"
         href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
@@ -16,7 +17,6 @@
     <script type="text/javascript" src="views/assets/js/tempusdominus-bootstrap-4.min.js"></script>
     <link rel="stylesheet" href="views/assets/css/tempusdominus-bootstrap-4.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
-
     <script src="views/assets/js/html2canvas.min.js"></script>
 </head>
 </head>

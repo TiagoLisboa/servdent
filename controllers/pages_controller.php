@@ -46,7 +46,7 @@
             $corpo .= "Email: " . $email . "\n";
             $corpo .= "Comentários: " . $message . "\n";
             
-            $email_to = 'trollwisard@gmail.com';
+            $email_to = 'contato@servdent.com';
             //não esqueça de substituir este email pelo seu.
             
             $status = mail($email_to, $subject, $corpo, $headers);
