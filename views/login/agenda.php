@@ -39,13 +39,41 @@
         <div class="row horarios">
             <div class="col-sm-8">
                 <h5 class="text-center">Horários Reservados</h5>
-                <form action="/?controller=reserva&action=modificar" method="POST" class="col-sm-12 editar-form">
+
+                <table class="table table-bordered table-horarios">
+                    <tr>
+                        <td class="text-center active" data-horario="08:00">08:00</td>
+                        <td class="text-center" data-horario="08:30">08:30</td>
+                        <td class="text-center" data-horario="09:00">09:00</td>
+                        <td class="text-center" data-horario="09:30">09:30</td>
+                        <td class="text-center" data-horario="10:00">10:00</td>
+                        <td class="text-center" data-horario="10:30">10:30</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center" data-horario="11:00">11:00</td>
+                        <td class="text-center" data-horario="11:30">11:30</td>
+                        <td class="text-center" data-horario="12:00">12:00</td>
+                        <td class="text-center" data-horario="12:30">12:30</td>
+                        <td class="text-center" data-horario="13:00">13:00</td>
+                        <td class="text-center" data-horario="13:30">13:30</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center" data-horario="14:00">14:00</td>
+                        <td class="text-center" data-horario="14:30">14:30</td>
+                        <td class="text-center" data-horario="15:00">15:00</td>
+                        <td class="text-center" data-horario="15:30">15:30</td>
+                        <td class="text-center" data-horario="16:00">16:00</td>
+                        <td class="text-center" data-horario="16:30">16:30</td>
+                    </tr>
+                </table>
+
+                <!-- <form action="/?controller=reserva&action=modificar" method="POST" class="col-sm-12 editar-form">
                     <div class="form-group horarios">
                         <select name="horario" class="form-control">
                         </select>
                     </div>
                     <input type="hidden" name="acao" id="acao">
-                </form>
+                </form> -->
             </div>
         </div>
         
@@ -59,12 +87,28 @@
 </div>
 
 <form action="/?controller=reserva&action=solicitar" method="POST" style="display: none">
+    <input type="text" name="data" id="id_servico" />
     <input type="text" name="data" id="data" />
+    <input type="text" name="horario" id="data" />
 </form>
 
 
 <script type="text/javascript">
     $(function () {
+        $('.servico').on('click', function (e) {
+            $(e.target).closest('.servico').siblings().children('.card').removeClass('border-blue');
+            $(e.target).closest('.card').addClass('border-blue');
+
+            $('.toggle.disabled').removeClass('disabled');
+
+            $('#id_servico').val($(e.target).closest('.servico').data('servico'));
+        });
+
+        $('.table-horarios td').on('click', function () {
+            $('.table-horarios td').removeClass('active');
+            $(this).addClass('active');
+        })
+
         $('#datetimepicker1').datetimepicker({
             inline: true,
             // sideBySide: true,
@@ -98,21 +142,21 @@
         })
     
         $('#datetimepicker1').on('change.datetimepicker', function () {
+            $('.table-horarios td').removeClass('reservado');
             reservedDates.forEach(function (e, i) {
                 $("td[data-day='"+e.data.format('DD/MM/YYYY')+"']").addClass("reservado");
             });
             var data = $('#datetimepicker1').datetimepicker('viewDate').format('YYYY-MM-DD');
-            $('.horarios select').html("");
             reservedDates.forEach(function (e, i) {
                 if(e.data.format('YYYY-MM-DD') == data) {
-                    $('.horarios select').append("<option value= " + e.id_agendamento + ">" + e.horario + "</option>");
+                    $('.table-horarios td[data-horario=\'' + e.horario + '\']').addClass('reservado');
                 }
             })
         });
 
         var reservedDates = [
             <?php foreach($agendamentos as $agendamento) {
-                echo("{id_agendamento: " . $agendamento->id_agendamento . ", data: moment('" . $agendamento->data_2 . "'), horario: " . $agendamento->horario . "}, ");
+                echo("{id_agendamento: " . $agendamento->id_agendamento . ", data: moment('" . $agendamento->data_2 . "'), horario: '" . $agendamento->horario . "'}, ");
             }?>
         ];
 

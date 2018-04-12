@@ -18,6 +18,7 @@
         public $telefone;
         public $data_nascimento;
         public $cro;
+        public $servicos;
 
         public function __construct ($id_usuario, $senha, $usuario, $papel, $nome_completo, $email, $cpf, $cep, $estado, $cidade, $bairro, $rua, $complemento, $numero, $telefone, $data_nascimento, $cro) {
             $this->id_usuario = $id_usuario;
@@ -37,6 +38,7 @@
             $this->telefone = $telefone;
             $this->data_nascimento = $data_nascimento;
             $this->cro = $cro;
+            $this->servicos = Usuario::allServicos($id_usuario);
         }
 
         public static function all() {
@@ -99,6 +101,11 @@
         public static function delete($id_usuario) {
             $db = Db::getInstance();
 
+            Agendamento::deleteFromUsuario($id_usuario);
+            Pagamento::deleteFromUsuario($id_usuario);
+
+            $req = $db->prepare("DELETE FROM dental_clean.PacienteServico WHERE paciente_id_usuario=:id_usuario");
+            $req->execute(array('id_usuario' => $id_usuario));
             $req = $db->prepare("DELETE FROM dental_clean.usuario WHERE id_usuario=:id_usuario");
             $req->execute(array('id_usuario' => $id_usuario));
         }

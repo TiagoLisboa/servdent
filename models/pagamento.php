@@ -55,4 +55,11 @@
 
             return new Pagamento($pagamento['id_pagamento'], $pagamento['data_pagamento'], $pagamento['data_vencimento'], $pagamento['tipo_pagamento'], $pagamento['valor_pagamento'], $pagamento['confirmar_pagamento'], $pagamento['cod_pagamento'], $pagamento['paciente_id_usuario'], $pagamento['servico_id_servico']);
         }
+
+        public static function deleteFromUsuario($id_usuario) {
+            $db = Db::getInstance();
+
+            $req = $db->prepare("DELETE FROM dental_clean.pagamento WHERE paciente_id_usuario=:id_usuario");
+            $req->execute(array('id_usuario' => $id_usuario));
+        }
     }

@@ -14,6 +14,20 @@
             header('Location: /?controller=login&action=index');
         }
 
+        public function reservarEspecial() {
+            if (!session_id()) @ session_start();
+            if (!isset($_POST['data'])) return call('pages', 'error');
+
+            $paciente_id_usuario = intval($_POST['id_usuario']);
+            $data_2 = $_POST['data'];
+            $servico_id_servico = intval($_POST['id_servico']);
+            $horario = $_POST['horario'];
+
+            Agendamento::insert($servico_id_servico, $data_2, $horario, "", "", 0, $paciente_id_usuario);
+
+            header('Location: /?controller=login&action=index');
+        }
+
         public function solicitar() {
             if (!session_id()) @ session_start();
             if (!isset($_SESSION['usuario']) || !isset($_POST['data'])) return call('pages', 'error');
@@ -46,7 +60,6 @@
             $horario = $_POST['horario'];
             $data = $_POST['data'];
             $id_agendamento = intval($_POST['id_agendamento']);
-
             
             $agendamento = Agendamento::find($id_agendamento);
             
@@ -68,17 +81,38 @@
             header("Location: /?controller=login&action=index");
         }
 
-        public function modificar() {
-            if (!isset($_POST['horario']) || !isset($_POST['acao'])) return call('pages', 'error');
+        public function solicitarReserva() {
+            if (!isset($_GET['data']) || !isset($_GET['horario'])) return call('pages', 'error');
             if (!session_id()) @ session_start();
 
-            $id_agendamento = intval($_POST['horario']);
+            $data = $_GET['data'];
+            $horario = $_GET['horario'];
+
+            $pacientes = Usuario::allWithPapel('Paciente');
+            $servicos = Servico::all();
+
+            require_once('views/compras/solicitarReserva.php');
+            
+        }
+
+        public function modificar() {
+            if (!isset($_POST['acao'])) return call('pages', 'error');
+            if (!session_id()) @ session_start();
+
+            $id_agendamento = intval($_POST['id_agendamento']);
             $acao = $_POST['acao'];
 
             if ($acao == 'cancelar') {
                 Agendamento::delete($id_agendamento);
             } else if ($acao == 'alterar') {
                 return header("Location: /?controller=reserva&action=alterar&agendamento=$id_agendamento");
+            } else if ($acao == 'reservar') {
+                $this->finalizar();
+            } else if ($acao = 'solicitarReserva') {
+                $data = $_POST['data'];
+                $horario = $_POST['horario'];
+
+                return header("Location: /?controller=reserva&action=solicitarReserva&data=$data&horario=$horario");
             }
 
             header("Location: /?controller=login&action=index");

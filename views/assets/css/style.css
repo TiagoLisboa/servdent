@@ -32,7 +32,7 @@ body {
 .f-title {
     position: absolute;
     top: 45%;
-    left: 15px;
+    left: 30px;
     background: linear-gradient(to right, #66ccff, rgba(0,0,0,0));
     padding: 10px;
     box-sizing: border-box;
@@ -50,6 +50,10 @@ body {
     color: #999999;
 }
 
+.img-50 {
+    width: 50%;
+}
+
 .rounded-number {
     border-radius: 100%;
     padding: 2px 10px;
@@ -61,12 +65,12 @@ body {
 }
 
 .bg-green {
-    background-color: green;
+    background-color: #66CC66;
     color: #fff;
 }
 
 .bg-red {
-    background-color: red;
+    background-color: #FF3333;
     color: #fff;
 }
 
@@ -143,19 +147,27 @@ body {
     border-top-right-radius: 0;
 }
 
-.day.disabled {
-    background-color: red !important;
+.disabled {
+    background-color: #FF3333 !important;
     color: white !important;
 }
 
-.day.reservado {
-    background-color: green;
+.reservado {
+    background-color: #66CC66;
     color: white !important;
+}
+
+.horario-original {
+    background-color: #66CC66 !important;
 }
 
 .day.reservado:hover:not(.active):not(.disabled) {
-    background-color: green !important;
+    background-color: #99CCFF !important;
     color: white !important;
+}
+
+.day.active {
+    background-color: #99CCFF !important;
 }
 
 .card {
@@ -192,4 +204,32 @@ body {
     padding: 0 10px;
     margin-left: -5px;
     color: #fff;
+}
+
+.table-horarios td {
+    cursor: pointer;
+}
+
+.table-horarios td.active {
+    background-color: #99CCFF;
+    color: white;
+}
+
+.border-blue {
+    border: 5px solid #99CCFF;
+    box-sizing: border-box;
+}
+
+.thin-border-blue {
+    border: 2px solid #99CCFF;
+    box-sizing: border-box;
+}
+
+.border-blue .card-body {
+    padding: 1rem;
+}
+
+#relatorio {
+    padding: 20px 50px;
+    box-sizing: border-box;
 }

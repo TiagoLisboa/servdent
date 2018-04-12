@@ -29,10 +29,10 @@
 
     $controllers = array(
         'pages' => ['home', 'servicos', 'error', 'contato', 'enviarEmail'],
-        'login' => ['index', 'validate', 'secretaria', 'gerente', 'paciente', 'logout'],
+        'login' => ['index', 'validate', 'secretaria', 'gerente', 'paciente', 'logout', 'relatorioCliente', 'relatorioReservas', 'escolherDia'],
         'servico' => ['editar', 'atualizar', 'deletar', 'cadastrar', 'novo'],
         'paciente' => ['editar', 'atualizar', 'deletar','novo', 'cadastrar', 'novoUsuario', 'editarUsuario'],
-        'reserva' => ['solicitar', 'finalizar', 'modificar', 'alterar', 'update'],
+        'reserva' => ['solicitar', 'finalizar', 'modificar', 'alterar', 'update', 'solicitarReserva', 'reservarEspecial'],
         'pagseguro' => ['checkout', 'notify']);
     
     if (array_key_exists($controller, $controllers)) {

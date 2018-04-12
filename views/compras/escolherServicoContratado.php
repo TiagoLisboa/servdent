@@ -1,10 +1,3 @@
-<style>
-    .border-blue {
-        border: 2px solid blue;
-        box-sizing: border-box;
-    }
-</style>
-
 <div class="container">
     <div class="row">
 

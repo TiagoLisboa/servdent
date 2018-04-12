@@ -10,6 +10,7 @@
         public $alterado;
         public $paciente_id_usuario;
         public $servico;
+        public $usuario;
 
         public function __construct ($id_agendamento, $servico_id_servico, $data_2, $horario, $cod_servico, $registro_historico, $alterado, $paciente_id_usuario) {
             $this->id_agendamento = $id_agendamento;
@@ -20,8 +21,8 @@
             $this->registro_historico = $registro_historico;
             $this->alterado = $alterado;
             $this->paciente_id_usuario = $paciente_id_usuario;
-            require_once('models/servico.php');
             $this->servico = Servico::find($servico_id_servico);
+            $this->usuario = Usuario::find($paciente_id_usuario);
         }
 
         public static function allByIdPaciente($paciente_id_usuario) {
@@ -88,6 +89,13 @@
             $req = $db->prepare('DELETE FROM agendamento WHERE id_agendamento=:id_agendamento');
 
             $req->execute(array('id_agendamento'=>$id_agendamento));
+        }
+
+        public static function deleteFromUsuario($id_usuario) {
+            $db = Db::getInstance();
+
+            $req = $db->prepare("DELETE FROM dental_clean.agendamento WHERE paciente_id_usuario=:id_usuario");
+            $req->execute(array('id_usuario' => $id_usuario));
         }
 
     }
