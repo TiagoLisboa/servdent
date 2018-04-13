@@ -1,11 +1,13 @@
 <?php
 
     // Definir uma constante para corrigir os caminhos relativos dos links
-    if ('/'. strtok($_SERVER["REQUEST_URI"],'?') .'/' == "//") {
+    /*if ('/'. strtok($_SERVER["REQUEST_URI"],'?') .'/' == "//") {
         define('__BASE_URI__', '');    
     } else {
         define('__BASE_URI__', strtok($_SERVER["REQUEST_URI"],'?'));
-    }
+    }*/
+
+    define('__BASE_URI__', '');
 
     // Carrega as configurações de conecção com o banco de dados
     require_once('connection.php');
