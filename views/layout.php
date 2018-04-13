@@ -25,7 +25,7 @@
                     <img src="<?= __BASE_URI__ ?>views/assets/imgs/logo.png" alt="logo ServDent">
                 </a>
             </figure>
-            <div class="col-sm-3 offset-sm-2">
+            <div class="col-sm-<?= isset($_SESSION['usuario']) ? "4" : "3" ?> offset-sm-<?= isset($_SESSION['usuario']) ? "3" : "4" ?>">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item"><a href="<?= __BASE_URI__ ?>" id="link-inicio" class="nav-link">Início</a></li>
                     <li class="nav-item"><a href="<?= __BASE_URI__ ?>?controller=pages&action=servicos" id="link-servico" class="nav-link">Serviços</a></li>
@@ -33,17 +33,7 @@
                         <?= isset($_SESSION['usuario']) ? 'Conta' : 'Login' ?>
                     </a></li>
                     <li class="nav-item"><a href="<?= __BASE_URI__ ?>?controller=pages&action=contato" class="nav-link"  id="link-contato">Contato</a></li>
-                </ul>
-            </div>
-            <div class="col-sm-3 offset-sm-1">
-                <form class="">
-                    <input class="search-input" type="search" placeholder="O que você procura?" aria-label="Search">
-                    <button class="search-button" type="submit"><img src="<?= __BASE_URI__ ?>views/assets/imgs/lupa.png" alt="lupa"></button>
-                </form>
-            </div>
-            <?php if (isset($_SESSION['usuario'])) { ?>
-                <div class="col-sm-1">
-                    <ul class="navbar-nav ml-auto">
+                    <?php if (isset($_SESSION['usuario'])) { ?>
                         <li class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <?= $_SESSION['usuario']->usuario ?>
@@ -52,9 +42,15 @@
                                 <a href="<?= __BASE_URI__ ?>?controller=login&action=logout" class="dropdown-item">Logout</a>
                             </div>
                         </li>
-                    </ul>
-                </div>
-            <?php } ?>
+                    <?php } ?>
+                </ul>
+            </div>
+            <div class="col-sm-3">
+                <form class="">
+                    <input class="search-input" type="search" placeholder="O que você procura?" aria-label="Search">
+                    <button class="search-button" type="submit"><img src="<?= __BASE_URI__ ?>views/assets/imgs/lupa.png" alt="lupa"></button>
+                </form>
+            </div>
         </nav>
     </header>
 
