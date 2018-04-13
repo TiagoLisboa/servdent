@@ -181,6 +181,7 @@
             <table class="table">
                 <thead>
                     <tr>
+                        <th>HORA</th>
                         <th>NOME DO CLIENTE</th>
                         <th>USUARIO</th>
                         <th>SERVIÇO</th>
@@ -360,6 +361,16 @@
                 $('#form-geral').submit();
             }
         })
+
+        function compare(a, b) {
+            if (moment(a.horario, 'HH:mm').isBefore(moment(b.horario, 'HH:mm'))) {
+                return -1;
+            }
+            if (moment(b.horario, 'HH:mm').isBefore(moment(a.horario, 'HH:mm'))) {
+                return 1;
+            }
+            return 0;
+        }
     
         $('#datetimepicker1').on('change.datetimepicker', function () {
             $('.table-horarios td').removeClass('reservado').removeClass('disabled');
@@ -371,11 +382,12 @@
             
             $('#dadosreserva').html("");
 
-            reservedDates.forEach(function (e, i) {
+            reservedDates.sort(compare).forEach(function (e, i) {
                 if(e.data.format('YYYY-MM-DD') == data) {
                     $('.table-horarios td[data-horario=\'' + e.horario + '\']').addClass('reservado').data('id_agendamento', e.id_agendamento);
                     $('#dadosreserva').append(
                         "<tr>" +
+                            "<td>" + e.horario + "</td>" +
                             "<td>" + e.paciente + "</td>" +
                             "<td>" + e.usuario + "</td>" +
                             "<td>" + e.servico + "</td>" +

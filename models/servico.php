@@ -44,8 +44,16 @@
         public static function delete($id_servico) {
             $db = Db::getInstance();
 
-            $req = $db->prepare('DELETE FROM servico WHERE id_servico = :id_servico');
+            $req = $db->prepare('DELETE FROM PacienteServico WHERE id_servico = :id_servico');
+            $req->execute(array('id_servico' => $id_servico));
 
+            $req = $db->prepare('DELETE FROM agendamento WHERE servico_id_servico = :id_servico');
+            $req->execute(array('id_servico' => $id_servico));
+
+            $req = $db->prepare('DELETE FROM pagamento WHERE servico_id_servico = :id_servico');
+            $req->execute(array('id_servico' => $id_servico));
+
+            $req = $db->prepare('DELETE FROM servico WHERE id_servico = :id_servico');
             $req->execute(array('id_servico' => $id_servico));
         }
 
