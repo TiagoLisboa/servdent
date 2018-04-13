@@ -4,7 +4,7 @@
 
 	<h2> Editar Serviço </h2>
 
-	<form action="/?controller=servico&action=atualizar" method="POST" enctype="multipart/form-data">
+	<form action="<?= __BASE_URI__ ?>?controller=servico&action=atualizar" method="POST" enctype="multipart/form-data">
 
 		<input type="hidden" name="id_servico" value="<?= $id_servico ?>">
 
@@ -35,7 +35,7 @@
 			<textarea class="form-control" id="descricao_servico" name="descricao_servico" placeholder="Descrição" required /><?= $descricao_servico ?></textarea>
 		</div>
 
-        <a href="/?controller=login&action=index" class="btn btn-primary"><< Voltar</a>
+        <a href="<?= __BASE_URI__ ?>?controller=login&action=index" class="btn btn-primary"><< Voltar</a>
 		<button type="submit" class="btn btn-primary">Editar</button>
 		<a href="#" class="deletar btn btn-danger">Deletar</a>
 
@@ -48,7 +48,7 @@
 	$('.deletar').on('click', function (e) {
 		var x = confirm("Tem certeza que deseja deletar esse serviço?");
 		if (x)
-			window.location="/?controller=servico&action=deletar&id_servico=<?= $id_servico ?>"
+			window.location="<?= __BASE_URI__ ?>?controller=servico&action=deletar&id_servico=<?= $id_servico ?>"
 	});
 	
 	$('.custom-file-input').on('change',function(){

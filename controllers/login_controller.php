@@ -1,40 +1,67 @@
 <?php
     class LoginController {
+
+        // Carrega a página de login
         public function index() {
             require_once('views/login/index.php');
         }
 
+        // Carrega a página da secretária
         public function secretaria() {
             if (!session_id()) @ session_start();
             if (!isset($_SESSION['usuario']) || $_SESSION['usuario']->papel != 'Secretaria') return call('pages', 'error');
 
+            // Carrega os dados necessários para a pagina
             $pacientes = Usuario::allWithPapel('Paciente');
             $agendamentos = Agendamento::all();
+
+            // Carrega o arquivo da página
             require_once('views/login/secretaria.php');
         }
 
+        // Carrega a página da paciente
         public function paciente() {
             if (!session_id()) @ session_start();
             if (!isset($_SESSION['usuario'])) return call('pages', 'error');
 
+            // Carrega os dados necessários para a pagina
             $usuario = $_SESSION['usuario'];
             $agendamentos = Agendamento::allByIdPaciente(intval($_SESSION['usuario']->id_usuario));
             $allAgendamentos = Agendamento::all();
             $servicos = Usuario::allServicos(intval($_SESSION['usuario']->id_usuario));
 
+            // Carrega o arquivo da página
             require_once('views/login/paciente.php');
         }
 
+        // Carrega a página da secretária
+        public function gerente() {
+            if (!session_id()) @ session_start();
+            if (!isset($_SESSION['usuario']) || $_SESSION['usuario']->papel != 'Gerente') return call('pages', 'error');
+
+            // Carrega os dados necessários para a pagina
+            $usuarios = Usuario::all();
+            $servicos = Servico::all();
+            $pacientes = Usuario::allWithPapel('Paciente');
+            $agendamentos = Agendamento::all();
+
+            // Carrega o arquivo da página
+            require_once('views/login/gerente.php');
+        }
+
+        // Gera o relatório do cliente e retorna para a pagina do gerente
         public function relatorioCliente() {
             if (!session_id()) @ session_start();
             // if (!isset($_POST['servicos']) || !isset($_POST['buscacliente'])) return call('pages', 'error');
 
+            // Carrega os dados necessários para a pagina
             $servicos_escolhidos = $_POST['servicos'];
             $cliente = $_POST['buscacliente'];
-
             $pacientes = Usuario::allWithPapel('Paciente');
             $retorno;
 
+
+            // Escreve tabela do relatório em uma variável
             $i = 1;
 
             $relatorio  = "<table class='table'>";
@@ -115,6 +142,8 @@
             require_once('views/login/gerente.php');
         }
 
+        // Gera o relatório de reserva e retorna para a pagina do gerente
+        // Segue a mesma ideia do outro relatório
         public function relatorioReservas() {
             $data = $_POST['data'];
             $agendamentos = Agendamento::all();
@@ -167,45 +196,45 @@
             require_once('views/login/gerente.php');
         }
 
+        // Abre página para escolher o dia do relatório de reserva
         public function escolherDia() {
+            // Carrega os dados necessários para a pagina
             $agendamentos = Agendamento::all();
+
+            // Carrega o arquivo da página
             require_once('views/login/escolherDia.php');
         }
 
-        public function gerente() {
-            if (!session_id()) @ session_start();
-            if (!isset($_SESSION['usuario']) || $_SESSION['usuario']->papel != 'Gerente') return call('pages', 'error');
-
-            $usuarios = Usuario::all();
-            $servicos = Servico::all();
-            $pacientes = Usuario::allWithPapel('Paciente');
-            $agendamentos = Agendamento::all();
-
-            require_once('views/login/gerente.php');
-        }
-
-        
+        // Verifica se é um usuario válido
         public function validate() {
             if (!isset($_POST['usuario']) || !isset($_POST['senha']))
                 return call('pages', 'error');
 
+            // Procura pelo usuario tentando logar
             $login = Usuario::findByUsuario($_POST['usuario']);
 
+            // Verifica se a senha é correta
             if ($login->senha == $_POST['senha']) {
+                // Coloca o usuario encontrado no banco na sessão
                 if (!session_id()) @ session_start();
                 $_SESSION['usuario'] = $login;
 
-                return header('Location: /?controller=login&action=index');
+                // Retorna para a página do usuario
+                return header('Location: ' .  __BASE_URI__  . '?controller=login&action=index');
             }
             
-            return call('pages', 'error');
+            // retorna para a página de login com uma mensagem
+            return header('Location: ' .  __BASE_URI__  . '?controller=login&action=index&msg=1');
         }
 
+        // Finaliza a sessão do usuário
         public function logout() {
             if (session_id()) @ session_start();
 
+            // Reseta a variavel de sessão
             $_SESSION = array();
 
+            // Finaliza os cookies de sessão
             if (ini_get("session.use_cookies")) {
                 $params = session_get_cookie_params();
                 setcookie(session_name(), '', time() - 42000,
@@ -214,9 +243,11 @@
                 );
             }
 
+            // Destroi a sessão
             session_destroy();
 
-            header('Location: /');
+            // Retorna para a página inicial
+            header('Location: ' .  __BASE_URI__  . '');
         }
     }
 

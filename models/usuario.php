@@ -46,7 +46,7 @@
             $db = Db::getInstance();
 
             $req = $db->prepare("SELECT id_usuario, senha, usuario, papel, nome_completo, email, cpf, cep, estado, cidade, bairro, rua, complemento, numero, telefone, data_nascimento, cro
-            FROM dental_clean.usuario");
+            FROM servdent.usuario");
             $req->execute();
 
             foreach($req->fetchAll() as $usuario) {
@@ -61,7 +61,7 @@
             $db = Db::getInstance();
 
             $req = $db->prepare("SELECT id_usuario, senha, usuario, papel, nome_completo, email, cpf, cep, estado, cidade, bairro, rua, complemento, numero, telefone, data_nascimento, cro
-            FROM dental_clean.usuario WHERE papel = :papel");
+            FROM servdent.usuario WHERE papel = :papel");
             $req->execute(array('papel' => $papel));
 
             foreach($req->fetchAll() as $usuario) {
@@ -75,7 +75,7 @@
             $db = Db::getInstance();
 
             $req = $db->prepare("SELECT id_usuario, senha, usuario, papel, nome_completo, email, cpf, cep, estado, cidade, bairro, rua, complemento, numero, telefone, data_nascimento, cro
-            FROM dental_clean.usuario WHERE id_usuario = :id_usuario");
+            FROM servdent.usuario WHERE id_usuario = :id_usuario");
             $req->execute(array('id_usuario' => $id_usuario));
 
             $usuario = $req->fetch();
@@ -88,7 +88,7 @@
             $db = Db::getInstance();
 
             $req = $db->prepare("SELECT id_usuario, senha, usuario, papel, nome_completo, email, cpf, cep, estado, cidade, bairro, rua, complemento, numero, telefone, data_nascimento, cro
-            FROM dental_clean.usuario WHERE usuario = :id_usuario");
+            FROM servdent.usuario WHERE usuario = :id_usuario");
             $req->execute(array('id_usuario' => $id_usuario));
 
             $usuario = $req->fetch();
@@ -104,9 +104,9 @@
             Agendamento::deleteFromUsuario($id_usuario);
             Pagamento::deleteFromUsuario($id_usuario);
 
-            $req = $db->prepare("DELETE FROM dental_clean.PacienteServico WHERE paciente_id_usuario=:id_usuario");
+            $req = $db->prepare("DELETE FROM servdent.PacienteServico WHERE paciente_id_usuario=:id_usuario");
             $req->execute(array('id_usuario' => $id_usuario));
-            $req = $db->prepare("DELETE FROM dental_clean.usuario WHERE id_usuario=:id_usuario");
+            $req = $db->prepare("DELETE FROM servdent.usuario WHERE id_usuario=:id_usuario");
             $req->execute(array('id_usuario' => $id_usuario));
         }
 
@@ -114,7 +114,7 @@
         public static function update($id_usuario, $senha, $usuario, $papel, $nome_completo, $email, $cpf, $cep, $estado, $cidade, $bairro, $rua, $complemento, $numero, $telefone, $data_nascimento, $cro) {
             $db = Db::getInstance();
 
-            $req = $db->prepare("UPDATE dental_clean.usuario
+            $req = $db->prepare("UPDATE servdent.usuario
             SET senha=?, usuario=?, papel=?, nome_completo=?, email=?, cpf=?, cep=?, estado=?, cidade=?, bairro=?, rua=?, complemento=?, numero=?, telefone=?, data_nascimento=?, cro=?
             WHERE id_usuario=?");
             $req->execute(array($senha, $usuario, $papel, $nome_completo, $email, $cpf, $cep, $estado, $cidade, $bairro, $rua, $complemento, $numero, $telefone, $data_nascimento, $cro, $id_usuario));
@@ -124,7 +124,7 @@
         public static function insert($senha, $usuario, $papel, $nome_completo, $email, $cpf, $cep, $estado, $cidade, $bairro, $rua, $complemento, $numero, $telefone, $data_nascimento, $cro) {
             $db = Db::getInstance();
 
-            $req = $db->prepare("INSERT INTO dental_clean.usuario
+            $req = $db->prepare("INSERT INTO servdent.usuario
             (senha, usuario, papel, nome_completo, email, cpf, cep, estado, cidade, bairro, rua, complemento, numero, telefone, data_nascimento, cro)
             VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
             $req->execute(array($senha, $usuario, $papel, $nome_completo, $email, $cpf, $cep, $estado, $cidade, $bairro, $rua, $complemento, $numero, $telefone, $data_nascimento, $cro));
@@ -140,7 +140,7 @@
             $db = Db::getInstance();
 
             $req = $db->prepare("SELECT id_paciente_servico, id_servico, paciente_id_usuario
-            FROM dental_clean.PacienteServico
+            FROM servdent.PacienteServico
             WHERE paciente_id_usuario = :paciente_id_usuario");
             $req->execute(array('paciente_id_usuario' => $paciente_id_usuario));
 
@@ -154,7 +154,7 @@
         public static function insertServico($id_servico, $id_usuario) {
             $db = Db::getInstance();
             
-            $req = $db->prepare("INSERT INTO dental_clean.PacienteServico
+            $req = $db->prepare("INSERT INTO servdent.PacienteServico
             (id_servico, paciente_id_usuario)
             VALUES(?, ?);");
             $req->execute(array($id_servico, $id_usuario));

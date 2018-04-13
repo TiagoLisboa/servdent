@@ -13,7 +13,7 @@
 
     <div class="row mt-50">
         <div class="col-sm-8 offset-sm-2">
-            <form action="/?controller=login&action=relatorioReservas" method="POST">
+            <form action="<?= __BASE_URI__ ?>?controller=login&action=relatorioReservas" method="POST">
                 <input type="hidden" name="data" id="data" />
                 <button type="submit" class="col-sm-12 btn btn-primary">Gerar Relatório</button>
             </form>

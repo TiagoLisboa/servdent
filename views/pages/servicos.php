@@ -1,3 +1,4 @@
+<?php $basedir = strtok($_SERVER["REQUEST_URI"],'/?'); ?>
 <!-- COMO FUCIONA -->
 
 <div class="jumbotron fluid-jumbotron">
@@ -41,12 +42,12 @@
     <?php foreach($servicos as $servico) { ?>
         <div class="row top-buffer">
             <div class="col-sm-3">
-                <img class="card-img-top" src="<?= $servico->img_path ?>" alt="<?= $servico->tipo_servico ?>">
+                <img class="card-img-top" src="<?= __BASE_URI__ ?><?= $servico->img_path ?>" alt="<?= $servico->tipo_servico ?>">
             </div>
             <div class="col-sm-8">
                 <h3 class="text-muted"><?= $servico->tipo_servico ?></h3>
                 <p class="text-muted"><?= $servico->descricao_servico ?></p>
-                <a href="<?= (isset($_SESSION['usuario']) && $_SESSION['usuario']->papel == 'Paciente') ? '/?controller=pagseguro&action=checkout&servico=' . $servico->id_servico : '#' ?>"
+                <a href="<?= __BASE_URI__ ?><?= (isset($_SESSION['usuario']) && $_SESSION['usuario']->papel == 'Paciente') ? '?controller=pagseguro&action=checkout&servico=' . $servico->id_servico : '#' ?>"
                 class="btn btn-primary">Comprar</a> 
             </div>
         </div>

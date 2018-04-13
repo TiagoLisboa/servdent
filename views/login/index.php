@@ -4,9 +4,19 @@
 
 ?>
 
+    <?php if (isset($_GET['msg']) && $_GET['msg'] == '1') { ?>
+        <div class="container">
+            <div class="row">
+                <div class="alert alert-danger col-sm-4 offset-sm-4">
+                    Login ou senha incorretos
+                </div>
+            </div>
+        </div>
+    <?php } ?>
+
     <div class="container">
 
-        <form class="form-signin" action="/?controller=login&action=validate" method="POST">
+        <form class="form-signin" action="<?= __BASE_URI__ ?>?controller=login&action=validate" method="POST">
             <h2 class="form-signin-heading">Faça o login</h2>
             <label for="inputEmail" class="sr-only">Login</label>
             <input type="text" id="inputEmail" name="usuario" class="form-control" placeholder="Login" required autofocus>

@@ -4,7 +4,7 @@
 
 	<h2> Editar Paciente </h2>
 
-	<form action="/?controller=paciente&action=atualizar" method="POST">
+	<form action="<?= __BASE_URI__ ?>?controller=paciente&action=atualizar" method="POST">
 
 		<h3> Login </h3>
 
@@ -98,11 +98,11 @@
         </div>
 
         <div class="form-group">
-            <label for="cru" class="control-label">CRU</label>
-            <input type="text" class="form-control" id="cru" name="cru" placeholder="Complemento" value="<?= $cru ?>"/>
+            <label for="cro" class="control-label">CRO</label>
+            <input type="text" class="form-control" id="cro" name="cro" placeholder="CRO" value="<?= $cro ?>"/>
         </div>
 		
-		<a href="/?controller=login&action=index" class="btn btn-primary"><< Voltar</a>
+		<a href="<?= __BASE_URI__ ?>?controller=login&action=index" class="btn btn-primary"><< Voltar</a>
 		<button type="submit" class="btn btn-primary">Editar</button>
 		<a href="#" class="deletar btn btn-danger">Deletar</a>
 	</form>
@@ -112,7 +112,7 @@
 	$('.deletar').on('click', function (e) {
 		var x = confirm("Tem certeza que deseja deletar esse usuario?");
 		if (x)
-			window.location="/?controller=paciente&action=deletar&id_usuario=<?= $id_usuario ?>"
+			window.location="<?= __BASE_URI__ ?>?controller=paciente&action=deletar&id_usuario=<?= $id_usuario ?>"
 	});
 
 </script>

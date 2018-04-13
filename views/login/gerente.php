@@ -3,11 +3,11 @@
 
         <h2>Serviços Cadastrados</h2>
 
-           <?php if(isset($_GET['success']) && intval($_GET['success']) >= 3) { ?>
+           <?php if(isset($_GET['success']) && intval($_GET['success']) >= 4) { ?>
                 <div class="container-fluid">
                     <div class="row">
                         <div class="alert alert-success col-sm-12">
-                            Usuario <?= intval($_GET['success']) == 3 ? 'cadastrado' : 'editado' ?> com <strong>Sucesso!</strong>
+                            Serviço <?= intval($_GET['success']) == 4 ? 'cadastrado' : $_GET['success'] == 5 ? 'editado' : 'deletado' ?> com <strong>Sucesso!</strong>
                         </div>
                     </div>
                 </div>
@@ -29,13 +29,13 @@
                     <td><?= $servico->tipo_servico ?></td>
                     <td>R$<?= number_format((float)$servico->valor_servico, 2, ',', ''); ?></td>
                     <td><?= $servico->descricao_servico ?></td>
-                    <td><a href="/?controller=servico&action=editar&servico=<?= $servico->id_servico ?>" class="btn btn-primary">Editar</a></td>
+                    <td><a href="<?= __BASE_URI__ ?>?controller=servico&action=editar&servico=<?= $servico->id_servico ?>" class="btn btn-primary">Editar</a></td>
                 </tr>
                 <?php } ?>
             </tbody>
         </table>
 
-        <a href="/?controller=servico&action=novo" class="btn btn-primary">Cadastrar serviço</a>
+        <a href="<?= __BASE_URI__ ?>?controller=servico&action=novo" class="btn btn-primary">Cadastrar serviço</a>
 
     </div>
 
@@ -43,11 +43,11 @@
 
         <h2>Usuarios Cadastrados </h2>
 
-        <?php if(isset($_GET['success'])) { ?>
+        <?php if(isset($_GET['success']) && intval($_GET['success']) < 4) { ?>
             <div class="container-fluid">
                 <div class="row">
                     <div class="alert alert-success col-sm-12">
-                        Usuario <?= intval($_GET['success']) == 1 ? 'cadastrado' : 'editado' ?> com <strong>Sucesso!</strong>
+                        Usuario <?= intval($_GET['success']) == 1 ? 'cadastrado' : $_GET['success'] == 2 ? 'editado' : 'deletado' ?> com <strong>Sucesso!</strong>
                     </div>
                 </div>
             </div>
@@ -74,13 +74,13 @@
                     <td><?= $paciente->telefone ?></td>
                     <td><?= $paciente->email ?></td>
                     <td><?= $paciente->papel ?></td>
-                    <td><a href="/?controller=paciente&action=editarUsuario&id_usuario=<?= $paciente->id_usuario ?>" class="btn btn-primary">Editar</a></td>
+                    <td><a href="<?= __BASE_URI__ ?>?controller=paciente&action=editarUsuario&id_usuario=<?= $paciente->id_usuario ?>" class="btn btn-primary">Editar</a></td>
                 </tr>
                 <?php } ?>
             </tbody>
         </table>
 
-        <a href="/?controller=paciente&action=novoUsuario" class="btn btn-primary">Cadastrar Usuario</a>
+        <a href="<?= __BASE_URI__ ?>?controller=paciente&action=novoUsuario" class="btn btn-primary">Cadastrar Usuario</a>
 
     </div>
     <div class="row mt-50"></div>
@@ -164,7 +164,7 @@
             </div>
         </div>
 
-        <form action="/?controller=reserva&action=modificar" method="POST" style="display: none" id="form-geral">
+        <form action="<?= __BASE_URI__ ?>?controller=reserva&action=modificar" method="POST" style="display: none" id="form-geral">
             <input type="text" name="id_servico" id="id_servico" value="<?= $valini ?>" />
             <input type="text" name="id_agendamento" id="id_agendamento" />
             <input type="text" name="data" id="data" />
@@ -206,7 +206,7 @@
                     </div>
                 </div>
 
-                <form action="/?controller=login&action=relatorioCliente" method="POST">
+                <form action="<?= __BASE_URI__ ?>?controller=login&action=relatorioCliente" method="POST" id="relatorioCliente">
 
                 <div class="row">
                     <div class="col-sm-12">
@@ -249,7 +249,7 @@
 
             <div class="row mt-20">
                 <div class="col-sm-12">
-                    <a href="/?controller=login&action=escolherDia" class="btn btn-primary">Gerar Relatório de Reserva</a>
+                    <a href="<?= __BASE_URI__ ?>?controller=login&action=escolherDia" class="btn btn-primary">Gerar Relatório de Reserva</a>
                 </div>
             </div>
         </div>
@@ -329,12 +329,10 @@
 
         $('#reservar').on('click', function (e) {
             e.preventDefault();
-            if (reservedDates.length > 0) {
-                alert('Paciente já possui um agendamento ativo.');
-            } else if (!horario_reservado) {
+            if (!horario_reservado) {
                 $('#data').val($('#datetimepicker1').datetimepicker("viewDate").format('YYYY-MM-DD'));
-                $('#acao').val('reservar');
-                $('form').submit();
+                $('#acao').val('solicitarReserva');
+                $('#form-geral').submit();
             } else {
                 alert('Horario já está reservado');
             }

@@ -28,7 +28,7 @@
             $db = Db::getInstance();
 
 
-            $req = $db->prepare("INSERT INTO dental_clean.pagamento
+            $req = $db->prepare("INSERT INTO servdent.pagamento
             (data_pagamento, data_vencimento, tipo_pagamento, valor_pagamento, confirmar_pagamento, cod_pagamento, servico_id_servico, paciente_id_usuario)
             VALUES(?, ?, ?, ?, ?, ?, ?, ?);");
 
@@ -59,7 +59,7 @@
         public static function deleteFromUsuario($id_usuario) {
             $db = Db::getInstance();
 
-            $req = $db->prepare("DELETE FROM dental_clean.pagamento WHERE paciente_id_usuario=:id_usuario");
+            $req = $db->prepare("DELETE FROM servdent.pagamento WHERE paciente_id_usuario=:id_usuario");
             $req->execute(array('id_usuario' => $id_usuario));
         }
     }

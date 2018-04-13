@@ -4,7 +4,7 @@
         <?php $valini; $i = 1; foreach($servicos as $servico) { $valini = $i == 1 ? $servico->id_servico : $valini; ?>
             <div class="col-sm-2 mt-10 servico" data-servico="<?= $servico->id_servico ?>">
                 <div class="card <?= $i++ == 1 ? 'border-blue' : '' ?>">
-                    <img class="card-img-top" src="<?= $servico->img_path ?>" alt="<?= $servico->tipo_servico ?>">
+                    <img class="card-img-top" src="<?= __BASE_URI__ ?><?= $servico->img_path ?>" alt="<?= $servico->tipo_servico ?>">
                     <div class="card-body">
                         <h5 class="card-title text-center"><?=  $servico->tipo_servico ?></h5>
                     </div>
@@ -52,7 +52,7 @@
     </div>
 </div>
 
-<form action="/?controller=reserva&action=reservarEspecial" method="POST" style="display: none">
+<form action="<?= __BASE_URI__ ?>?controller=reserva&action=reservarEspecial" method="POST" style="display: none">
     <input type="text" name="id_servico" id="id_servico" value="<?= $valini ?>" />
     <input type="text" name="id_usuario" id="id_usuario" value="<?= $valini_usuario ?>" />
     <input type="text" name="data" id="data" value="<?= $data ?>"/>

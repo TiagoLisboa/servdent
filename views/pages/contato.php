@@ -23,7 +23,7 @@
     <p class="text-muted text-center">Dúvidas? Entre em contato.</p>
 
     <div class="mt-50">
-        <form action="/?controller=pages&action=enviarEmail" method="POST">
+        <form action="<?= __BASE_URI__ ?>?controller=pages&action=enviarEmail" method="POST">
             <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group">
@@ -56,7 +56,7 @@
     <div class="row mt-50">
         <div class="col-sm-6">
             <div id="mapa" style="height: 300px; border: 3px solid #6699ff; border-radius: 5px;"></div>
-            <!-- <img src="views/assets/imgs/mapa.png" alt="mapa"> -->
+            <!-- <img src="<?= __BASE_URI__ ?>views/assets/imgs/mapa.png" alt="mapa"> -->
         </div>
         <div class="col-sm-6">
             <div style="margin-top: 140px">

@@ -1,7 +1,9 @@
+
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-10 offset-sm-1">
-            <img src="views/assets/imgs/header-bg.png" alt="" class="img-fluid col">
+            <img src="<?= __BASE_URI__ ?>views/assets/imgs/header-bg.png" alt="" class="img-fluid col">
             <div class="f-title">
                 <h2 class="text-white font-weight-bold">NÓS CUIDAMOS DO SEU SORRISO</h2>
             </div>
@@ -25,7 +27,7 @@
 
         <div class="col-sm-4 mt-50">
             <div class="card">
-                <img class="mx-auto card-img-top img-50" src="<?= $servico->img_path ?>" alt="<?= $servico->tipo_servico ?>">
+                <img class="mx-auto card-img-top img-50" src="<?= __BASE_URI__ ?><?= $servico->img_path ?>" alt="<?= $servico->tipo_servico ?>">
                 <div class="card-body">
                     <h4 class="card-title text-center text-grey font-weight-bold"><?= $servico->tipo_servico ?></h4>
                     <p class="card-text text-center text-muted"><?= $servico->descricao_servico ?></p>
@@ -52,7 +54,7 @@
 
         <div class="col-sm-4">
             <div class="card">
-                <img class="mx-auto card-img-top img-50" src="views/assets/imgs/secretaria.png" alt="Secretária">
+                <img class="mx-auto card-img-top img-50" src="<?= __BASE_URI__ ?>views/assets/imgs/secretaria.png" alt="Secretária">
                 <div class="card-body">
                     <h4 class="card-title text-center font-weight-bold text-grey">SECRETÁRIA</h4>
                     <h5 class="text-center text-grey">Andreia Lourenço</h5>
@@ -63,7 +65,7 @@
 
         <div class="col-sm-4">
             <div class="card">
-                <img class="mx-auto card-img-top img-50" src="views/assets/imgs/gerente.png" alt="Secretária">
+                <img class="mx-auto card-img-top img-50" src="<?= __BASE_URI__ ?>views/assets/imgs/gerente.png" alt="Secretária">
                 <div class="card-body">
                     <h4 class="card-title text-center font-weight-bold text-grey">GERENTE</h4>
                     <h5 class="text-center text-grey">Roger Correia Simões</h5>
@@ -74,7 +76,7 @@
 
         <div class="col-sm-4">
             <div class="card">
-                <img class="mx-auto card-img-top img-50" src="views/assets/imgs/dentista.png" alt="Secretária">
+                <img class="mx-auto card-img-top img-50" src="<?= __BASE_URI__ ?>views/assets/imgs/dentista.png" alt="Secretária">
                 <div class="card-body">
                     <h4 class="card-title text-center font-weight-bold text-grey">DENTISTA</h4>
                     <h5 class="text-center text-grey">Andre Fazanno</h5>

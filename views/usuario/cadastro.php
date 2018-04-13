@@ -2,7 +2,7 @@
 
 	<h2> Cadastrar Usuario </h2>
 
-	<form action="/?controller=paciente&action=cadastrar" method="POST">
+	<form action="<?= __BASE_URI__ ?>?controller=paciente&action=cadastrar" method="POST">
 
 		<h3> Login </h3>
 
@@ -94,8 +94,8 @@
 		</div>
 
         <div class="form-group">
-			<label for="cru" class="control-label">CRU</label>
-			<input type="text" class="form-control" id="cru" name="cru" placeholder="Complemento" />
+			<label for="cro" class="control-label">CRO</label>
+			<input type="text" class="form-control" id="cro" name="cro" placeholder="Complemento" />
 		</div>
 
 		<button type="submit" class="btn btn-primary">Cadastrar</button>

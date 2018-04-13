@@ -1,17 +1,22 @@
 <?php
     class PacienteController {
+
+        // Carrega a página de cadastro de paciente
         public function novo() {
             require_once('views/paciente/cadastro.php');
         }
 
+        // Carrega a página de cadastro de usuario (para o gerente)
         public function novoUsuario() {
             require_once('views/usuario/cadastro.php');
         }
 
+        // Executa o cadastro do usuario        
         public function cadastrar() {
             if(!isset($_POST['usuario']))
                 return call('pages', 'error');
             
+            // Pega os atributos do metodo
             $id_usuario = intval($_POST['id_usuario']);
             $usuario = $_POST['usuario'];
             $senha = $_POST['senha'];
@@ -30,22 +35,27 @@
             $data_nascimento = isset($_POST['data_nascimento']) ? $_POST['data_nascimento'] : "";
             $cro = isset($_POST['cro']) ? $_POST['cro'] : "";
 
+            // Executa o método de insersão do modelo
             Usuario::insert($senha, $usuario, $papel, $nome_completo, $email, 
                             $cpf, $cep, $estado, $cidade, $bairro, $rua, $complemento, 
                             $numero, $telefone, $data_nascimento, $cro);
 
-            header("Location: /?controller=login&action=index&success=1");
+            header("Location: " .  __BASE_URI__  . "?controller=login&action=index&success=1");
         }
 
+        // Executa a deleção do usuario        
         public function deletar() {
             if(!isset($_GET['id_usuario']))
                 return call('pages', 'error');
             
+            // Deleta o usuario com o id contido no metodo GET
             Usuario::delete(intval($_GET['id_usuario']));
             
-            header('Location: /?controller=login&action=index');
+            header('Location: ' .  __BASE_URI__  . '?controller=login&action=index&success=3');
         }
 
+        // Executa a atualização de um usuario
+        // Funciona parecido com o cadastrar
         public function atualizar() {
             if(!isset($_POST['id_usuario']))
                 return call('pages', 'error');
@@ -72,17 +82,20 @@
                             $cpf, $cep, $estado, $cidade, $bairro, $rua, $complemento, 
                             $numero, $telefone, $data_nascimento, $cro);
 
-            header("Location: /?controller=login&action=index&success=2");
+            header("Location: " .  __BASE_URI__  . "?controller=login&action=index&success=2");
         }
 
+        // Carrega página de editar paciente
         public function editar() {
             if(!isset($_GET['paciente']))
                 return call('pages', 'error');
 
+            // Procura paciente no banco de dados
             $id_usuario = intval($_GET['paciente']);
 
             $usuario = Usuario::find($id_usuario);
             
+            // Inicia as variaveis para colocar no formulario
             $id_usuario = $usuario->id_usuario;
             $login = $usuario->usuario;
             $senha = $usuario->senha;
@@ -99,9 +112,12 @@
             $complemento = $usuario->complemento;
             $data_nascimento = $usuario->data_nascimento;
 
+            // Carrega a página do formulário
             require_once('views/paciente/editar.php');
         }
 
+        // Carrega página de editar usuário        
+        // Funciona de modo parecido com o anterior
         public function editarUsuario() {
             if(!isset($_GET['id_usuario']))
                 return call('pages', 'error');
@@ -126,7 +142,7 @@
             $complemento = $usuario->complemento;
             $data_nascimento = $usuario->data_nascimento;
             $papel = $usuario->papel;
-            $cru = $usuario->cru;
+            $cro = $usuario->cro;
 
             require_once('views/usuario/editar.php');
         }

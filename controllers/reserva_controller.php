@@ -1,13 +1,16 @@
 <?php
     class ReservaController {
+        
+        // Realiza uma reserva (do usuario)
         public function finalizar() {
             if (!session_id()) @ session_start();
             if (!isset($_SESSION['usuario']) || !isset($_POST['data'])) return call('pages', 'error');
 
+            // Carrega os dados necessários
             $paciente_id_usuario = intval($_SESSION['usuario']->id_usuario);
 
             /*if (count(Agendamento::allByIdPaciente()) > 0) {
-                return header('Location: /?controller=login&action=index&msg=7');    
+                return header('Location: ' .  __BASE_URI__  . '?controller=login&action=index&msg=7');    
             }*/
 
             $data_2 = $_POST['data'];
@@ -16,17 +19,20 @@
 
             Agendamento::insert($servico_id_servico, $data_2, $horario, "", "", 0, $paciente_id_usuario);
 
-            header('Location: /?controller=login&action=index');
+            // Carrega a página
+            header('Location: ' .  __BASE_URI__  . '?controller=login&action=index');
         }
 
+        // Realiza uma reserva (do gerente ou da secretaria)
         public function reservarEspecial() {
             if (!session_id()) @ session_start();
             if (!isset($_POST['data'])) return call('pages', 'error');
 
+            // Carrega os dados necessários
             $paciente_id_usuario = intval($_POST['id_usuario']);
 
             /*if (count(Agendamento::allByIdPaciente()) > 0) {
-                return header('Location: /?controller=login&action=index&msg=7');    
+                return header('Location: ' .  __BASE_URI__  . '?controller=login&action=index&msg=7');    
             }*/
 
             $data_2 = $_POST['data'];
@@ -35,50 +41,52 @@
 
             Agendamento::insert($servico_id_servico, $data_2, $horario, "", "", 0, $paciente_id_usuario);
 
-            header('Location: /?controller=login&action=index');
+            // Carrega a página
+            header('Location: ' .  __BASE_URI__  . '?controller=login&action=index');
         }
 
-        public function solicitar() {
-            if (!session_id()) @ session_start();
-            if (!isset($_SESSION['usuario']) || !isset($_POST['data'])) return call('pages', 'error');
-
-            $data = $_POST['data'];
-            $servicos = Usuario::allServicos(intval($_SESSION['usuario']->id_usuario));
-            $agendamentos = Agendamento::all();
-
-            require_once('views/compras/escolherServicoContratado.php');
-        }
-
+        // Carrega página de editar reserva
         public function alterar() {
             if (!isset($_GET['agendamento'])) return call('pages', 'error');
             if (!session_id()) @ session_start();
 
+            // Carrega os dados necessários
             $agendamento = Agendamento::find(intval($_GET['agendamento']));
             $agendamentos = Agendamento::all();
 
+            // Se o agendamento já tiver sido alterado, retorna para a página
+            // Do usuario com uma mensagem
             if ($agendamento->alterado != 0) {
-                return header('Location: /?controller=login&action=index&msg=1');
+                return header('Location: ' .  __BASE_URI__  . '?controller=login&action=index&msg=1');
             }
 
+            // Carrega a página
             require_once('views/compras/editarAgendamento.php');
         }
 
+        // Edita uma reserva
         public function update() {
             if (!isset($_POST['horario']) || !isset($_POST['data']) || !isset($_POST['id_agendamento'])) return call('pages', 'error');
             if (!session_id()) @ session_start();
 
+            // Carrega os dados vindos por post
             $horario = $_POST['horario'];
             $data = $_POST['data'];
             $id_agendamento = intval($_POST['id_agendamento']);
             
+            // Procura o agendamento no banco de dados
             $agendamento = Agendamento::find($id_agendamento);
-            
+
+            // Verifica se o agendamento já foi alterado
             if ($agendamento->alterado != 0) {
                 return call ('pages', 'error');
             }
+
+            // Modifica data e hora
             $agendamento->data_2 = $data;
             $agendamento->horario = $horario;
 
+            // Atualiza os valores no banco de dados
             Agendamento::update($agendamento->id_agendamento,
                                 $agendamento->servico_id_servico,
                                 $agendamento->data_2,
@@ -88,9 +96,11 @@
                                 1,
                                 $agendamento->paciente_id_usuario);
 
-            header("Location: /?controller=login&action=index");
+            // Manda de volta para página do usuário
+            header("Location: " .  __BASE_URI__  . "?controller=login&action=index");
         }
 
+        // Solicitação de reserva do gerente/secretária
         public function solicitarReserva() {
             if (!isset($_GET['data']) || !isset($_GET['horario'])) return call('pages', 'error');
             if (!session_id()) @ session_start();
@@ -105,6 +115,7 @@
             
         }
 
+        // Verifica qual a alteração a ser feita na reserva e a realiza
         public function modificar() {
             if (!isset($_POST['acao'])) return call('pages', 'error');
             if (!session_id()) @ session_start();
@@ -115,17 +126,17 @@
             if ($acao == 'cancelar') {
                 Agendamento::delete($id_agendamento);
             } else if ($acao == 'alterar') {
-                return header("Location: /?controller=reserva&action=alterar&agendamento=$id_agendamento");
+                return header("Location: " .  __BASE_URI__  . "?controller=reserva&action=alterar&agendamento=$id_agendamento");
             } else if ($acao == 'reservar') {
                 $this->finalizar();
             } else if ($acao = 'solicitarReserva') {
                 $data = $_POST['data'];
                 $horario = $_POST['horario'];
 
-                return header("Location: /?controller=reserva&action=solicitarReserva&data=$data&horario=$horario");
+                return header("Location: " .  __BASE_URI__  . "?controller=reserva&action=solicitarReserva&data=$data&horario=$horario");
             }
 
-            header("Location: /?controller=login&action=index");
+            header("Location: " .  __BASE_URI__  . "?controller=login&action=index");
         }
     }
 ?>

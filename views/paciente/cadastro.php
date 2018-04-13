@@ -2,7 +2,7 @@
 
 	<h2> Cadastrar Paciente </h2>
 
-	<form action="/?controller=paciente&action=cadastrar" method="POST">
+	<form action="<?= __BASE_URI__ ?>?controller=paciente&action=cadastrar" method="POST">
 
 		<h3> Login </h3>
 

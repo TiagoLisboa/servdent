@@ -43,13 +43,13 @@
                     <td><?= $paciente->telefone ?></td>
                     <td><?= $paciente->email ?></td>
                     <td><?= $paciente->papel ?></td>
-                    <td><a href="/?controller=paciente&action=editar&paciente=<?= $paciente->id_usuario ?>" class="btn btn-primary">Editar</a></td>
+                    <td><a href="<?= __BASE_URI__ ?>?controller=paciente&action=editar&paciente=<?= $paciente->id_usuario ?>" class="btn btn-primary">Editar</a></td>
                 </tr>
                 <?php } ?>
             </tbody>
         </table>
 
-        <a href="/?controller=paciente&action=novo" class="btn btn-primary">Cadastrar paciente</a>
+        <a href="<?= __BASE_URI__ ?>?controller=paciente&action=novo" class="btn btn-primary">Cadastrar paciente</a>
 
     </div>
 
@@ -134,7 +134,7 @@
             </div>
         </div>
 
-        <form action="/?controller=reserva&action=modificar" method="POST" style="display: none">
+        <form action="<?= __BASE_URI__ ?>?controller=reserva&action=modificar" method="POST" style="display: none" id="form-geral">
             <input type="text" name="id_servico" id="id_servico" value="<?= $valini ?>" />
             <input type="text" name="id_agendamento" id="id_agendamento" />
             <input type="text" name="data" id="data" />
@@ -198,12 +198,10 @@
 
         $('#reservar').on('click', function (e) {
             e.preventDefault();
-            if (reservedDates.length > 0) {
-                alert('Paciente já possui um agendamento ativo.');
-            } else if (!horario_reservado) {
+            if (!horario_reservado) {
                 $('#data').val($('#datetimepicker1').datetimepicker("viewDate").format('YYYY-MM-DD'));
-                $('#acao').val('reservar');
-                $('form').submit();
+                $('#acao').val('solicitarReserva');
+                $('#form-geral').submit();
             } else {
                 alert('Horario já está reservado');
             }

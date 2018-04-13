@@ -52,7 +52,7 @@
         public static function update($id_servico, $valor_servico, $tipo_servico, $descricao_servico, $img_path) {
             $db = Db::getInstance();
 
-            $req = $db->prepare("UPDATE dental_clean.servico
+            $req = $db->prepare("UPDATE servdent.servico
                                 SET valor_servico=?, tipo_servico=?, descricao_servico=?, img_path=?
                                 WHERE id_servico=?");
 
@@ -62,7 +62,7 @@
         public static function insert($valor_servico, $tipo_servico, $descricao_servico, $img_path) {
             $db = Db::getInstance();
 
-            $req = $db->prepare("INSERT INTO dental_clean.servico
+            $req = $db->prepare("INSERT INTO servdent.servico
                                 (valor_servico, tipo_servico, descricao_servico, img_path)
                                 VALUES(?, ?, ?, ?)");
 

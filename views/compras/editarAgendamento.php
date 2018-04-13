@@ -62,9 +62,10 @@
 
     </div>
 
-    <form action="/?controller=reserva&action=update" method="POST" style="display: none">
+    <form action="<?= __BASE_URI__ ?>?controller=reserva&action=update" method="POST" style="display: none">
         <input type="text" name="id_agendamento" value="<?=$agendamento->id_agendamento?>"/>
         <input type="text" name="data" id="data" />
+        <input type="text" name="acao" id="acao" value="alterar" />
         <input type="text" name="horario" id="horario" value="08:00" />
     </form>
 

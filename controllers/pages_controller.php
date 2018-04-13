@@ -1,23 +1,29 @@
 <?php
     class PagesController {
+
+        // Carrega a página inicial
         public function home() {
             $servicos = Servico::all();
             require_once('views/pages/inicio.php');
         }
 
+        // Carrega a página de serviços
         public function servicos() {
             $servicos = Servico::all();
             require_once('views/pages/servicos.php');
         }
 
+        // Carrega a página de contato
         public function contato() {
             require_once('views/pages/contato.php');
         }
 
+        // Carrega a página de error
         public function error() {
             require_once('views/pages/error.php');
         }
 
+        // Envia o email
         public function enviarEmail() {
             if (!isset($_POST['nome']))
                 return call('pages', 'error');
@@ -52,7 +58,7 @@
             $status = mail($email_to, $subject, $corpo, $headers);
             //enviando o email.
 
-            header("Location: /");
+            header("Location: " .  __BASE_URI__  . "");
         }
     }
 

@@ -68,7 +68,7 @@
         public static function update($id_agendamento, $servico_id_servico, $data_2, $horario, $cod_servico, $registro_historico, $alterado, $paciente_id_usuario) {
             $db = Db::getInstance();
 
-            $req = $db->prepare("UPDATE dental_clean.agendamento
+            $req = $db->prepare("UPDATE servdent.agendamento
             SET servico_id_servico=?, data_2=?, horario=?, cod_servico=?, registro_historico=?, alterado=?, paciente_id_usuario=?
             WHERE id_agendamento=?");
             $req->execute(array($servico_id_servico, $data_2, $horario, $cod_servico, $registro_historico, $alterado, $paciente_id_usuario, $id_agendamento));
@@ -94,7 +94,7 @@
         public static function deleteFromUsuario($id_usuario) {
             $db = Db::getInstance();
 
-            $req = $db->prepare("DELETE FROM dental_clean.agendamento WHERE paciente_id_usuario=:id_usuario");
+            $req = $db->prepare("DELETE FROM servdent.agendamento WHERE paciente_id_usuario=:id_usuario");
             $req->execute(array('id_usuario' => $id_usuario));
         }
 
