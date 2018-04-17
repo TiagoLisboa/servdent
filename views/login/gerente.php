@@ -305,8 +305,10 @@
         $('.table-horarios td').on('click', function () {
             if (!$(this).hasClass('disabled')) {
                 $('.table-horarios td').removeClass('active');
+                $('tr.infor-agendamento').removeClass('bg-green');
                 if ($(this).hasClass('reservado')) {
                     horario_reservado = true;
+                    $('tr[data-id_agendamento="' + $(this).data('id_agendamento') + '"]').addClass('bg-green');
                     $('#id_agendamento').val($(this).data('id_agendamento'));
                 } else {
                     horario_reservado = false;
@@ -386,7 +388,7 @@
                 if(e.data.format('YYYY-MM-DD') == data) {
                     $('.table-horarios td[data-horario=\'' + e.horario + '\']').addClass('reservado').data('id_agendamento', e.id_agendamento);
                     $('#dadosreserva').append(
-                        "<tr>" +
+                        "<tr data-id_agendamento=\"" + e.id_agendamento + "\" data-horario=\"" + e.horario + "\" class='infor-agendamento'>" +
                             "<td>" + e.horario + "</td>" +
                             "<td>" + e.paciente + "</td>" +
                             "<td>" + e.usuario + "</td>" +
@@ -395,6 +397,16 @@
                     )
                 }
             })
+
+            $('tr.infor-agendamento').on('click', function () {
+                $('.table-horarios td').removeClass('active');
+                $('.table-horarios td[data-horario="' + $(this).data('horario') + '"]').addClass('active');
+                $('tr.infor-agendamento').removeClass('bg-green');
+                $('tr[data-id_agendamento="' + $(this).data('id_agendamento') + '"]').addClass('bg-green');
+                $('#id_agendamento').val($(this).data('id_agendamento'));
+                $('#horario').val($(this).data('horario'));
+                horario_reservado = true;
+            });
         });
 
         var reservedDates = [

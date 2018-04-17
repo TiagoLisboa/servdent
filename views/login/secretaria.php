@@ -151,6 +151,7 @@
             <table class="table">
                 <thead>
                     <tr>
+                        <th>HORA</th>
                         <th>NOME DO CLIENTE</th>
                         <th>USUARIO</th>
                         <th>SERVIÇO</th>
@@ -170,11 +171,23 @@
     $(function () {
         var horario_reservado = false;
 
+        function compare(a, b) {
+            if (moment(a.horario, 'HH:mm').isBefore(moment(b.horario, 'HH:mm'))) {
+                return -1;
+            }
+            if (moment(b.horario, 'HH:mm').isBefore(moment(a.horario, 'HH:mm'))) {
+                return 1;
+            }
+            return 0;
+        }
+
         $('.table-horarios td').on('click', function () {
             if (!$(this).hasClass('disabled')) {
                 $('.table-horarios td').removeClass('active');
+                $('tr.infor-agendamento').removeClass('bg-green');
                 if ($(this).hasClass('reservado')) {
                     horario_reservado = true;
+                    $('tr[data-id_agendamento="' + $(this).data('id_agendamento') + '"]').addClass('bg-green');
                     $('#id_agendamento').val($(this).data('id_agendamento'));
                 } else {
                     horario_reservado = false;
@@ -240,11 +253,12 @@
             
             $('#dadosreserva').html("");
 
-            reservedDates.forEach(function (e, i) {
+            reservedDates.sort(compare).forEach(function (e, i) {
                 if(e.data.format('YYYY-MM-DD') == data) {
                     $('.table-horarios td[data-horario=\'' + e.horario + '\']').addClass('reservado').data('id_agendamento', e.id_agendamento);
                     $('#dadosreserva').append(
-                        "<tr>" +
+                        "<tr data-id_agendamento=\"" + e.id_agendamento + "\" data-horario=\"" + e.horario + "\" class='infor-agendamento'>" +
+                            "<td>" + e.horario + "</td>" +
                             "<td>" + e.paciente + "</td>" +
                             "<td>" + e.usuario + "</td>" +
                             "<td>" + e.servico + "</td>" +
@@ -252,6 +266,16 @@
                     )
                 }
             })
+
+            $('tr.infor-agendamento').on('click', function () {
+                $('.table-horarios td').removeClass('active');
+                $('.table-horarios td[data-horario="' + $(this).data('horario') + '"]').addClass('active');
+                $('tr.infor-agendamento').removeClass('bg-green');
+                $('tr[data-id_agendamento="' + $(this).data('id_agendamento') + '"]').addClass('bg-green');
+                $('#id_agendamento').val($(this).data('id_agendamento'));
+                $('#horario').val($(this).data('horario'));
+                horario_reservado = true;
+            });
         });
 
         var reservedDates = [

@@ -40,9 +40,50 @@
     </div>
 </div>
 
+<!-- A CLINICA -->
+
+<div class="jumbotron fluid-jumbotron mt-100">
+    <div class="container">
+        <h1 class="text-center text-blue font-weight-bold">A CLÍNICA</h1>
+        <p class="text-center text-muted">Tecnologia e profissionais de ponta.</p>
+    </div>
+</div>
+
+<div class="container-fluid nossos-servicos">
+    <div class="row">
+        <div class="col-sm-5 offset-sm-1">
+            <img src="<?= __BASE_URI__ ?>views/assets/imgs/dentistas.png" alt="dentistas" class="img-fluid" style="width: 100%">
+        </div>
+        <div class="col-sm-6">
+            <p class="text-muted mt-50" style="line-height: 40px; font-size: 1.4em">
+                A Clínica Odontologica SerDent tem como<br />
+                missão oferecer ao paciente o que há de mais<br />
+                moderno e atual na Odontologia mundial, sem<br />
+                abrir mão das bases sólidas adquiridas pelo Dr.<br />
+                Maurício depois de anos de treinamento.
+            </p>
+        </div>
+    </div>
+
+    <div class="row mt-100">
+        <div class="col-sm-5 offset-sm-1">
+            <p class="text-muted mt-50" style="line-height: 40px; font-size: 1.4em">
+                Aqui é onde o clássico e o moderno se fundem<br />
+                para oferecer o que o paciente precisa, num<br />
+                espaço confortável com profissionais altamente<br />
+                capacitados, aliando tudo isso à tecnologia de<br />
+                ponta em odontologia.
+            </p>
+        </div>
+        <div class="col-sm-5">
+            <img src="<?= __BASE_URI__ ?>views/assets/imgs/cadeira-dentista.png" alt="cadeira de dentista" class="img-fluid" style="width: 100%">
+        </div>
+    </div>
+</div>
+
 <!-- NOSSA EQUIPE -->
 
-<div class="jumbotron fluid-jumbotron">
+<div class="jumbotron fluid-jumbotron mt-100">
     <div class="container">
         <h1 class="text-center text-blue font-weight-bold">NOSSA EQUIPE</h1>
         <p class="text-center text-muted">Profissionais altamente qualificados</p>
