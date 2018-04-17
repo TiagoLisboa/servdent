@@ -4,7 +4,11 @@
     if ('/'. strtok($_SERVER["REQUEST_URI"],'?') .'/' == "//") {
         define('__BASE_URI__', '');    
     } else {
-        define('__BASE_URI__', strtok($_SERVER["REQUEST_URI"],'?'));
+        if (substr(strtok($_SERVER["REQUEST_URI"],'?'), -1) == "/") {
+            define('__BASE_URI__', strtok($_SERVER["REQUEST_URI"],'?'));
+        } else {
+            define('__BASE_URI__', strtok($_SERVER["REQUEST_URI"],'?').'/');
+        }
     }
 
     // define('__BASE_URI__', '');
