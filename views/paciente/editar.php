@@ -92,10 +92,32 @@
 
 </div>
 <script>
-	$('.deletar').on('click', function (e) {
-		var x = confirm("Tem certeza que deseja deletar esse usuario?");
-		if (x)
-			window.location="<?= __BASE_URI__ ?>?controller=paciente&action=deletar&id_usuario=<?= $id_usuario ?>"
-	});
+	$(function () {
+		$('.deletar').on('click', function (e) {
+			var x = confirm("Tem certeza que deseja deletar esse usuario?");
+			if (x)
+				window.location="<?= __BASE_URI__ ?>?controller=paciente&action=deletar&id_usuario=<?= $id_usuario ?>"
+		});
 
+
+		$('#cep').blur(function () {
+			var cep = $(this).val();
+			cep.replace(/./g, "");
+			cep.replace(/-/g, "");
+
+			$.get(
+				"http://viacep.com.br/ws/" + cep + "/json/",
+				function (data) {
+					console.log(data);
+					if (data.erro == true) return;
+					$("#cep").val(data.cep);
+					$("#estado").val(data.uf);
+					$("#bairro").val(data.bairro);
+					$("#complemento").val(data.complemento);
+					$("#cidade").val(data.localidade);
+					$("#rua").val(data.logradouro);
+				}
+			)
+		})
+	});
 </script>
