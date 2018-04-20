@@ -11,6 +11,8 @@
         public $cod_pagamento;
         public $paciente_id_usuario;
         public $servico_id_servico;
+        public $usuario;
+        public $servico;
 
         public function __construct($id_pagamento, $data_pagamento, $data_vencimento, $tipo_pagamento, $valor_pagamento, $confirmar_pagamento, $cod_pagamento, $paciente_id_usuario, $servico_id_servico) {
             $this->id_pagamento = $id_pagamento;
@@ -22,6 +24,22 @@
             $this->cod_pagamento = $cod_pagamento;
             $this->paciente_id_usuario = $paciente_id_usuario;
             $this->servico_id_servico = $servico_id_servico;
+            $this->usuario = Usuario::find($paciente_id_usuario);
+            $this->servico = Servico::find($servico_id_servico);
+        }
+
+        public static function all() {
+            $list = [];
+            $db = Db::getInstance();
+
+            $req = $db->prepare("SELECT * FROM servdent.pagamento");
+            $req->execute();
+
+            foreach($req->fetchAll() as $pagamento) {
+                $list[] = new Pagamento($pagamento['id_pagamento'], $pagamento['data_pagamento'], $pagamento['data_vencimento'], $pagamento['tipo_pagamento'], $pagamento['valor_pagamento'], $pagamento['confirmar_pagamento'], $pagamento['cod_pagamento'], $pagamento['paciente_id_usuario'], $pagamento['servico_id_servico']);
+            }
+
+            return $list;
         }
 
         public static function insert($data_pagamento, $data_vencimento, $tipo_pagamento, $valor_pagamento, $confirmar_pagamento, $cod_pagamento, $paciente_id_usuario, $servico_id_servico) {

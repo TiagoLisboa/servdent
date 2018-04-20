@@ -83,7 +83,12 @@
         <a href="<?= __BASE_URI__ ?>?controller=paciente&action=novoUsuario" class="btn btn-primary">Cadastrar Usuario</a>
 
     </div>
+
+    <?php require_once('views/login/pagamentos.php'); ?>
+
     <div class="row mt-50"></div>
+
+    <h2>Agenda</h2>
     
     <?php if(isset($_GET['msg']) && intval($_GET['msg']) == 1) { ?>
         <div class="container-fluid">

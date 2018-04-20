@@ -40,7 +40,7 @@
 
 		<div class="form-group">
 			<label for="data_nascimento" class="control-label">Data de Nacimento</label>
-			<input type="date" class="form-control" id="data_nascimento" name="data_nascimento" />
+			<input type="date" class="form-control" id="data_nascimento" name="data_nascimento" required/>
 		</div>
 
 		<h3> Endereço </h3>
@@ -78,7 +78,7 @@
 
 		<div class="form-group">
 			<label for="complemento" class="control-label">Complemento</label>
-			<input type="text" class="form-control" id="complemento" name="complemento" placeholder="Complemento" />
+			<input type="text" class="form-control" id="complemento" name="complemento" placeholder="Complemento" required/>
 		</div>
 
 		<button type="submit" class="btn btn-primary">Cadastrar</button>

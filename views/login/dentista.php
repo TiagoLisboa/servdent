@@ -7,80 +7,10 @@
         background-color: #99CCFF !important;
     }
 </style>
+
 <div class="container">
     <div class="row">
 
-        <h2>Pacientes Cadastrados </h2>
-
-        <?php if(isset($_GET['success'])) { ?>
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="alert alert-success col-sm-12">
-                        Paciente <?= intval($_GET['success']) == 1 ? 'cadastrado' : 'editado' ?> com <strong>Sucesso!</strong>
-                    </div>
-                </div>
-            </div>
-        <?php } ?>
-
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Nome</th>
-                    <th scope="col">Usuário</th>
-                    <th scope="col">Telefone</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Função</th>
-                    <th scope="col">Editar</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($pacientes as $paciente) { ?>
-                <tr>
-                    <th scope="row"><?= $paciente->id_usuario ?></td>
-                    <td><?= $paciente->nome_completo ?></td>
-                    <td><?= $paciente->usuario ?></td>
-                    <td><?= $paciente->telefone ?></td>
-                    <td><?= $paciente->email ?></td>
-                    <td><?= $paciente->papel ?></td>
-                    <td><a href="<?= __BASE_URI__ ?>?controller=paciente&action=editar&paciente=<?= $paciente->id_usuario ?>" class="btn btn-primary">Editar</a></td>
-                </tr>
-                <?php } ?>
-            </tbody>
-        </table>
-
-        <a href="<?= __BASE_URI__ ?>?controller=paciente&action=novo" class="btn btn-primary">Cadastrar paciente</a>
-
-    </div>
-
-    <?php require_once('views/login/pagamentos.php'); ?>
-
-    <div class="row mt-50"></div>
-
-    <h2>Agenda</h2>
-    
-    <?php if(isset($_GET['msg']) && intval($_GET['msg']) == 1) { ?>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="alert alert-warning col-sm-12">
-                    Reserva já foi alterada uma vez
-                </div>
-            </div>
-        </div>
-    <?php } ?>
-
-    <?php if(isset($_GET['msg']) && intval($_GET['msg']) == 7) { ?>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="alert alert-warning col-sm-12">
-                    Paciente já possui uma reserva ativa
-                </div>
-            </div>
-        </div>
-    <?php } ?>
-
-    <div class="row">
-        
         <div class="container">
             <div style="overflow:hidden;">
                 <div class="form-group datepicker">
@@ -125,8 +55,6 @@
 
                 </div>
                 <div class="col-md-3" style="height: 100%;">
-                    <a href="" id="reservar" class="col-md-12 bg-green" style="display: block; border-radius: 5px; margin-bottom: 10px; color: white;">SOLICITAR RESERVA</a>
-                    <a href="" id="alterar" class="col-md-12 bg-blue" style="display: block; border-radius: 5px; margin-bottom: 10px; color: white;">SOLICITAR ALTERAÇÃO</a>
                     <a href="" id="cancelar" class="col-md-12 bg-red" style="display: block; border-radius: 5px; margin-bottom: 10px; color: white;">CANCELAR RESERVA</a>
                 </div>
             </div>
@@ -167,8 +95,6 @@
         </div>
 
     </div>
-
-    
 </div>
 
 <script type="text/javascript">
@@ -217,18 +143,6 @@
         // Seta valor do hidden input de data como a data inicial
         $('#data').val($('#datetimepicker1').datetimepicker('viewDate').format('YYYY-MM-DD'));
 
-        // Ação de criar nova reserva
-        $('#reservar').on('click', function (e) {
-            e.preventDefault();
-            if (!horario_reservado) {
-                $('#data').val($('#datetimepicker1').datetimepicker("viewDate").format('YYYY-MM-DD'));
-                $('#acao').val('solicitarReserva');
-                $('#form-geral').submit();
-            } else {
-                alert('Horario já está reservado');
-            }
-        });
-
         // Ação de cancelar reserva
         $('#cancelar').on('click', function (e) {
             e.preventDefault();
@@ -240,17 +154,6 @@
                     $('#acao').val('cancelar');
                     $('#form-geral').submit();
                 }
-            }
-        })
-        
-        // Ação de alterar reserva
-        $('#alterar').on('click', function (e) {
-            e.preventDefault();
-            if(!horario_reservado) {
-                alert("Reserva não selecionada");
-            } else {
-                $('#acao').val('alterar');
-                $('#form-geral').submit();
             }
         })
     

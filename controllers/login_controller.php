@@ -5,6 +5,18 @@
         public function index() {
             require_once('views/login/index.php');
         }
+        
+        // Carrega a página do dentista
+        public function dentista() {
+            if (!session_id()) @ session_start();
+            if (!isset($_SESSION['usuario']) || $_SESSION['usuario']->papel != 'Dentista') return call('pages', 'error');
+
+            // Carrega os dados necessários para a pagina
+            $agendamentos = Agendamento::all();
+
+            // Carrega o arquivo da página
+            require_once('views/login/dentista.php');
+        }
 
         // Carrega a página da secretária
         public function secretaria() {
@@ -14,6 +26,7 @@
             // Carrega os dados necessários para a pagina
             $pacientes = Usuario::allWithPapel('Paciente');
             $agendamentos = Agendamento::all();
+            $pagamentos = Pagamento::all();
 
             // Carrega o arquivo da página
             require_once('views/login/secretaria.php');
@@ -44,6 +57,7 @@
             $servicos = Servico::all();
             $pacientes = Usuario::allWithPapel('Paciente');
             $agendamentos = Agendamento::all();
+            $pagamentos = Pagamento::all();            
 
             // Carrega o arquivo da página
             require_once('views/login/gerente.php');

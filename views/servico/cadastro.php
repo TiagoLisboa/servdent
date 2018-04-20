@@ -7,7 +7,7 @@
 		<div class="form-group">
 			<label for="img">Imagem</label>
 			<div class="custom-file" id="customFile" lang="es">
-				<input type="file" class="custom-file-input" id="img" name="img" aria-describedby="fileHelp"  accept="image/*">
+				<input type="file" class="custom-file-input" id="img" name="img" aria-describedby="fileHelp"  accept="image/*" required>
 				<label class="custom-file-label" for="img">
 				Escolha uma imagem
 				</label>

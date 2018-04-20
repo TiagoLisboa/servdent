@@ -44,7 +44,7 @@
 
 		<div class="form-group">
 			<label for="data_nascimento" class="control-label">Data de Nacimento</label>
-			<input type="date" class="form-control" id="data_nascimento" name="data_nascimento" value="<?= $data_nascimento?>"/>
+			<input type="date" class="form-control" id="data_nascimento" name="data_nascimento" value="<?= $data_nascimento?>" required/>
 		</div>
 
 		<h3> Endereço </h3>
@@ -82,14 +82,14 @@
 
 		<div class="form-group">
 			<label for="complemento" class="control-label">Complemento</label>
-			<input type="text" class="form-control" id="complemento" name="complemento" placeholder="Complemento" value="<?= $complemento ?>" />
+			<input type="text" class="form-control" id="complemento" name="complemento" placeholder="Complemento" value="<?= $complemento ?>" required/>
 		</div>
 
         <h3>Sistema</h3>
 
         <div class="form-group">
             <label for="papel" class="control-label">Papel</label>
-            <select name="papel" id="papel" class="form-control" value="<?= $papel ?>">
+            <select name="papel" id="papel" class="form-control" value="<?= $papel ?>" required>
                 <option value="Paciente">Paciente</option>
                 <option value="Secretaria">Secretaria</option>
                 <option value="Dentista">Dentista</option>
@@ -99,7 +99,7 @@
 
         <div class="form-group">
             <label for="cro" class="control-label">CRO</label>
-            <input type="text" class="form-control" id="cro" name="cro" placeholder="CRO" value="<?= $cro ?>"/>
+            <input type="text" class="form-control" id="cro" name="cro" placeholder="CRO" value="<?= $cro ?>" required />
         </div>
 		
 		<a href="<?= __BASE_URI__ ?>?controller=login&action=index" class="btn btn-primary"><< Voltar</a>
