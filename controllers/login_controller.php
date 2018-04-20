@@ -26,7 +26,17 @@
             // Carrega os dados necessários para a pagina
             $pacientes = Usuario::allWithPapel('Paciente');
             $agendamentos = Agendamento::all();
-            $pagamentos = Pagamento::all();
+            
+            // Filtra Pagamentos
+            if (isset($_POST['filtropagamento']) && $_POST['filtropagamento'] != "") {
+                $usuario = array_filter($pacientes, function ($u) {
+                    return $u->usuario == $_POST['filtropagamento'];
+                });
+                $usuario = $usuario == null ? -1 : $usuario[0]->id_usuario;
+                $pagamentos = Pagamento::allPagos($usuario);
+            } else  {
+                $pagamentos = Pagamento::allPagos();
+            }
 
             // Carrega o arquivo da página
             require_once('views/login/secretaria.php');
@@ -57,7 +67,17 @@
             $servicos = Servico::all();
             $pacientes = Usuario::allWithPapel('Paciente');
             $agendamentos = Agendamento::all();
-            $pagamentos = Pagamento::all();            
+
+            // Filtra Pagamentos
+            if (isset($_POST['filtropagamento']) && $_POST['filtropagamento'] != "") {
+                $usuario = array_filter($pacientes, function ($u) {
+                    return $u->usuario == $_POST['filtropagamento'];
+                });
+                $usuario = $usuario == null ? -1 : $usuario[0]->id_usuario;
+                $pagamentos = Pagamento::allPagos($usuario);
+            } else  {
+                $pagamentos = Pagamento::allPagos();
+            }
 
             // Carrega o arquivo da página
             require_once('views/login/gerente.php');

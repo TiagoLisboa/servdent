@@ -42,6 +42,28 @@
             return $list;
         }
 
+        public static function allPagos($usuario = null) {
+            $list = [];
+            $db = Db::getInstance();
+
+            $req;
+
+            if ($usuario == null) {
+                $req = $db->prepare("SELECT * FROM servdent.pagamento WHERE confirmar_pagamento=3 OR confirmar_pagamento=4");
+                $req->execute();
+            } else {
+                $req = $db->prepare("SELECT * FROM servdent.pagamento WHERE paciente_id_usuario=? AND (confirmar_pagamento=3 OR confirmar_pagamento=4)");
+                $req->execute(array($usuario));
+            }
+            
+
+            foreach($req->fetchAll() as $pagamento) {
+                $list[] = new Pagamento($pagamento['id_pagamento'], $pagamento['data_pagamento'], $pagamento['data_vencimento'], $pagamento['tipo_pagamento'], $pagamento['valor_pagamento'], $pagamento['confirmar_pagamento'], $pagamento['cod_pagamento'], $pagamento['paciente_id_usuario'], $pagamento['servico_id_servico']);
+            }
+
+            return $list;
+        }
+
         public static function insert($data_pagamento, $data_vencimento, $tipo_pagamento, $valor_pagamento, $confirmar_pagamento, $cod_pagamento, $paciente_id_usuario, $servico_id_servico) {
             $db = Db::getInstance();
 
