@@ -26,7 +26,7 @@ $servico = Servico::find(intval($servico));
 $usuario = $_SESSION['usuario'];
 
 // Insere um novo pagamento no banco de dados (Ainda não concluido, apenas indica que vai ser pago)
-$ref = Pagamento::insert("", "", "", floatval($servico->valor_servico), "0", "", $usuario->id_usuario, $servico->id_servico);
+$ref = Pagamento::insert("", "", "", floatval($servico->valor_servico), "3", "", $usuario->id_usuario, $servico->id_servico);
 
 
 // Organiza os dados para enviar a requisição ao pagseguro
