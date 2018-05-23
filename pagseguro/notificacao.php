@@ -34,7 +34,7 @@ $date = $xml->date;
 
 // Verifica se houve mudança nos status do pagamento
 if($reference && $status){
-	if ($status == 3 || $status == 4) {// Se o statos indicar que houve finalização no pagamento
+	//if ($status == 3 || $status == 4) {// Se o statos indicar que houve finalização no pagamento
 										//  atualiza o pagamento no banco de dados
 		$pagamento = Pagamento::find(intval($reference));
 		$pagamento->tipo_pagamento = $metodo;
@@ -44,7 +44,7 @@ if($reference && $status){
 		Pagamento::update($pagamento);
 		// Insere o serviço no banco de dados
 		// Usuario::insertServico($pagamento->servico_id_servico, $pagamento->paciente_id_usuario);
-	}
+	//}
 }
 
 ?>
