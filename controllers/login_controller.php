@@ -308,6 +308,10 @@
             // Retorna para a página inicial
             header('Location: ' .  __BASE_URI__  . '');
         }
+
+        public function esqueci() {
+            require_once('views/login/esqueciMinhaSenha.php');
+        }
     }
 
 ?>

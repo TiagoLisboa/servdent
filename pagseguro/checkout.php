@@ -21,12 +21,21 @@ $url .= $email_token;
 // Carrega as informações necessárias
 $servico = preg_replace('/[^[:alnum:]-]/','',$_GET["servico"]);
 
+$servicos = $_SESSION['usuario']->servicos;
 
 $servico = Servico::find(intval($servico));
+
 $usuario = $_SESSION['usuario'];
 
+foreach ($servicos as $ss) {
+	if ($ss->id_servico == intval($servico->id_servico)) {
+		return header('Location: ' .  __BASE_URI__  . '?controller=login&action=index');
+	}
+}
+
+
 // Insere um novo pagamento no banco de dados (Ainda não concluido, apenas indica que vai ser pago)
-$ref = Pagamento::insert("", "", "", floatval($servico->valor_servico), "3", "", $usuario->id_usuario, $servico->id_servico);
+$ref = Pagamento::insert("", "", "", floatval($servico->valor_servico), "0", "", $usuario->id_usuario, $servico->id_servico);
 
 
 // Organiza os dados para enviar a requisição ao pagseguro
@@ -49,6 +58,9 @@ $data['reference'] = $ref;
 
 // Insere um novo serviço para o usuario
 Usuario::insertServico($servico->id_servico, $usuario->id_usuario);
+
+// Atualiza a session com o novo serviço
+$_SESSION['usuario']->servicos = Usuario::allServicos($usuario->id_usuario);
 
 // Cria uma query http com os dados
 $dados = http_build_query($data);

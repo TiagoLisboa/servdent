@@ -54,9 +54,6 @@
                     </table>
 
                 </div>
-                <div class="col-md-3" style="height: 100%;">
-                    <a href="" id="cancelar" class="col-md-12 bg-red" style="display: block; border-radius: 5px; margin-bottom: 10px; color: white;">CANCELAR RESERVA</a>
-                </div>
             </div>
             
             <div class="row mt-20">
@@ -87,6 +84,7 @@
                         <th>NOME DO CLIENTE</th>
                         <th>USUARIO</th>
                         <th>SERVIÇO</th>
+                        <th>STATUS</th>
                     </tr>
                 </thead>
                 <tbody id="dadosreserva">
@@ -177,6 +175,7 @@
                             "<td>" + e.paciente + "</td>" +
                             "<td>" + e.usuario + "</td>" +
                             "<td>" + e.servico + "</td>" +
+                            "<td> <select> <option>SELECIONE</option> <option>ATENDIDO</option> <option>NÃO COMPARECEU</option> </select> </td>" +
                         "</tr>"
                     )
                 }

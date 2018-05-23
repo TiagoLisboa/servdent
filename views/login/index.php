@@ -23,6 +23,7 @@
             <label for="inputPassword" class="sr-only">Senha</label>
             <input type="password" id="inputPassword" name="senha" class="form-control" placeholder="Senha" required>
             <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
+            <a href="<?= __BASE_URI__ ?>?controller=login&action=esqueci" class="btn btn-lg btn-danger btn-block" type="submit">Esqueci minha senha</a>
         </form>
 
     </div> <!-- /container -->

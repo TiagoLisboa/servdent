@@ -159,6 +159,7 @@
                         <th>NOME DO CLIENTE</th>
                         <th>USUARIO</th>
                         <th>SERVIÇO</th>
+                        <th>STATUS</th>
                     </tr>
                 </thead>
                 <tbody id="dadosreserva">
@@ -274,6 +275,7 @@
                             "<td>" + e.paciente + "</td>" +
                             "<td>" + e.usuario + "</td>" +
                             "<td>" + e.servico + "</td>" +
+                            "<td> <select> <option>SELECIONE</option> <option>ATENDIDO</option> <option>NÃO COMPARECEU</option> </select> </td>" +
                         "</tr>"
                     )
                 }

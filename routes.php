@@ -34,7 +34,7 @@
     // Registro de todas as funções dos controladores
     $controllers = array(
         'pages' => ['home', 'servicos', 'error', 'contato', 'enviarEmail'],
-        'login' => ['index', 'validate', 'secretaria', 'gerente', 'paciente', 'logout', 'relatorioCliente', 'relatorioReservas', 'escolherDia'],
+        'login' => ['index', 'validate', 'secretaria', 'gerente', 'paciente', 'logout', 'relatorioCliente', 'relatorioReservas', 'escolherDia', 'esqueci'],
         'servico' => ['editar', 'atualizar', 'deletar', 'cadastrar', 'novo'],
         'paciente' => ['editar', 'atualizar', 'deletar','novo', 'cadastrar', 'novoUsuario', 'editarUsuario'],
         'reserva' => ['solicitar', 'finalizar', 'modificar', 'alterar', 'update', 'solicitarReserva', 'reservarEspecial'],

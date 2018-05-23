@@ -49,10 +49,10 @@
             $req;
 
             if ($usuario == null) {
-                $req = $db->prepare("SELECT * FROM servdent.pagamento WHERE confirmar_pagamento=3 OR confirmar_pagamento=4");
+                $req = $db->prepare("SELECT * FROM servdent.pagamento /*WHERE confirmar_pagamento=3 OR confirmar_pagamento=4*/");
                 $req->execute();
             } else {
-                $req = $db->prepare("SELECT * FROM servdent.pagamento WHERE paciente_id_usuario=? AND (confirmar_pagamento=3 OR confirmar_pagamento=4)");
+                $req = $db->prepare("SELECT * FROM servdent.pagamento WHERE paciente_id_usuario=? /*AND (confirmar_pagamento=3 OR confirmar_pagamento=4)*/");
                 $req->execute(array($usuario));
             }
             
